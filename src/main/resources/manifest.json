@@ -1,0 +1,19 @@
+{
+  "Group": "KotlinPlugin",
+  "Name": "KotlinPlugin",
+  "Version": "1.0.0",
+  "Description": "A Hytale plugin made in Kotlin",
+  "Authors": [
+    {
+      "Name": "Gael Rial",
+      "Email": "your.email@example.com",
+      "Url": "https://grialc.com"
+    }
+  ],
+  "Website": "",
+  "Main": "com.example.kotlinplugin.KotlinPlugin",
+  "ServerVersion": "*",
+  "Dependencies": {},
+  "OptionalDependencies": {},
+  "DisabledByDefault": false
+}
