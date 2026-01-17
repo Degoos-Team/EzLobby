@@ -10,14 +10,15 @@ class KotlinPlugin(init: JavaPluginInit) : JavaPlugin(init) {
 
     override fun setup() {
         logger.atInfo().log("[Degoos:EzLobby] Plugin has been loaded")
-        CompletableFuture.runAsync {
-            commandRegistry.registerCommand(EzLobbyCommand())
-            commandRegistry.registerCommand(NotifyCommand())
-        }
     }
 
     override fun start() {
-        // logger.atInfo().log("Start")
+        CompletableFuture.runAsync {
+            commandRegistry.registerCommand(EzLobbyCommand())
+            logger.atConfig().log("[Degoos:EzLobby] EzLobby Command Registered")
+            commandRegistry.registerCommand(NotifyCommand())
+            logger.atConfig().log("[Degoos:EzLobby] EzNotify Command Registered")
+        }
     }
 
     override fun shutdown() {

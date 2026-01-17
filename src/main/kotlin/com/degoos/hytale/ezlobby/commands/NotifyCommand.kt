@@ -12,32 +12,38 @@ import com.hypixel.hytale.server.core.universe.PlayerRef
 import com.hypixel.hytale.server.core.universe.Universe
 import com.hypixel.hytale.server.core.universe.world.World
 import com.hypixel.hytale.server.core.util.EventTitleUtil
+import javax.annotation.Nonnull
 
 
-class NotifyCommand : CommandBase("notify", "Show a title to a player or the server", false) {
+class NotifyCommand : CommandBase("eznotify", "Show a title to a player or the server", false) {
+    @Nonnull
     private val titleArg: RequiredArg<String?> = this.withRequiredArg(
         "title", "ezlobby.commands.notify.arg.title",
         ArgTypes.STRING
     )
 
+    @Nonnull
     private val subtitleArg: DefaultArg<String?> = this.withDefaultArg(
         "subtitle", "ezlobby.commands.notify.arg.subtitle",
         ArgTypes.STRING, "", "ezlobby.commands.notify.arg.subtitle.defaultValue"
     )
 
-    private val worldArg: DefaultArg<World?> = this.withDefaultArg(
+    @Nonnull
+    private val worldArg: DefaultArg<String?> = this.withDefaultArg(
         "world", "ezlobby.commands.notify.arg.world",
-        ArgTypes.WORLD, Universe.get().defaultWorld, "ezlobby.commands.notify.arg.world.defaultValue"
+        ArgTypes.STRING, null, "ezlobby.commands.notify.arg.world.defaultValue"
     )
 
+    @Nonnull
     private val playerArg: OptionalArg<PlayerRef> = this.withOptionalArg(
         "player", "ezlobby.commands.notify.arg.player",
         ArgTypes.PLAYER_REF
     )
 
+    @Nonnull
     private val broadcastArg: DefaultArg<Boolean> = this.withDefaultArg(
-        "world", "ezlobby.commands.notify.arg.world",
-        ArgTypes.BOOLEAN, true, "ezlobby.commands.notify.arg.broadcast.defaultValue"
+        "broadcast", "ezlobby.commands.notify.arg.world",
+        ArgTypes.BOOLEAN, false, "ezlobby.commands.notify.arg.broadcast.defaultValue"
     )
 
     init {
@@ -87,11 +93,20 @@ class NotifyCommand : CommandBase("notify", "Show a title to a player or the ser
     override fun executeSync(ctx: CommandContext) {
         val title = ctx.get<String>(this.titleArg)
         val subtitle = ctx.get<String>(this.subtitleArg)
-        val world = ctx.get<World>(this.worldArg) ?: Universe.get().defaultWorld
+        val worldStr = ctx.get<String>(this.worldArg)
         val player = ctx.get<PlayerRef?>(this.playerArg)
         val broadcast = ctx.get<Boolean>(this.broadcastArg)
 
-        if(broadcast) {
+        var world: World? = null
+        if(worldStr != null) {
+            world = Universe.get().getWorld(worldStr)
+            if(world == null) {
+                ctx.sendMessage(Message.raw("World '$worldStr' not found!"))
+                return
+            }
+        }
+
+        if(broadcast || (player == null && world == null)) {
             broadcastNotify(title, subtitle)
         } else if(player != null) {
             notifyPlayer(player, title, subtitle)
