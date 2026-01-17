@@ -36,7 +36,7 @@ tasks.shadowJar {
     archiveClassifier.set("")
 
     dependencies {
-        exclude(dependency("org.jetbrains.kotlin:.*"))
+        // exclude(dependency("org.jetbrains.kotlin:.*"))
     }
 
     minimize()
