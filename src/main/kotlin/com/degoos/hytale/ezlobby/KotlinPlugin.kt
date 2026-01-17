@@ -1,4 +1,4 @@
-package com.example.kotlinplugin
+package com.degoos.hytale.ezlobby
 
 import com.hypixel.hytale.server.core.plugin.JavaPlugin
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit

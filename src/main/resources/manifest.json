@@ -1,17 +1,22 @@
 {
-  "Group": "KotlinPlugin",
-  "Name": "KotlinPlugin",
-  "Version": "1.0.0",
-  "Description": "A Hytale plugin made in Kotlin",
+  "Group": "Degoos",
+  "Name": "EzLobby",
+  "Version": "0.1.0",
+  "Description": "Simple plugin to set up and manage your Lobby server",
   "Authors": [
     {
       "Name": "Gael Rial",
       "Email": "your.email@example.com",
       "Url": "https://grialc.com"
+    },
+    {
+      "Name": "Antonio Terrero",
+      "Email": "atalgaba@gmail.com",
+      "Url": "https://atalgaba.com"
     }
   ],
   "Website": "",
-  "Main": "com.example.kotlinplugin.KotlinPlugin",
+  "Main": "com.degoos.hytale.ezlobby.KotlinPlugin",
   "ServerVersion": "*",
   "Dependencies": {},
   "OptionalDependencies": {},

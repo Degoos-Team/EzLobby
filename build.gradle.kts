@@ -5,7 +5,7 @@ plugins {
     id("com.gradleup.shadow") version "9.3.1"
 }
 
-group = "com.example"
+group = "com.degoos.hytale"
 version = "1.0-SNAPSHOT"
 
 val hytaleInstallationPath = properties["hytale.path"].toString()
