@@ -29,9 +29,9 @@ class NotifyCommand : CommandBase("eznotify", "Show a title to a player or the s
     )
 
     @Nonnull
-    private val worldArg: DefaultArg<String?> = this.withDefaultArg(
+    private val worldArg: OptionalArg<World?> = this.withOptionalArg(
         "world", "ezlobby.commands.notify.arg.world",
-        ArgTypes.STRING, null, "ezlobby.commands.notify.arg.world.defaultValue"
+        ArgTypes.WORLD
     )
 
     @Nonnull
@@ -93,24 +93,15 @@ class NotifyCommand : CommandBase("eznotify", "Show a title to a player or the s
     override fun executeSync(ctx: CommandContext) {
         val title = ctx.get<String>(this.titleArg)
         val subtitle = ctx.get<String>(this.subtitleArg)
-        val worldStr = ctx.get<String>(this.worldArg)
+        val world = ctx.get<World?>(this.worldArg)
         val player = ctx.get<PlayerRef?>(this.playerArg)
         val broadcast = ctx.get<Boolean>(this.broadcastArg)
-
-        var world: World? = null
-        if(worldStr != null) {
-            world = Universe.get().getWorld(worldStr)
-            if(world == null) {
-                ctx.sendMessage(Message.raw("World '$worldStr' not found!"))
-                return
-            }
-        }
 
         if(broadcast || (player == null && world == null)) {
             broadcastNotify(title, subtitle)
         } else if(player != null) {
             notifyPlayer(player, title, subtitle)
-        } else if(world != null) {
+        } else if(world != null) { // always true?
             notifyWorld(world, title, subtitle)
         }
     }
