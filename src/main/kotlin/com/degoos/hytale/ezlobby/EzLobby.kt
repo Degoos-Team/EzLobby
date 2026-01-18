@@ -2,14 +2,16 @@ package com.degoos.hytale.ezlobby
 
 import com.degoos.hytale.ezlobby.commands.TitleCommand
 import com.degoos.hytale.ezlobby.commands.ezlobby.EzLobbyCommand
+import com.degoos.hytale.ezlobby.systems.BreakEventSystem
+import com.degoos.hytale.ezlobby.systems.DamageEventSystem
+import com.degoos.hytale.ezlobby.systems.PlaceEventSystem
+import com.degoos.hytale.ezlobby.systems.UseEventSystem
 import com.degoos.hytale.ezlobby.configs.EzLobbyConfig
 import com.degoos.hytale.ezlobby.listeners.PlayerReadyListener
 import com.degoos.kayle.KotlinPlugin
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
 import com.hypixel.hytale.server.core.util.Config
-import java.util.concurrent.CompletableFuture
-
 
 @Suppress("unused")
 class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
@@ -25,20 +27,23 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
     }
 
     override fun start() {
-        CompletableFuture.runAsync {
-            // region Commands
-            commandRegistry.registerCommand(EzLobbyCommand())
-            logger.atConfig().log("[Degoos:EzLobby] EzLobby Command Registered")
-            commandRegistry.registerCommand(TitleCommand())
-            logger.atConfig().log("[Degoos:EzLobby] EzTitle Command Registered")
-            // endregion
+        entityStoreRegistry.registerSystem(BreakEventSystem())
+        entityStoreRegistry.registerSystem(PlaceEventSystem())
+        entityStoreRegistry.registerSystem(DamageEventSystem())
+        entityStoreRegistry.registerSystem(UseEventSystem())
 
-            // region Events
-            this.eventRegistry.registerGlobal(
-                PlayerReadyEvent::class.java
-            ) { event: PlayerReadyEvent -> PlayerReadyListener().onPlayerReady(event) }
-            // endregion
-        }
+        // region Commands
+        commandRegistry.registerCommand(EzLobbyCommand())
+        logger.atConfig().log("[Degoos:EzLobby] EzLobby Command Registered")
+        commandRegistry.registerCommand(NotifyCommand())
+        logger.atConfig().log("[Degoos:EzLobby] EzNotify Command Registered")
+        // endregion
+
+        // region Events
+        this.eventRegistry.registerGlobal(
+            PlayerReadyEvent::class.java
+        ) { event: PlayerReadyEvent -> PlayerReadyListener().onPlayerReady(event) }
+        // endregion
     }
 
     override fun shutdown() {
