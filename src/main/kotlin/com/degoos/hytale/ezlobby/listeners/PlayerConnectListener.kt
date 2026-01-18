@@ -2,6 +2,7 @@ package com.degoos.hytale.ezlobby.listeners
 
 import com.degoos.hytale.ezlobby.EzLobby
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
+import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent
 import com.hypixel.hytale.server.core.universe.Universe
 
 
@@ -16,7 +17,8 @@ class PlayerConnectListener {
         val world = Universe.get().getWorld(spawnPointWorldName) ?: return
 
         event.world = world
-
-        // todo: teleport player to defined spawn point instead of the default world spawnpoint
+        event.holder.tryRemoveComponent(TransformComponent.getComponentType())
+        event.holder.addComponent(TransformComponent.getComponentType(),
+            TransformComponent(spawnPointPosition, spawnPointRotation))
     }
 }
