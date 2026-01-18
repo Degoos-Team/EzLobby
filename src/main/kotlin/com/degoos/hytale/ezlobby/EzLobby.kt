@@ -10,7 +10,7 @@ import java.util.concurrent.CompletableFuture
 
 @Suppress("unused")
 class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
-    private lateinit var mainConfig: Config<EzLobbyConfig?>
+    private var mainConfig: Config<EzLobbyConfig?>
 
     init {
         instance = this
