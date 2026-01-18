@@ -35,7 +35,7 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
         entityStoreRegistry.registerSystem(PickupEventSystem())
 
         // region Commands
-        commandRegistry.registerCommand(EzLobbyCommand())
+        commandRegistry.registerCommand(EzLobbyCommand(this))
         logger.atConfig().log("[Degoos:EzLobby] EzLobby Command Registered")
         commandRegistry.registerCommand(TitleCommand())
         logger.atConfig().log("[Degoos:EzLobby] EzNotify Command Registered")
