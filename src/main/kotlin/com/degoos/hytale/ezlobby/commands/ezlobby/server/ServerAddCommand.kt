@@ -1,13 +1,68 @@
 package com.degoos.hytale.ezlobby.commands.ezlobby.server
 
+import com.degoos.hytale.ezlobby.EzLobby
+import com.degoos.hytale.ezlobby.models.Server
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.CommandContext
+import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalArg
+import com.hypixel.hytale.server.core.command.system.arguments.system.RequiredArg
+import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase
-import javax.annotation.Nonnull
-
 
 class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add.desc") {
-    override fun executeSync(@Nonnull context: CommandContext) {
-        context.sendMessage(Message.raw("Add a server, biatch."))
+    private val nameArg: RequiredArg<String?> = this.withRequiredArg(
+        "name", "ezlobby.commands.server.add.arg.name",
+        ArgTypes.STRING
+    )
+
+    private val hostArg: RequiredArg<String?> = this.withRequiredArg(
+        "host", "ezlobby.commands.server.add.arg.host",
+        ArgTypes.STRING
+    )
+
+    private val portArg: RequiredArg<Int?> = this.withRequiredArg(
+        "port", "ezlobby.commands.server.add.arg.port",
+        ArgTypes.INTEGER
+    )
+
+    private val uiIconArg: OptionalArg<String?> = this.withOptionalArg(
+        "icon", "ezlobby.commands.server.add.arg.uiIcon",
+        ArgTypes.STRING
+    )
+
+    private val uiColorTintArg: OptionalArg<String?> = this.withOptionalArg(
+        "colorTint", "ezlobby.commands.server.add.arg.uiColorTint",
+        ArgTypes.STRING
+    )
+
+    private val uiBackgroundArg: OptionalArg<String?> = this.withOptionalArg(
+        "background", "ezlobby.commands.server.add.arg.uiBackground",
+        ArgTypes.STRING
+    )
+
+    override fun executeSync(context: CommandContext) {
+        val serversConfig = EzLobby.getServersConfig()
+        val config = serversConfig?.get()
+
+        if (config == null) {
+            context.sendMessage(Message.raw("[EzLobby] Could not add a server, servers file is missing :/"))
+            return
+        }
+
+        val name = context.get<String>(this.nameArg)
+        val host = context.get<String>(this.hostArg)
+        val port = context.get<Int>(this.portArg)
+        val uiIcon = context.get<String?>(this.uiIconArg)
+        val uiColorTint = context.get<String?>(this.uiColorTintArg)
+        val uiBackground = context.get<String?>(this.uiBackgroundArg)
+
+        config.servers.add(Server(name, host, port, uiIcon, uiColorTint, uiBackground))
+
+        context.sendMessage(Message.raw("[EzLobby] Added server '$name' with address $host:$port"))
+        serversConfig.save()
+
+        config.servers.forEach { server ->
+            context.sendMessage(Message.raw(" - ${server.name}: ${server.host}:${server.port}"))
+        }
     }
 }

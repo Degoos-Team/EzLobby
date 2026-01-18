@@ -7,7 +7,8 @@ import com.degoos.hytale.ezlobby.systems.DamageEventSystem
 import com.degoos.hytale.ezlobby.systems.PlaceEventSystem
 import com.degoos.hytale.ezlobby.systems.UseEventSystem
 import com.degoos.hytale.ezlobby.configs.EzLobbyConfig
-import com.degoos.hytale.ezlobby.listeners.PlayerReadyListener
+import com.degoos.hytale.ezlobby.configs.ServersConfig
+import com.degoos.hytale.ezlobby.listeners.PlayerConnectListener
 import com.degoos.kayle.KotlinPlugin
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
@@ -16,10 +17,12 @@ import com.hypixel.hytale.server.core.util.Config
 @Suppress("unused")
 class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
     private var mainConfig: Config<EzLobbyConfig?>
+    private var serversConfig: Config<ServersConfig?>
 
     init {
         instance = this
         mainConfig = this.withConfig("EzLobbyConfig", EzLobbyConfig.CODEC)
+        serversConfig = this.withConfig("EzLobbyServers", ServersConfig.CODEC)
     }
 
     override fun setup() {
@@ -42,7 +45,7 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
         // region Events
         this.eventRegistry.registerGlobal(
             PlayerConnectEvent::class.java
-        ) { event: PlayerConnectEvent -> PlayerReadyListener().onPlayerReady(event) }
+        ) { event: PlayerConnectEvent -> PlayerConnectListener().onPlayerReady(event) }
         // endregion
     }
 
@@ -54,6 +57,9 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
         private var instance: EzLobby? = null
         fun getMainConfig(): Config<EzLobbyConfig?>? {
             return instance?.mainConfig
+        }
+        fun getServersConfig(): Config<ServersConfig?>? {
+            return instance?.serversConfig
         }
         fun getEvetRegistry() = instance?.eventRegistry
     }
