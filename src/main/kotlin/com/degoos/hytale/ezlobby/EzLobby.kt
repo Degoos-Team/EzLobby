@@ -4,6 +4,7 @@ import com.degoos.hytale.ezlobby.commands.NotifyCommand
 import com.degoos.hytale.ezlobby.commands.ezlobby.EzLobbyCommand
 import com.degoos.hytale.ezlobby.systems.BreakEventSystem
 import com.degoos.hytale.ezlobby.systems.DamageEventSystem
+import com.degoos.hytale.ezlobby.systems.PickupEventSystem
 import com.degoos.hytale.ezlobby.systems.PlaceEventSystem
 import com.degoos.hytale.ezlobby.systems.UseEventSystem
 import com.degoos.kayle.KotlinPlugin
@@ -24,6 +25,7 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
         entityStoreRegistry.registerSystem(PlaceEventSystem())
         entityStoreRegistry.registerSystem(DamageEventSystem())
         entityStoreRegistry.registerSystem(UseEventSystem())
+        entityStoreRegistry.registerSystem(PickupEventSystem())
 
         commandRegistry.registerCommand(EzLobbyCommand())
         logger.atConfig().log("[Degoos:EzLobby] EzLobby Command Registered")
