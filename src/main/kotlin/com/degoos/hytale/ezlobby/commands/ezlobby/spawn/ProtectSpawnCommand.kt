@@ -29,12 +29,13 @@ class ProtectSpawnCommand : AbstractPlayerCommand("protect", "ezlobby.commands.e
             return
         }
 
+
         spawnWorld.worldConfig.isSpawningNPC = false
         spawnWorld.worldConfig.gameMode = GameMode.Adventure
         spawnWorld.worldConfig.isPvpEnabled = false
 
-        // todo: ensure worldConfig changes are saved persistently (?)
-
-        playerRef.sendMessage(Message.raw("[EzLobby] Spawn protection enabled for World(name=${worldName})."))
+        Universe.get().worldConfigProvider.save(spawnWorld.savePath, spawnWorld.worldConfig, spawnWorld).thenRun {
+            playerRef.sendMessage(Message.raw("[EzLobby] Spawn protection enabled for World(name=${worldName})."))
+        }
     }
 }
