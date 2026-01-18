@@ -6,6 +6,7 @@ import com.hypixel.hytale.server.core.command.system.basecommands.AbstractComman
 class EzLobbyCommand: AbstractCommandCollection("ezlobby", "ezlobby.commands.ezlobby.desc") {
     init {
         this.addSubCommand(ServerCommand())
+        this.addSubCommand(SetSpawnCommand())
 
         this.requirePermission("ezlobby.admin")
     }
