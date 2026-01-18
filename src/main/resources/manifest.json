@@ -1,5 +1,5 @@
 {
-  "Group": "Degoos",
+  "Group": "com.degoos",
   "Name": "EzLobby",
   "Version": "0.1.0",
   "Description": "Simple plugin to set up and manage your Lobby server",
