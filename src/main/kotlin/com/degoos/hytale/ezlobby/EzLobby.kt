@@ -35,7 +35,7 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
         // region Commands
         commandRegistry.registerCommand(EzLobbyCommand())
         logger.atConfig().log("[Degoos:EzLobby] EzLobby Command Registered")
-        commandRegistry.registerCommand(NotifyCommand())
+        commandRegistry.registerCommand(TitleCommand())
         logger.atConfig().log("[Degoos:EzLobby] EzNotify Command Registered")
         // endregion
 
