@@ -2,11 +2,12 @@ package com.degoos.hytale.ezlobby
 
 import com.degoos.hytale.ezlobby.commands.NotifyCommand
 import com.degoos.hytale.ezlobby.commands.ezlobby.EzLobbyCommand
-import com.hypixel.hytale.server.core.plugin.JavaPlugin
+import com.degoos.kayle.KotlinPlugin
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
 import java.util.concurrent.CompletableFuture
 
-class KotlinPlugin(init: JavaPluginInit) : JavaPlugin(init) {
+@Suppress("unused")
+class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
 
     override fun setup() {
         logger.atInfo().log("[Degoos:EzLobby] Plugin has been loaded")

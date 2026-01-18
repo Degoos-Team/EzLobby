@@ -15,10 +15,13 @@ val serverOutputPath = "${properties["hytale.server"]}/mods"
 
 repositories {
     mavenCentral()
+    maven("https://dev.degoos.xyz/maven/repo")
 }
 
 dependencies {
     compileOnly(files(hytaleServerExecutablePath))
+
+    compileOnly("com.degoos:kayle:1.0.0")
 
     testImplementation(kotlin("test"))
 }
@@ -36,7 +39,7 @@ tasks.shadowJar {
     archiveClassifier.set("")
 
     dependencies {
-        // exclude(dependency("org.jetbrains.kotlin:.*"))
+        exclude(dependency("org.jetbrains.kotlin:.*"))
     }
 
     minimize()
