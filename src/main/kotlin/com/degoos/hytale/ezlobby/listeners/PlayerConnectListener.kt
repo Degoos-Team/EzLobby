@@ -1,6 +1,7 @@
 package com.degoos.hytale.ezlobby.listeners
 
 import com.degoos.hytale.ezlobby.EzLobby
+import com.hypixel.hytale.server.core.event.events.player.AddPlayerToWorldEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent
 import com.hypixel.hytale.server.core.universe.Universe
