@@ -14,39 +14,39 @@ import com.hypixel.hytale.server.core.universe.world.World
 import com.hypixel.hytale.server.core.util.EventTitleUtil
 
 
-class NotifyCommand :
-    CommandBase("eznotify", "Show a title to a player or the server", false) {
+class TitleCommand :
+    CommandBase("eztitle", "Show a title to a player or the server", false) {
 
     private val titleArg: RequiredArg<String?> = this.withRequiredArg(
-        "title", "ezlobby.commands.notify.arg.title",
+        "title", "ezlobby.commands.title.arg.title",
         ArgTypes.STRING
     )
 
     private val subtitleArg: DefaultArg<String?> = this.withDefaultArg(
-        "subtitle", "ezlobby.commands.notify.arg.subtitle",
-        ArgTypes.STRING, "", "ezlobby.commands.notify.arg.subtitle.defaultValue"
+        "subtitle", "ezlobby.commands.title.arg.subtitle",
+        ArgTypes.STRING, "", "ezlobby.commands.title.arg.subtitle.defaultValue"
     )
 
     private val worldArg: OptionalArg<World?> = this.withOptionalArg(
-        "world", "ezlobby.commands.notify.arg.world",
+        "world", "ezlobby.commands.title.arg.world",
         ArgTypes.WORLD
     )
 
     private val playerArg: OptionalArg<PlayerRef> = this.withOptionalArg(
-        "player", "ezlobby.commands.notify.arg.player",
+        "player", "ezlobby.commands.title.arg.player",
         ArgTypes.PLAYER_REF
     )
 
     private val broadcastArg: DefaultArg<Boolean> = this.withDefaultArg(
-        "broadcast", "ezlobby.commands.notify.arg.broadcast",
-        ArgTypes.BOOLEAN, false, "ezlobby.commands.notify.arg.broadcast.defaultValue"
+        "broadcast", "ezlobby.commands.title.arg.broadcast",
+        ArgTypes.BOOLEAN, false, "ezlobby.commands.title.arg.broadcast.defaultValue"
     )
 
     init {
-        this.requirePermission("ezlobby.notify")
+        this.requirePermission("ezlobby.title")
     }
 
-    fun broadcastNotify(title: String, subtitle: String) {
+    fun broadcastTitle(title: String, subtitle: String) {
         EventTitleUtil.showEventTitleToUniverse(
             Message.raw(title),
             Message.raw(subtitle),
@@ -66,7 +66,7 @@ class NotifyCommand :
         val broadcast = ctx.get<Boolean>(this.broadcastArg)
 
         if (broadcast || (player == null && world == null)) {
-            broadcastNotify(title, subtitle)
+            broadcastTitle(title, subtitle)
         } else if (player != null) {
             player.sendTitle(Message.raw(title), Message.raw(subtitle))
         } else {

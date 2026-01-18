@@ -1,6 +1,6 @@
 package com.degoos.hytale.ezlobby
 
-import com.degoos.hytale.ezlobby.commands.NotifyCommand
+import com.degoos.hytale.ezlobby.commands.TitleCommand
 import com.degoos.hytale.ezlobby.commands.ezlobby.EzLobbyCommand
 import com.degoos.hytale.ezlobby.configs.EzLobbyConfig
 import com.degoos.kayle.KotlinPlugin
@@ -25,8 +25,8 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
         CompletableFuture.runAsync {
             commandRegistry.registerCommand(EzLobbyCommand())
             logger.atConfig().log("[Degoos:EzLobby] EzLobby Command Registered")
-            commandRegistry.registerCommand(NotifyCommand())
-            logger.atConfig().log("[Degoos:EzLobby] EzNotify Command Registered")
+            commandRegistry.registerCommand(TitleCommand())
+            logger.atConfig().log("[Degoos:EzLobby] EzTitle Command Registered")
         }
     }
 
