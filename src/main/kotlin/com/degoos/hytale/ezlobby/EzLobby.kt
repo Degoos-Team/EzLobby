@@ -9,7 +9,7 @@ import com.degoos.hytale.ezlobby.systems.UseEventSystem
 import com.degoos.hytale.ezlobby.configs.EzLobbyConfig
 import com.degoos.hytale.ezlobby.listeners.PlayerReadyListener
 import com.degoos.kayle.KotlinPlugin
-import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent
+import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
 import com.hypixel.hytale.server.core.util.Config
 
@@ -41,8 +41,8 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
 
         // region Events
         this.eventRegistry.registerGlobal(
-            PlayerReadyEvent::class.java
-        ) { event: PlayerReadyEvent -> PlayerReadyListener().onPlayerReady(event) }
+            PlayerConnectEvent::class.java
+        ) { event: PlayerConnectEvent -> PlayerReadyListener().onPlayerReady(event) }
         // endregion
     }
 

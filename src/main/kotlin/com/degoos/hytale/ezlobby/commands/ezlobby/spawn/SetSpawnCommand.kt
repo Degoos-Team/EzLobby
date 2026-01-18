@@ -1,4 +1,4 @@
-package com.degoos.hytale.ezlobby.commands.ezlobby
+package com.degoos.hytale.ezlobby.commands.ezlobby.spawn
 
 import com.degoos.hytale.ezlobby.EzLobby
 import com.hypixel.hytale.component.Ref
@@ -11,12 +11,11 @@ import com.hypixel.hytale.server.core.universe.world.World
 import com.hypixel.hytale.server.core.universe.world.WorldConfig
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore
 
-
-class SetSpawnCommand : AbstractPlayerCommand("setspawn", "ezlobby.commands.ezlobby.setspawn.desc") {
+class SetSpawnCommand : AbstractPlayerCommand("set", "ezlobby.commands.ezlobby.spawn.set.desc") {
     override fun execute(
         context: CommandContext,
         store: Store<EntityStore?>,
-        refStora: Ref<EntityStore?>,
+        refStore: Ref<EntityStore?>,
         playerRef: PlayerRef,
         world: World
     ) {
