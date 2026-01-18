@@ -8,6 +8,7 @@ import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalAr
 import com.hypixel.hytale.server.core.command.system.arguments.system.RequiredArg
 import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase
+import java.util.UUID
 
 class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add.desc") {
     private val nameArg: RequiredArg<String?> = this.withRequiredArg(
@@ -49,6 +50,7 @@ class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add
             return
         }
 
+        val uuid = UUID.randomUUID()
         val name = context.get<String>(this.nameArg)
         val host = context.get<String>(this.hostArg)
         val port = context.get<Int>(this.portArg)
@@ -56,13 +58,9 @@ class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add
         val uiColorTint = context.get<String?>(this.uiColorTintArg)
         val uiBackground = context.get<String?>(this.uiBackgroundArg)
 
-        config.servers.add(Server(name, host, port, uiIcon, uiColorTint, uiBackground))
+        config.servers.add(Server(uuid, name, host, port, uiIcon, uiColorTint, uiBackground))
 
-        context.sendMessage(Message.raw("[EzLobby] Added server '$name' with address $host:$port"))
+        context.sendMessage(Message.raw("[EzLobby] Added server '$name' ($uuid) with address $host:$port"))
         serversConfig.save()
-
-        config.servers.forEach { server ->
-            context.sendMessage(Message.raw(" - ${server.name}: ${server.host}:${server.port}"))
-        }
     }
 }
