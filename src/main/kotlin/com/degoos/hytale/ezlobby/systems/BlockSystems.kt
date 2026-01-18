@@ -8,6 +8,7 @@ import com.hypixel.hytale.component.system.EntityEventSystem
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.event.events.ecs.BreakBlockEvent
 import com.hypixel.hytale.server.core.event.events.ecs.DamageBlockEvent
+import com.hypixel.hytale.server.core.event.events.ecs.InteractivelyPickupItemEvent
 import com.hypixel.hytale.server.core.event.events.ecs.PlaceBlockEvent
 import com.hypixel.hytale.server.core.event.events.ecs.UseBlockEvent
 import com.hypixel.hytale.server.core.permissions.PermissionsModule
@@ -90,6 +91,27 @@ class UseEventSystem : EntityEventSystem<EntityStore, UseBlockEvent.Pre>(UseBloc
     ) {
         val player = fetchPlayer(index, chunkArchetype) ?: return
         if (!PermissionsModule.get().hasPermission(player.uuid, "ezlobby.block.use")) {
+            player.sendMessage(Message.raw("You don't have permission to use blocks!"))
+            event.isCancelled = true
+        }
+    }
+
+    override fun getQuery(): Archetype<EntityStore> = Archetype.empty()
+
+}
+
+class PickupEventSystem :
+    EntityEventSystem<EntityStore, InteractivelyPickupItemEvent>(InteractivelyPickupItemEvent::class.java) {
+
+    override fun handle(
+        index: Int,
+        chunkArchetype: ArchetypeChunk<EntityStore>,
+        store: Store<EntityStore>,
+        commandBuffer: CommandBuffer<EntityStore>,
+        event: InteractivelyPickupItemEvent
+    ) {
+        val player = fetchPlayer(index, chunkArchetype) ?: return
+        if (!PermissionsModule.get().hasPermission(player.uuid, "ezlobby.block.pickup")) {
             player.sendMessage(Message.raw("You don't have permission to use blocks!"))
             event.isCancelled = true
         }

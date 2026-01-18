@@ -4,6 +4,7 @@ import com.degoos.hytale.ezlobby.commands.TitleCommand
 import com.degoos.hytale.ezlobby.commands.ezlobby.EzLobbyCommand
 import com.degoos.hytale.ezlobby.systems.BreakEventSystem
 import com.degoos.hytale.ezlobby.systems.DamageEventSystem
+import com.degoos.hytale.ezlobby.systems.PickupEventSystem
 import com.degoos.hytale.ezlobby.systems.PlaceEventSystem
 import com.degoos.hytale.ezlobby.systems.UseEventSystem
 import com.degoos.hytale.ezlobby.configs.EzLobbyConfig
@@ -34,9 +35,10 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
         entityStoreRegistry.registerSystem(PlaceEventSystem())
         entityStoreRegistry.registerSystem(DamageEventSystem())
         entityStoreRegistry.registerSystem(UseEventSystem())
+        entityStoreRegistry.registerSystem(PickupEventSystem())
 
         // region Commands
-        commandRegistry.registerCommand(EzLobbyCommand())
+        commandRegistry.registerCommand(EzLobbyCommand(this))
         logger.atConfig().log("[Degoos:EzLobby] EzLobby Command Registered")
         commandRegistry.registerCommand(TitleCommand())
         logger.atConfig().log("[Degoos:EzLobby] EzNotify Command Registered")
@@ -45,7 +47,7 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
         // region Events
         this.eventRegistry.registerGlobal(
             PlayerConnectEvent::class.java
-        ) { event: PlayerConnectEvent -> PlayerReadyListener().onPlayerReady(event) }
+        ) { event: PlayerConnectEvent -> PlayerConnectListener().onPlayerReady(event) }
         // endregion
     }
 
