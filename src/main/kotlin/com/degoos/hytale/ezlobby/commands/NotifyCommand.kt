@@ -38,7 +38,7 @@ class NotifyCommand :
     )
 
     private val broadcastArg: DefaultArg<Boolean> = this.withDefaultArg(
-        "broadcast", "ezlobby.commands.notify.arg.world",
+        "broadcast", "ezlobby.commands.notify.arg.broadcast",
         ArgTypes.BOOLEAN, false, "ezlobby.commands.notify.arg.broadcast.defaultValue"
     )
 
