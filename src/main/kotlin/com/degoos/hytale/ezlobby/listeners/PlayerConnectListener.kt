@@ -1,13 +1,11 @@
 package com.degoos.hytale.ezlobby.listeners
 
 import com.degoos.hytale.ezlobby.EzLobby
-import com.degoos.kayle.dsl.teleport
-import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
 import com.hypixel.hytale.server.core.universe.Universe
 
 
-class PlayerReadyListener {
+class PlayerConnectListener {
     fun onPlayerReady(event: PlayerConnectEvent) {
         val ezLobbyConfig = EzLobby.getMainConfig()?.get() ?: return
 
