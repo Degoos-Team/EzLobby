@@ -9,7 +9,7 @@ import com.degoos.hytale.ezlobby.systems.PlaceEventSystem
 import com.degoos.hytale.ezlobby.systems.UseEventSystem
 import com.degoos.hytale.ezlobby.configs.EzLobbyConfig
 import com.degoos.hytale.ezlobby.configs.ServersConfig
-import com.degoos.hytale.ezlobby.listeners.PlayerReadyListener
+import com.degoos.hytale.ezlobby.listeners.PlayerConnectListener
 import com.degoos.kayle.KotlinPlugin
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit

@@ -7,7 +7,7 @@ import com.hypixel.hytale.server.core.command.system.basecommands.AbstractComman
 
 class EzLobbyCommand(plugin : KotlinPlugin): AbstractCommandCollection("ezlobby", "ezlobby.commands.ezlobby.desc") {
     init {
-        this.addSubCommand(ServerCommand())
+        this.addSubCommand(ServerCommand(plugin))
         this.addSubCommand(SpawnCommand(plugin))
 
         this.requirePermission("ezlobby.admin")
