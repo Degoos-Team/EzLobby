@@ -16,9 +16,11 @@
     }
   ],
   "Website": "",
-  "Main": "com.degoos.hytale.ezlobby.KotlinPlugin",
+  "Main": "com.degoos.hytale.ezlobby.EzLobby",
   "ServerVersion": "*",
-  "Dependencies": {},
+  "Dependencies": {
+    "Degoos:Kayle": "*"
+  },
   "OptionalDependencies": {},
   "DisabledByDefault": false
 }

@@ -2,22 +2,24 @@ package com.degoos.hytale.ezlobby
 
 import com.degoos.hytale.ezlobby.commands.NotifyCommand
 import com.degoos.hytale.ezlobby.commands.ezlobby.EzLobbyCommand
-import com.hypixel.hytale.server.core.plugin.JavaPlugin
+import com.degoos.kayle.KotlinPlugin
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
 import java.util.concurrent.CompletableFuture
 
-class KotlinPlugin(init: JavaPluginInit) : JavaPlugin(init) {
+@Suppress("unused")
+class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
 
     override fun setup() {
         logger.atInfo().log("[Degoos:EzLobby] Plugin has been loaded")
-        CompletableFuture.runAsync {
-            commandRegistry.registerCommand(EzLobbyCommand())
-            commandRegistry.registerCommand(NotifyCommand())
-        }
     }
 
     override fun start() {
-        // logger.atInfo().log("Start")
+        CompletableFuture.runAsync {
+            commandRegistry.registerCommand(EzLobbyCommand())
+            logger.atConfig().log("[Degoos:EzLobby] EzLobby Command Registered")
+            commandRegistry.registerCommand(NotifyCommand())
+            logger.atConfig().log("[Degoos:EzLobby] EzNotify Command Registered")
+        }
     }
 
     override fun shutdown() {
