@@ -2,12 +2,8 @@ package com.degoos.hytale.ezlobby
 
 import com.degoos.hytale.ezlobby.commands.TitleCommand
 import com.degoos.hytale.ezlobby.commands.ezlobby.EzLobbyCommand
-import com.degoos.hytale.ezlobby.systems.BreakEventSystem
-import com.degoos.hytale.ezlobby.systems.DamageEventSystem
-import com.degoos.hytale.ezlobby.systems.PickupEventSystem
-import com.degoos.hytale.ezlobby.systems.PlaceEventSystem
-import com.degoos.hytale.ezlobby.systems.UseEventSystem
 import com.degoos.hytale.ezlobby.configs.EzLobbyConfig
+import com.degoos.hytale.ezlobby.configs.ServersConfig
 import com.degoos.hytale.ezlobby.listeners.PlayerConnectListener
 import com.degoos.hytale.ezlobby.systems.*
 import com.degoos.kayle.KotlinPlugin
@@ -62,9 +58,11 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
         fun getMainConfig(): Config<EzLobbyConfig?>? {
             return instance?.mainConfig
         }
+
         fun getServersConfig(): Config<ServersConfig?>? {
             return instance?.serversConfig
         }
+
         fun getEvetRegistry() = instance?.eventRegistry
     }
 }
