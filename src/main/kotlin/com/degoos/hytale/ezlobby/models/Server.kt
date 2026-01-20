@@ -16,8 +16,8 @@ class Server(
     var uiIcon: String? = null,
     var uiColorTint: String? = null,
     var uiBackground: String? = null,
-    var description: String? = null,
     var displayName: String? = null,
+    var description: String? = null,
 ) {
 
     companion object {
