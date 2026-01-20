@@ -46,7 +46,7 @@ class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add
         ArgTypes.STRING
     )
 
-    private val descriptionArg: RequiredArg<String?> = this.withRequiredArg(
+    private val descriptionArg: OptionalArg<String?> = this.withOptionalArg(
         "description", "ezlobby.commands.server.add.arg.description",
         ArgTypes.STRING
     )
