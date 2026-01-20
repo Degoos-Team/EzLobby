@@ -7,6 +7,7 @@ import com.hypixel.hytale.codec.builder.BuilderCodec
 import java.util.UUID
 
 
+// todo add a secondary constructor that requires a JSON / BSON?
 class Server(
     var id: UUID,
     var name: String,
@@ -14,7 +15,9 @@ class Server(
     var port: Int,
     var uiIcon: String? = null,
     var uiColorTint: String? = null,
-    var uiBackground: String? = null
+    var uiBackground: String? = null,
+    var description: String? = null,
+    var displayName: String? = null,
 ) {
 
     companion object {
@@ -30,6 +33,8 @@ class Server(
             .append(KeyedCodec("UIIcon", Codec.STRING), Server::uiIcon.setter, Server::uiIcon).add()
             .append(KeyedCodec("UIColorTint", Codec.STRING), Server::uiColorTint.setter, Server::uiColorTint).add()
             .append(KeyedCodec("UIBackground", Codec.STRING), Server::uiBackground.setter, Server::uiBackground).add()
+            .append(KeyedCodec("DisplayName", Codec.STRING), Server::displayName.setter, Server::displayName).add()
+            .append(KeyedCodec("Description", Codec.STRING), Server::description.setter, Server::description).add()
             .build()
     }
 }

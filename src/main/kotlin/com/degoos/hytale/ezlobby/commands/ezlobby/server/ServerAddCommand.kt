@@ -41,6 +41,16 @@ class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add
         ArgTypes.STRING
     )
 
+    private val displayNameArg: OptionalArg<String?> = this.withOptionalArg(
+        "displayName", "ezlobby.commands.server.add.arg.displayName",
+        ArgTypes.STRING
+    )
+
+    private val descriptionArg: RequiredArg<String?> = this.withRequiredArg(
+        "description", "ezlobby.commands.server.add.arg.description",
+        ArgTypes.STRING
+    )
+
     override fun executeSync(context: CommandContext) {
         val serversConfig = EzLobby.getServersConfig()
         val config = serversConfig?.get()
@@ -57,8 +67,10 @@ class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add
         val uiIcon = context.get<String?>(this.uiIconArg)
         val uiColorTint = context.get<String?>(this.uiColorTintArg)
         val uiBackground = context.get<String?>(this.uiBackgroundArg)
+        val displayName = context.get<String?>(this.displayNameArg)
+        val description = context.get<String?>(this.descriptionArg)
 
-        config.servers.add(Server(uuid, name, host, port, uiIcon, uiColorTint, uiBackground))
+        config.servers.add(Server(uuid, name, host, port, uiIcon, uiColorTint, uiBackground, displayName, description))
 
         context.sendMessage(Message.raw("[EzLobby] Added server '$name' ($uuid) with address $host:$port"))
         serversConfig.save()

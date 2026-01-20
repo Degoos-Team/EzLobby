@@ -26,7 +26,7 @@ class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.l
         }
 
         config.servers.forEachIndexed { idx, server ->
-            context.sendMessage(Message.raw("[$idx] - ${server.name} (${server.host}:${server.port})"))
+            context.sendMessage(Message.raw("[$idx] ${server.name} - ${server.displayName} (${server.host}:${server.port})"))
         }
     }
 }
