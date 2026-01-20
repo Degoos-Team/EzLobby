@@ -1,12 +1,9 @@
 package com.degoos.hytale.ezlobby.commands.ezlobby.server
 
 import com.degoos.hytale.ezlobby.EzLobby
-import com.degoos.hytale.ezlobby.models.Server
+import com.degoos.kayle.formatter.MessageFormatter
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.CommandContext
-import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalArg
-import com.hypixel.hytale.server.core.command.system.arguments.system.RequiredArg
-import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase
 
 class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.list.desc") {
@@ -26,7 +23,7 @@ class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.l
         }
 
         config.servers.forEachIndexed { idx, server ->
-            context.sendMessage(Message.raw("[$idx] ${server.name} - ${server.displayName} (${server.host}:${server.port})"))
+            context.sendMessage(Message.raw("[$idx] ${server.name} - ${MessageFormatter.parse(server.displayName ?: server.name)} (${server.host}:${server.port})"))
         }
     }
 }
