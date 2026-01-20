@@ -17,13 +17,19 @@ class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.l
             return
         }
 
-        if(config.servers.isEmpty()) {
+        if (config.servers.isEmpty()) {
             context.sendMessage(Message.raw("[EzLobby] There are no servers added yet. Use `/server add` to add one!"))
             return
         }
 
         config.servers.forEachIndexed { idx, server ->
-            context.sendMessage(Message.raw("[$idx] ${server.name} - ${MessageFormatter.parse(server.displayName ?: server.name)} (${server.host}:${server.port})"))
+            context.sendMessage(
+                Message.join(
+                    Message.raw("[$idx] ${server.name} - "),
+                    MessageFormatter.parse(server.displayName ?: server.name),
+                    Message.raw(" (${server.host}:${server.port})")
+                )
+            )
         }
     }
 }
