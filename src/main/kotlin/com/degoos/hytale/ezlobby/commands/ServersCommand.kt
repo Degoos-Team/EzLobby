@@ -15,6 +15,10 @@ import kotlinx.coroutines.withContext
 import kotlin.coroutines.EmptyCoroutineContext
 
 class ServersCommand : AbstractServerCommand("servers", "ezlobby.commands.server.desc") {
+    init {
+        this.requirePermission("ezlobby.servers")
+    }
+
     override fun executeSync(context: CommandContext) {
         validateServersConfig(context) ?: return
 
