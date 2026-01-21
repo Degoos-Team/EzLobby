@@ -1,0 +1,29 @@
+# EzLobby Messages Language File (es-ES)
+# Formato: clave = valor
+
+# Mensajes de error
+error.config_missing = [EzLobby] ¿Qué? No hay archivo de servidores :/
+error.servers_empty = [EzLobby] Aún no hay servidores agregados. ¡Usa `/server add` para agregar uno!
+error.config_missing_add = [EzLobby] No se pudo agregar el servidor, falta el archivo de servidores :/
+error.player_not_found = [EzLobby] Algo realmente extraño ha sucedido. No se pudo encontrar ningún jugador, ni siquiera tú mismo :o/
+error.server_not_found = [EzLobby] No se encontró ningún servidor con el selector proporcionado: {selector}
+error.spawn_config_missing = [EzLobby] No se pudo establecer el punto de aparición, falta la configuración :/
+error.spawn_world_not_found = [EzLobby] No se pudo establecer el punto de aparición, World(name={name}) no existe :/
+
+# Mensajes de éxito
+success.server_added = [EzLobby] Servidor '{name}' ({id}) agregado con dirección {host}:{port}
+success.server_removed = [EzLobby] Servidor '{name}' ({id}) con dirección '{host}:{port}' fue eliminado
+success.config_reloading = [EzLobby] Recargando la lista de servidores desde la configuración...
+success.config_reloaded = [EzLobby] ¡Lista de servidores recargada!
+success.spawn_set = [EzLobby] Punto de aparición establecido en tu ubicación actual: {name}<{position}, {rotation}>
+success.spawn_protected = [EzLobby] Protección de spawn habilitada para World(name={name}).
+success.player_teleporting = [EzLobby] El jugador '{player}' está siendo teletransportado al servidor '{server}'
+
+# Mensajes de permisos
+permission.break_blocks = ¡No tienes permiso para romper bloques!
+permission.place_blocks = ¡No tienes permiso para colocar bloques!
+permission.damage_blocks = ¡No tienes permiso para dañar bloques!
+permission.use_blocks = ¡No tienes permiso para usar bloques!
+
+# Formato de lista de servidores
+server_list.entry = [{idx}] {name} - {displayName} ({host}:{port})

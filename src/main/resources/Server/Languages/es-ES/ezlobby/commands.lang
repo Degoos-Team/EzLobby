@@ -1,0 +1,58 @@
+# EzLobby Commands Language File (es-ES)
+# Formato: clave = valor
+
+# Comando principal
+ezlobby.desc = Gestionar configuraciones y funcionalidades del plugin EzLobby
+
+# Comando de título
+title.desc = Mostrar un título a un jugador o al servidor
+title.arg.title = El texto del título a mostrar
+title.arg.subtitle = El texto del subtítulo a mostrar
+title.arg.subtitle.defaultValue = ''
+title.arg.world = El mundo en el que transmitir el título
+title.arg.player = El jugador al que mostrar el título
+title.arg.broadcast = Si transmitir a todos los jugadores
+title.arg.broadcast.defaultValue = false
+
+# Comando de servidores (para jugadores)
+server.desc = Abrir la lista de servidores o teletransportarse a un servidor específico
+
+# Colección de comandos de servidor
+ezlobby.server.desc = Gestionar servidores en el lobby
+
+# Argumentos de comandos de servidor (compartidos entre comandos de servidor)
+server.arg.index = El índice del servidor en la lista
+server.arg.id = El UUID del servidor
+server.arg.name = El nombre del servidor
+
+# Comando de agregar servidor
+ezlobby.server.add.desc = Agregar un nuevo servidor al lobby
+server.add.arg.name = El nombre del servidor a agregar
+server.add.arg.host = La dirección del host del servidor
+server.add.arg.port = El número de puerto del servidor
+server.add.arg.uiIcon = El icono de interfaz a mostrar para el servidor
+server.add.arg.uiColorTint = El tinte de color de la interfaz para el icono del servidor
+server.add.arg.uiBackground = El fondo de la interfaz para el servidor
+server.add.arg.displayName = El nombre de visualización mostrado a los jugadores
+server.add.arg.description = La descripción del servidor
+
+# Comando de eliminar servidor
+ezlobby.server.remove.desc = Eliminar un servidor del lobby
+
+# Comando de listar servidores
+ezlobby.server.list.desc = Listar todos los servidores en el lobby
+
+# Comando de teletransporte a servidor
+ezlobby.server.tp.desc = Teletransportar un jugador a un servidor
+
+# Comando de recargar servidor
+ezlobby.server.reload.desc = Recargar la lista de servidores desde la configuración
+
+# Comando de spawn
+ezlobby.spawn.desc = Gestionar el punto de aparición del lobby
+
+# Comando de establecer spawn
+ezlobby.spawn.set.desc = Establecer el punto de aparición en tu ubicación actual
+
+# Comando de proteger spawn
+ezlobby.spawn.protect.desc = Habilitar la protección del spawn en el mundo actual

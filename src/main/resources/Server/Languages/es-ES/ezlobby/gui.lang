@@ -1,0 +1,10 @@
+# EzLobby GUI Language File (es-ES)
+serverrow.description = Descripción del Servidor
+serverrow.name = Nombre del Servidor
+serverrow.tooltip = Haz clic para conectarte a este servidor
+# Fila de servidor
+
+serverlist.title = Lista de Servidores
+# Página de lista de servidores
+
+# Formato: clave = valor
