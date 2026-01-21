@@ -3,6 +3,7 @@ package com.degoos.hytale.ezlobby.ui
 import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.hytale.ezlobby.assets.ServerIconsStorage
 import com.degoos.hytale.ezlobby.dsl.parseColors
+import com.degoos.hytale.ezlobby.utils.ColorUtils
 import com.degoos.kayle.dsl.dispatcher
 import com.degoos.kayle.dsl.world
 import com.hypixel.hytale.codec.Codec
@@ -13,7 +14,6 @@ import com.hypixel.hytale.component.Store
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType
 import com.hypixel.hytale.server.core.Message
-import com.hypixel.hytale.server.core.asset.type.item.config.Item
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage
 import com.hypixel.hytale.server.core.ui.builder.EventData
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder
@@ -47,6 +47,8 @@ class ServerListEvent(var action: String? = null, var serverIndex: Int? = null) 
             .build()
     }
 }
+
+
 
 class ServerListPage(player: PlayerRef) :
     InteractiveCustomUIPage<ServerListEvent>(player, CustomPageLifetime.CanDismiss, ServerListEvent.CODEC) {
@@ -84,6 +86,16 @@ class ServerListPage(player: PlayerRef) :
             } else {
                 uiCommandBuilder.set("$imageSelector.AssetPath", icon!!.name)
                 uiCommandBuilder.remove(iconSelector)
+            }
+
+            if(server.uiColorTint != null) {
+                val stateColors = ColorUtils.generateButtonStateColors(server.uiColorTint!!)
+                stateColors.forEach { (state, color) ->
+                    uiCommandBuilder.set(
+                        "$buttonSelector.Style.$state.Background",
+                        color
+                    )
+                }
             }
 
             uiEventBuilder.addEventBinding(
