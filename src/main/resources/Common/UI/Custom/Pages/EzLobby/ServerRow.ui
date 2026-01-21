@@ -4,10 +4,10 @@ Button {
     TooltipText: %ezlobby.gui.serverrow.tooltip;
 
     Style: (
-      Default: (Background: $Common.@InputBoxBackground),
-      Hovered: (Background: $Common.@InputBoxHoveredBackground),
-      Pressed: (Background: $Common.@InputBoxPressedBackground),
-      Disabled: (Background: $Common.@InputBoxSelectedBackground)
+      Default: (Background: $Common.@DefaultButtonDefaultBackground),
+      Hovered: (Background: $Common.@DefaultButtonHoveredBackground),
+      Pressed: (Background: $Common.@DefaultButtonPressedBackground),
+      Disabled: (Background: $Common.@DefaultButtonDisabledBackground)
     );
 
     LayoutMode: Left;

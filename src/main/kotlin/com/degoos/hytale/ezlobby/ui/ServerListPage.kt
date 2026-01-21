@@ -88,7 +88,7 @@ class ServerListPage(player: PlayerRef) :
                 uiCommandBuilder.remove(iconSelector)
             }
 
-            if(server.uiColorTint != null) {
+            if(server.uiColorTint === "test") {
                 val stateColors = ColorUtils.generateButtonStateColors(server.uiColorTint!!)
                 stateColors.forEach { (state, color) ->
                     uiCommandBuilder.set(
