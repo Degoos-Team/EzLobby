@@ -1,7 +1,6 @@
 package com.degoos.hytale.ezlobby.commands.ezlobby.spawn
 
 import com.degoos.hytale.ezlobby.EzLobby
-import com.degoos.kayle.KotlinPlugin
 import com.degoos.kayle.dsl.dispatcher
 import com.hypixel.hytale.protocol.GameMode
 import com.hypixel.hytale.server.core.Message
@@ -12,7 +11,7 @@ import kotlinx.coroutines.future.asCompletableFuture
 import kotlinx.coroutines.launch
 import java.util.concurrent.CompletableFuture
 
-class ProtectSpawnCommand(val plugin: KotlinPlugin) :
+class ProtectSpawnCommand :
     AbstractCommand("protect", "ezlobby.commands.ezlobby.spawn.protect.desc") {
 
     override fun execute(context: CommandContext): CompletableFuture<Void>? {
@@ -24,7 +23,7 @@ class ProtectSpawnCommand(val plugin: KotlinPlugin) :
             return null
         }
 
-        val job = plugin.launch(spawnWorld.dispatcher) {
+        val job = EzLobby.instance?.launch(spawnWorld.dispatcher) {
             spawnWorld.worldConfig.isSpawningNPC = false
             spawnWorld.worldConfig.gameMode = GameMode.Adventure
             spawnWorld.worldConfig.isPvpEnabled = false
@@ -34,6 +33,6 @@ class ProtectSpawnCommand(val plugin: KotlinPlugin) :
             }
         }
 
-        return job.asCompletableFuture().thenApply { return@thenApply null }
+        return job?.asCompletableFuture()?.thenApply { return@thenApply null }
     }
 }

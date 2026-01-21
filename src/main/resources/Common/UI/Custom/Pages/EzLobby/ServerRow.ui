@@ -1,0 +1,39 @@
+$Common = "../../Common.ui";
+
+Button {
+
+    Style: (
+      Default: (Background: $Common.@InputBoxBackground),
+      Hovered: (Background: $Common.@InputBoxHoveredBackground),
+      Pressed: (Background: $Common.@InputBoxPressedBackground),
+      Disabled: (Background: $Common.@InputBoxSelectedBackground)
+    );
+
+    LayoutMode: Left;
+    Anchor: (Horizontal: 10, Height: 100, Top: 8);
+    Padding: (Horizontal: 10, Vertical: 16);
+
+    Group #IconGroup {
+      Anchor: (Width: 80, Height: 80, Right: 15);
+      AssetImage #Icon {
+            Anchor: (Width: 64, Height: 64);
+            AssetPath: "Icons/TEMPLATE_ICON.png";
+      }
+    }
+
+    Group {
+      LayoutMode: Top;
+      FlexWeight: 1;
+      Padding: (Top: 4);
+      Label #Name {
+        Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true);
+        Anchor: (Height: 22);
+        Text: "SERVER_NAME";
+      }
+      Label #Description {
+        Style: (FontSize: 14, TextColor: #aaaaaa);
+        Anchor: (Height: 18);
+        Text: "Join this server now!";
+      }
+    }
+}

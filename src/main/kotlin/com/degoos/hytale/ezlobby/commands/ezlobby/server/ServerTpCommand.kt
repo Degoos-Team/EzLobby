@@ -1,5 +1,6 @@
 package com.degoos.hytale.ezlobby.commands.ezlobby.server
 
+import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.kayle.KotlinPlugin
 import com.degoos.kayle.dsl.dispatcher
 import com.degoos.kayle.dsl.world
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.EmptyCoroutineContext
 
-class ServerTpCommand(val plugin: KotlinPlugin) :
+class ServerTpCommand() :
     AbstractServerCommand("tp", "ezlobby.commands.ezlobby.server.tp.desc") {
 
     private val playerArg: OptionalArg<PlayerRef> = this.withOptionalArg(
@@ -29,7 +30,7 @@ class ServerTpCommand(val plugin: KotlinPlugin) :
             return
         }
 
-        plugin.launch {
+        EzLobby.instance?.launch {
             val localPlayer = if (playerRef == null) {
                 val ref = context.senderAsPlayerRef() ?: return@launch
                 withContext(ref.world.dispatcher) {
