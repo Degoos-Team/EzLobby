@@ -1,7 +1,10 @@
 package com.degoos.hytale.ezlobby.utils
 
 import com.degoos.hytale.ezlobby.EzLobby
+import com.degoos.hytale.ezlobby.configs.ServersConfig
 import com.degoos.hytale.ezlobby.models.Server
+import com.hypixel.hytale.server.core.Message
+import com.hypixel.hytale.server.core.command.system.CommandContext
 import java.util.*
 
 fun findServer(name: String?, index: Int?, id: UUID?): Server? {
@@ -16,4 +19,21 @@ fun findServer(name: String?, index: Int?, id: UUID?): Server? {
         return server.find { it.id == id }?.let { return it }
     }
     return null
+}
+
+fun validateServersConfig(context: CommandContext): ServersConfig? {
+    val serversConfig = EzLobby.getServersConfig()
+    val config = serversConfig?.get()
+
+    if (config == null) {
+        context.sendMessage(Message.raw("[EzLobby] What? There is no servers file :/"))
+        return null
+    }
+
+    if (config.servers.isEmpty()) {
+        context.sendMessage(Message.raw("[EzLobby] There are no servers added yet. Use `/server add` to add one!"))
+        return null
+    }
+
+    return config
 }

@@ -1,6 +1,7 @@
 package com.degoos.hytale.ezlobby
 
 import com.degoos.hytale.ezlobby.assets.ServerIconsStorage
+import com.degoos.hytale.ezlobby.commands.ServersCommand
 import com.degoos.hytale.ezlobby.commands.TitleCommand
 import com.degoos.hytale.ezlobby.commands.ezlobby.EzLobbyCommand
 import com.degoos.hytale.ezlobby.configs.EzLobbyConfig
@@ -36,9 +37,8 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
 
         // region Commands
         commandRegistry.registerCommand(EzLobbyCommand())
-        logger.atConfig().log("[Degoos:EzLobby] EzLobby Command Registered")
         commandRegistry.registerCommand(TitleCommand())
-        logger.atConfig().log("[Degoos:EzLobby] EzNotify Command Registered")
+        commandRegistry.registerCommand(ServersCommand())
         // endregion
 
         // region Events
