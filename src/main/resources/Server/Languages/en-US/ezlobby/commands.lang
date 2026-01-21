@@ -13,6 +13,9 @@ title.arg.player = The player to show the title to
 title.arg.broadcast = Whether to broadcast to all players
 title.arg.broadcast.defaultValue = false
 
+# Servers command (player-facing)
+server.desc = Open the server list or teleport to a specific server
+
 # Server command collection
 ezlobby.server.desc = Manage servers in the lobby
 
