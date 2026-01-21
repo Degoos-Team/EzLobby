@@ -2,7 +2,7 @@ package com.degoos.hytale.ezlobby.commands.ezlobby.server
 
 import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.hytale.ezlobby.ui.ServerListPage
-import com.degoos.kayle.formatter.MessageFormatter
+import com.degoos.hytale.ezlobby.dsl.parseColors
 import com.degoos.kayle.dsl.dispatcher
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.CommandContext
@@ -35,7 +35,7 @@ class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.l
                     context.sendMessage(
                         Message.join(
                             Message.raw("[$idx] ${server.name} - "),
-                            MessageFormatter.parse(server.displayName ?: server.name),
+                            Message.raw(server.displayName ?: server.name).parseColors(),
                             Message.raw(" (${server.host}:${server.port})")
                         )
                     )

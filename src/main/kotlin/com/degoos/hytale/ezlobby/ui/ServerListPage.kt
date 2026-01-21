@@ -2,6 +2,7 @@ package com.degoos.hytale.ezlobby.ui
 
 import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.hytale.ezlobby.assets.ServerIconsStorage
+import com.degoos.hytale.ezlobby.dsl.parseColors
 import com.degoos.kayle.dsl.dispatcher
 import com.degoos.kayle.dsl.world
 import com.hypixel.hytale.codec.Codec
@@ -11,6 +12,8 @@ import com.hypixel.hytale.component.Ref
 import com.hypixel.hytale.component.Store
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType
+import com.hypixel.hytale.server.core.Message
+import com.hypixel.hytale.server.core.asset.type.item.config.Item
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage
 import com.hypixel.hytale.server.core.ui.builder.EventData
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder
@@ -59,15 +62,28 @@ class ServerListPage(player: PlayerRef) :
         EzLobby.getServersConfig()?.get()?.servers?.forEachIndexed { index, server ->
             val buttonSelector = "#Content[$index]"
             val nameSelector = "#Content[$index] #Name"
+            val descriptionSelector = "#Content[$index] #Description"
             val iconSelector = "#Content[$index] #Icon"
+            val imageSelector = "#Content[$index] #Image"
             uiCommandBuilder.append("#Content", "Pages/EzLobby/ServerRow.ui")
-            uiCommandBuilder.set("$nameSelector.Text", server.name)
-
+            uiCommandBuilder.set(
+                "$nameSelector.TextSpans",
+                Message.raw(server.displayName ?: server.name).parseColors()
+            )
+            if (server.description != null) {
+                uiCommandBuilder.set("$descriptionSelector.TextSpans", Message.raw(server.description!!).parseColors())
+            }
             val icon = ServerIconsStorage.findIconForServer(server.id)
-            if (icon == null) {
-                uiCommandBuilder.remove(iconSelector)
+
+            if (icon == null && server.uiIcon == null) {
+                uiCommandBuilder.set("$iconSelector.ItemId", EzLobby.getServersConfig()?.get()?.fallbackIcon ?: "Unknown")
+                uiCommandBuilder.remove(imageSelector)
+            } else if (server.uiIcon != null) {
+                uiCommandBuilder.set("$iconSelector.ItemId", server.uiIcon!!)
+                uiCommandBuilder.remove(imageSelector)
             } else {
-                uiCommandBuilder.set("$iconSelector.AssetPath", icon.name)
+                uiCommandBuilder.set("$imageSelector.AssetPath", icon!!.name)
+                uiCommandBuilder.remove(iconSelector)
             }
 
             uiEventBuilder.addEventBinding(

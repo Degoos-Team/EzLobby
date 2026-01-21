@@ -1,6 +1,7 @@
 $Common = "../../Common.ui";
 
 Button {
+    TooltipText: %ezlobby.gui.serverrow.tooltip;
 
     Style: (
       Default: (Background: $Common.@InputBoxBackground),
@@ -15,7 +16,11 @@ Button {
 
     Group #IconGroup {
       Anchor: (Width: 80, Height: 80, Right: 15);
-      AssetImage #Icon {
+      ItemIcon #Icon {
+          Anchor: (Width: 64, Height: 64);
+          HitTestVisible: false;
+      }
+      AssetImage #Image {
             Anchor: (Width: 64, Height: 64);
             AssetPath: "Icons/TEMPLATE_ICON.png";
       }
@@ -28,12 +33,12 @@ Button {
       Label #Name {
         Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true);
         Anchor: (Height: 22);
-        Text: "SERVER_NAME";
+        Text: %ezlobby.gui.serverrow.name;
       }
       Label #Description {
         Style: (FontSize: 14, TextColor: #aaaaaa);
-        Anchor: (Height: 18);
-        Text: "Join this server now!";
+        Anchor: (Height: 18, Top: 8);
+        Text: %ezlobby.gui.serverrow.description;
       }
     }
 }

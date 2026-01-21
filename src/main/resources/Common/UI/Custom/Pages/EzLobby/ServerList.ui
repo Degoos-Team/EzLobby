@@ -7,7 +7,7 @@ $Common.@PageOverlay {
           Group {
             Label {
               Style: (FontSize: 24, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center);
-              Text: "Server List";
+              Text: %ezlobby.gui.serverlist.title;
             }
           }
         }

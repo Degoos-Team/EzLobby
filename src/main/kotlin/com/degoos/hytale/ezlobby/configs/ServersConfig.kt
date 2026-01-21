@@ -1,6 +1,7 @@
 package com.degoos.hytale.ezlobby.configs
 
 import com.degoos.hytale.ezlobby.models.Server
+import com.hypixel.hytale.codec.Codec
 import com.hypixel.hytale.codec.ExtraInfo
 import com.hypixel.hytale.codec.KeyedCodec
 import com.hypixel.hytale.codec.builder.BuilderCodec
@@ -8,6 +9,7 @@ import com.hypixel.hytale.codec.codecs.array.ArrayCodec
 
 
 class ServersConfig {
+    var fallbackIcon: String = "Unknown"
     var servers: MutableList<Server> = mutableListOf()
 
     companion object {
@@ -28,8 +30,13 @@ class ServersConfig {
                 { config: ServersConfig?, _: ExtraInfo? ->
                     config!!.servers.toTypedArray()
                 }
-            )
-            .add()
+            ).add()
+
+            .append(
+                KeyedCodec("FallbackIcon", Codec.STRING),
+                ServersConfig::fallbackIcon.setter,
+                ServersConfig::fallbackIcon
+            ).add()
 
             .build()
     }

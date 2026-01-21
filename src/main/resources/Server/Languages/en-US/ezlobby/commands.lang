@@ -1,0 +1,54 @@
+# EzLobby Commands Language File (en-US)
+# Format: key = value
+
+# Main command
+ezlobby.desc = Manage EzLobby plugin settings and features
+
+# Title command
+title.arg.title = The title text to display
+title.arg.subtitle = The subtitle text to display
+title.arg.subtitle.defaultValue = ''
+title.arg.world = The world to broadcast the title in
+title.arg.player = The player to show the title to
+title.arg.broadcast = Whether to broadcast to all players
+title.arg.broadcast.defaultValue = false
+
+# Server command collection
+ezlobby.server.desc = Manage servers in the lobby
+
+# Server command arguments (shared across server commands)
+server.arg.index = The index of the server in the list
+server.arg.id = The UUID of the server
+server.arg.name = The name of the server
+
+# Server add command
+ezlobby.server.add.desc = Add a new server to the lobby
+server.add.arg.name = The name of the server to add
+server.add.arg.host = The host address of the server
+server.add.arg.port = The port number of the server
+server.add.arg.uiIcon = The UI icon to display for the server
+server.add.arg.uiColorTint = The UI color tint for the server icon
+server.add.arg.uiBackground = The UI background for the server
+server.add.arg.displayName = The display name shown to players
+server.add.arg.description = The description of the server
+
+# Server remove command
+ezlobby.server.remove.desc = Remove a server from the lobby
+
+# Server list command
+ezlobby.server.list.desc = List all servers in the lobby
+
+# Server teleport command
+ezlobby.server.tp.desc = Teleport a player to a server
+
+# Server reload command
+ezlobby.server.reload.desc = Reload the server list from configuration
+
+# Spawn command collection
+ezlobby.spawn.desc = Manage spawn point settings
+
+# Spawn set command
+ezlobby.spawn.set.desc = Set the spawn point to your current location
+
+# Spawn protect command
+ezlobby.spawn.protect.desc = Enable spawn protection for the spawn world

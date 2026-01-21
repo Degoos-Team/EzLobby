@@ -4,7 +4,7 @@ import com.degoos.hytale.ezlobby.EzLobby
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.CommandContext
 
-class ServerRemoveCommand : AbstractServerCommand("remove", "ezlobby.commands.ezlobby.server.add.desc", true) {
+class ServerRemoveCommand : AbstractServerCommand("remove", "ezlobby.commands.ezlobby.server.remove.desc", true) {
 
     override fun executeSync(context: CommandContext) {
         val serversConfig = EzLobby.getServersConfig()

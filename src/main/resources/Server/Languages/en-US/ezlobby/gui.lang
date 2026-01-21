@@ -1,0 +1,10 @@
+# EzLobby GUI Language File (en-US)
+# Format: key = value
+
+# Server List Page
+serverlist.title = Server List
+
+# Server Row
+serverrow.tooltip = Click to connect to this server
+serverrow.name = Server Name
+serverrow.description = Server Description
