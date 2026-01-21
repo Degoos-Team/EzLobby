@@ -33,12 +33,14 @@ class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.l
         EzLobby.instance?.launch {
             if (sendInChat || !tryOpenListAsGUI(context)) {
                 config.servers.forEachIndexed { idx, server ->
+                    // server_list.entry = [{idx}] {name} - {displayName} ({host}:{port})
                     context.sendMessage(
-                        Message.join(
-                            Message.raw("[$idx] ${server.name} - "),
-                            Message.raw(server.displayName ?: server.name).parseColors(),
-                            Message.raw(" (${server.host}:${server.port})")
-                        )
+                        Message.translation("server_list.entry")
+                            .param("idx", idx.toString())
+                            .param("name", server.name)
+                            .param("displayName", Message.raw(server.displayName ?: server.name).parseColors())
+                            .param("host", server.host)
+                            .param("port", server.port.toString())
                     )
                 }
             }

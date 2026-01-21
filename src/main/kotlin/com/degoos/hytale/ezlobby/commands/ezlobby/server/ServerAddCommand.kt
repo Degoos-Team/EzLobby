@@ -8,7 +8,7 @@ import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalAr
 import com.hypixel.hytale.server.core.command.system.arguments.system.RequiredArg
 import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase
-import java.util.UUID
+import java.util.*
 
 class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add.desc") {
     private val nameArg: RequiredArg<String?> = this.withRequiredArg(
@@ -56,7 +56,7 @@ class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add
         val config = serversConfig?.get()
 
         if (config == null) {
-            context.sendMessage(Message.raw("[EzLobby] Could not add a server, servers file is missing :/"))
+            context.sendMessage(Message.translation("ezlobby_messages.error.config_missing_add"))
             return
         }
 
@@ -72,7 +72,13 @@ class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add
 
         config.servers.add(Server(uuid, name, host, port, uiIcon, uiColorTint, uiBackground, displayName, description))
 
-        context.sendMessage(Message.raw("[EzLobby] Added server '$name' ($uuid) with address $host:$port"))
+        context.sendMessage(
+            Message.raw("ezlobby_messages.success.server_added")
+                .param("name", name)
+                .param("id", uuid.toString())
+                .param("host", host)
+                .param("port", port.toString())
+        )
         serversConfig.save()
     }
 }

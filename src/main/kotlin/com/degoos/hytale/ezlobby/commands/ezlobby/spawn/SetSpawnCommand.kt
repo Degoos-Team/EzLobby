@@ -8,7 +8,6 @@ import com.hypixel.hytale.server.core.command.system.CommandContext
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand
 import com.hypixel.hytale.server.core.universe.PlayerRef
 import com.hypixel.hytale.server.core.universe.world.World
-import com.hypixel.hytale.server.core.universe.world.WorldConfig
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore
 
 class SetSpawnCommand : AbstractPlayerCommand("set", "ezlobby.commands.ezlobby.spawn.set.desc") {
@@ -23,7 +22,7 @@ class SetSpawnCommand : AbstractPlayerCommand("set", "ezlobby.commands.ezlobby.s
         val config = mainConfig?.get()
 
         if (config == null) {
-            context.sendMessage(Message.raw("[EzLobby] Could not set spawn point, config is missing :/"))
+            context.sendMessage(Message.translation("ezlobby_messages.error.spawn_config_missing"))
             return
         }
 
@@ -32,6 +31,11 @@ class SetSpawnCommand : AbstractPlayerCommand("set", "ezlobby.commands.ezlobby.s
         config.spawnPointRotation = playerRef.transform.rotation
 
         mainConfig.save()
-        context.sendMessage(Message.raw("[EzLobby] Spawn point set to your current location: ${WorldConfig.formatDisplayName(world.name)}<${playerRef.transform.position}, ${playerRef.transform.rotation}>"))
+        context.sendMessage(
+            Message.raw("ezlobby_messages.success.spawn_set")
+                .param("name", world.name)
+                .param("position", playerRef.transform.position.toString())
+                .param("rotation", playerRef.transform.rotation.toString())
+        )
     }
 }

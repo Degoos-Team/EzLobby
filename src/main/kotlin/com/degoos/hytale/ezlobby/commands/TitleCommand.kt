@@ -15,7 +15,7 @@ import com.hypixel.hytale.server.core.util.EventTitleUtil
 
 
 class TitleCommand :
-    CommandBase("eztitle", "Show a title to a player or the server", false) {
+    CommandBase("eztitle", "ezlobby.commands.title.desc", false) {
 
     private val titleArg: RequiredArg<String?> = this.withRequiredArg(
         "title", "ezlobby.commands.title.arg.title",

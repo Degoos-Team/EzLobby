@@ -1,7 +1,6 @@
 package com.degoos.hytale.ezlobby.commands.ezlobby.server
 
 import com.degoos.hytale.ezlobby.EzLobby
-import com.degoos.kayle.KotlinPlugin
 import com.degoos.kayle.dsl.dispatcher
 import com.degoos.kayle.dsl.world
 import com.hypixel.hytale.server.core.Message
@@ -41,7 +40,7 @@ class ServerTpCommand() :
             }
 
             if (localPlayer == null) {
-                context.sendMessage(Message.raw("[EzLobby] Something really weird has happened. No player could be found, not even yourself :o/"))
+                context.sendMessage(Message.translation("ezlobby_messages.error.player_not_found"))
                 return@launch
             }
 
@@ -50,10 +49,9 @@ class ServerTpCommand() :
             }
 
             context.sendMessage(
-                Message.raw(
-                    "[EzLobby] User '${localPlayer.username}' is being teleported to server " +
-                            "'${server.name}' (${server.host}:${server.port})"
-                )
+                Message.raw("ezlobby_messages.success.player_teleporting")
+                    .param("player", localPlayer.username)
+                    .param("server", server.name)
             )
         }
     }

@@ -45,12 +45,10 @@ abstract class AbstractServerCommand(
             val name = get<String>(nameArg)
             val index = get<Int>(indexArg)
             val id = get<String>(idArg)?.let { UUID.fromString(it) }
-            return Message.raw(
-                "[EzLobby] No server found with the provided selector: " +
-                        (if (index != null) "--index $index " else "") +
-                        (if (id != null) "--id $id " else "") +
-                        (if (name != null) "--name $name" else "")
-            )
+            val selector = (if (index != null) "--index $index " else "") +
+                    (if (id != null) "--id $id " else "") +
+                    (if (name != null) "--name $name" else "")
+            return Message.raw("ezlobby_messages.error.server_not_found").param("selector", selector.trim())
         }
 
 }

@@ -5,6 +5,7 @@
 ezlobby.desc = Manage EzLobby plugin settings and features
 
 # Title command
+title.desc = Show a title to a player or the server
 title.arg.title = The title text to display
 title.arg.subtitle = The subtitle text to display
 title.arg.subtitle.defaultValue = ''

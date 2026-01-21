@@ -29,10 +29,10 @@ class ServersCommand : AbstractServerCommand("servers", "ezlobby.commands.server
                     ref.store.getComponent(ref, PlayerRef.getComponentType())
                 }
 
-                if (localPlayer == null) {
-                    context.sendMessage(Message.raw("[EzLobby] Something really weird has happened. No player could be found, not even yourself :o/"))
-                    return@launch
-                }
+            if (localPlayer == null) {
+                context.sendMessage(Message.translation("ezlobby_messages.error.player_not_found"))
+                return@launch
+            }
 
                 withContext(localPlayer.world?.dispatcher ?: EmptyCoroutineContext) {
                     localPlayer.referToServer(server.host, server.port)

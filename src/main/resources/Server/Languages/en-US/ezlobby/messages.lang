@@ -1,0 +1,29 @@
+# EzLobby Messages Language File (en-US)
+# Format: key = value
+
+# Error messages
+error.config_missing = [EzLobby] What? There is no servers file :/
+error.servers_empty = [EzLobby] There are no servers added yet. Use `/server add` to add one!
+error.config_missing_add = [EzLobby] Could not add a server, servers file is missing :/
+error.player_not_found = [EzLobby] Something really weird has happened. No player could be found, not even yourself :o/
+error.server_not_found = [EzLobby] No server found with the provided selector: {selector}
+error.spawn_config_missing = [EzLobby] Could not set spawn point, config is missing :/
+error.spawn_world_not_found = [EzLobby] Could not set spawn point, World(name={name}) does not exist :/
+
+# Success messages
+success.server_added = [EzLobby] Added server '{name}' ({id}) with address {host}:{port}
+success.server_removed = [EzLobby] Server '{name}' ({id}) with address '{host}:{port}' was removed
+success.config_reloading = [EzLobby] Reloading server list from config...
+success.config_reloaded = [EzLobby] Servers list reloaded!
+success.spawn_set = [EzLobby] Spawn point set to your current location: {name}<{position}, {rotation}>
+success.spawn_protected = [EzLobby] Spawn protection enabled for World(name={name}).
+success.player_teleporting = [EzLobby] Player '{player}' is being teleported to server '{server}'
+
+# Permission messages
+permission.break_blocks = You don't have permission to break blocks!
+permission.place_blocks = You don't have permission to place blocks!
+permission.damage_blocks = You don't have permission to damage blocks!
+permission.use_blocks = You don't have permission to use blocks!
+
+# Server list format
+server_list.entry = [{idx}] {name} - {displayName} ({host}:{port})

@@ -11,7 +11,7 @@ class ServerRemoveCommand : AbstractServerCommand("remove", "ezlobby.commands.ez
         val config = serversConfig?.get()
 
         if (config == null) {
-            context.sendMessage(Message.raw("[EzLobby] Could not add a server, servers file is missing :/"))
+            context.sendMessage(Message.translation("ezlobby_messages.error.config_missing_add"))
             return
         }
 
@@ -25,6 +25,13 @@ class ServerRemoveCommand : AbstractServerCommand("remove", "ezlobby.commands.ez
         config.servers.remove(serverToRemove)
         serversConfig.save()
 
-        context.sendMessage(Message.raw("[EzLobby] Server '${serverToRemove.name}' (${serverToRemove.id}) with address '${serverToRemove.host}:${serverToRemove.port}' was removed"))
+        context.sendMessage(
+            Message
+                .translation("ezlobby_messages.success.server_removed")
+                .param("name", serverToRemove.name)
+                .param("id", serverToRemove.id.toString())
+                .param("host", serverToRemove.host)
+                .param("port", serverToRemove.port.toString())
+        )
     }
 }
