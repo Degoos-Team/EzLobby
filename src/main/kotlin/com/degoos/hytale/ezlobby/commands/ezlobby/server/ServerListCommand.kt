@@ -2,6 +2,7 @@ package com.degoos.hytale.ezlobby.commands.ezlobby.server
 
 import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.hytale.ezlobby.dsl.parseColors
+import com.degoos.hytale.ezlobby.ui.AdminServerListPage
 import com.degoos.hytale.ezlobby.ui.ServerListPage
 import com.degoos.hytale.ezlobby.utils.validateServersConfig
 import com.degoos.kayle.dsl.dispatcher
@@ -11,6 +12,7 @@ import com.hypixel.hytale.server.core.command.system.arguments.system.DefaultArg
 import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase
 import com.hypixel.hytale.server.core.entity.entities.Player
+import com.hypixel.hytale.server.core.permissions.PermissionsModule
 import com.hypixel.hytale.server.core.universe.PlayerRef
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -33,9 +35,9 @@ class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.l
         EzLobby.instance?.launch {
             if (sendInChat || !tryOpenListAsGUI(context)) {
                 config.servers.forEachIndexed { idx, server ->
-                    // server_list.entry = [{idx}] {name} - {displayName} ({host}:{port})
+                    // server.list.entry = [{idx}] {name} - {displayName} ({host}:{port})
                     context.sendMessage(
-                        Message.translation("server_list.entry")
+                        Message.translation("ezlobby.messages.server.list.entry")
                             .param("idx", idx.toString())
                             .param("name", server.name)
                             .param("displayName", Message.raw(server.displayName ?: server.name).parseColors())
@@ -49,7 +51,6 @@ class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.l
 
 
     private suspend fun tryOpenListAsGUI(context: CommandContext): Boolean {
-        // todo: create a server ADMIN gui
         if (!context.isPlayer) return false
 
         val player = context.senderAs(Player::class.java)
@@ -59,7 +60,16 @@ class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.l
         return withContext(world.dispatcher) {
             val playerRef = reference.store.getComponent(reference, PlayerRef.getComponentType())
                 ?: return@withContext false
-            player.pageManager.openCustomPage(reference, reference.store, ServerListPage(playerRef))
+
+            // Use admin UI for users with ezlobby.server.manage permission
+            val hasManagePermission = PermissionsModule.get().hasPermission(playerRef.uuid, "ezlobby.server.manage")
+            val page = if (hasManagePermission) {
+                AdminServerListPage(playerRef)
+            } else {
+                ServerListPage(playerRef)
+            }
+
+            player.pageManager.openCustomPage(reference, reference.store, page)
             true
         }
     }

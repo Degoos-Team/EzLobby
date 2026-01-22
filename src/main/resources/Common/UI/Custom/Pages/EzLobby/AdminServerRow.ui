@@ -1,0 +1,116 @@
+$Common = "../../Common.ui";
+
+@AdminServerRowDefaultBackground = PatchStyle(TexturePath: "../../Common/Buttons/Primary.png", Border: 12, Color: #ffffff);
+@AdminServerRowHoveredBackground = PatchStyle(TexturePath: "../../Common/Buttons/Primary_Hovered.png", Border: 12, Color: #ffffff);
+@AdminServerRowPressedBackground = PatchStyle(TexturePath: "../../Common/Buttons/Primary_Pressed.png", Border: 12, Color: #ffffff);
+@AdminServerRowDisabledBackground = PatchStyle(TexturePath: "../../Common/Buttons/Disabled.png", Border: 12, Color: #ffffff);
+
+@EditButtonDefaultBackground = PatchStyle(TexturePath: "../../Common/Buttons/Secondary.png", Border: 12, Color: #ffffff);
+@EditButtonHoveredBackground = PatchStyle(TexturePath: "../../Common/Buttons/Secondary_Hovered.png", Border: 12, Color: #ffffff);
+@EditButtonPressedBackground = PatchStyle(TexturePath: "../../Common/Buttons/Secondary_Pressed.png", Border: 12, Color: #ffffff);
+@EditButtonDisabledBackground = PatchStyle(TexturePath: "../../Common/Buttons/Disabled.png", Border: 12, Color: #ffffff);
+
+Group {
+    LayoutMode: Left;
+    Anchor: (Horizontal: 10, Height: 120, Top: 8);
+    Padding: (Horizontal: 0, Vertical: 0);
+    Background: @AdminServerRowDefaultBackground;
+
+    Button #ConnectButton {
+        TooltipText: %ezlobby.gui.admin.serverrow.connect.tooltip;
+
+        Style: (
+          Default: (Background: @AdminServerRowDefaultBackground),
+          Hovered: (Background: @AdminServerRowHoveredBackground),
+          Pressed: (Background: @AdminServerRowPressedBackground),
+          Disabled: (Background: @AdminServerRowDisabledBackground)
+        );
+
+        LayoutMode: Left;
+        FlexWeight: 1;
+        Padding: (Horizontal: 10, Vertical: 16);
+
+        Group #IconGroup {
+          Anchor: (Width: 80, Height: 80, Right: 15);
+          Background: PatchStyle(TexturePath: "../../Common/ContainerFullPatch.png", Color: #ffffff);
+
+          ItemIcon #Icon {
+              Anchor: (Width: 64, Height: 64);
+              HitTestVisible: false;
+          }
+          AssetImage #Image {
+                Anchor: (Width: 64, Height: 64);
+                AssetPath: "Icons/TEMPLATE_ICON.png";
+          }
+        }
+
+        Group {
+          LayoutMode: Top;
+          FlexWeight: 1;
+          Padding: (Top: 4);
+
+          Label #Name {
+            Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true);
+            Anchor: (Height: 22);
+            Text: %ezlobby.gui.admin.serverrow.name;
+          }
+
+          Label #Description {
+            Style: (FontSize: 14, TextColor: #aaaaaa);
+            Anchor: (Height: 18, Top: 4);
+            Text: %ezlobby.gui.admin.serverrow.description;
+          }
+
+          Group {
+            LayoutMode: Left;
+            Anchor: (Height: 16, Top: 8);
+
+            Label #HostLabel {
+              Style: (FontSize: 12, TextColor: #66ccff, RenderBold: true);
+              Text: %ezlobby.gui.admin.serverrow.host.label;
+              Anchor: (Right: 5);
+            }
+
+            Label #Host {
+              Style: (FontSize: 12, TextColor: #cccccc);
+              Text: %ezlobby.gui.admin.serverrow.host;
+            }
+          }
+
+          Group {
+            LayoutMode: Left;
+            Anchor: (Height: 16, Top: 4);
+
+            Label #IdLabel {
+              Style: (FontSize: 11, TextColor: #999999);
+              Text: %ezlobby.gui.admin.serverrow.id.label;
+              Anchor: (Right: 5);
+            }
+
+            Label #Id {
+              Style: (FontSize: 11, TextColor: #777777);
+              Text: %ezlobby.gui.admin.serverrow.id;
+            }
+          }
+        }
+    }
+
+    Button #EditButton {
+        TooltipText: %ezlobby.gui.admin.serverrow.edit.tooltip;
+
+        Style: (
+          Default: (Background: @EditButtonDefaultBackground),
+          Hovered: (Background: @EditButtonHoveredBackground),
+          Pressed: (Background: @EditButtonPressedBackground),
+          Disabled: (Background: @EditButtonDisabledBackground)
+        );
+
+        Anchor: (Width: 80, Right: 0);
+        LayoutMode: Middle;
+
+        Label {
+            Style: (FontSize: 14, TextColor: #bfcdd5, RenderBold: true, HorizontalAlignment: Center);
+            Text: %ezlobby.gui.admin.serverrow.edit.button;
+        }
+    }
+}

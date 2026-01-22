@@ -40,7 +40,7 @@ class ServerTpCommand() :
             }
 
             if (localPlayer == null) {
-                context.sendMessage(Message.translation("ezlobby_messages.error.player_not_found"))
+                context.sendMessage(Message.translation("ezlobby.messages.error.player.not.found"))
                 return@launch
             }
 
@@ -49,7 +49,7 @@ class ServerTpCommand() :
             }
 
             context.sendMessage(
-                Message.translation("ezlobby_messages.success.player_teleporting")
+                Message.translation("ezlobby.messages.success.player.teleporting")
                     .param("player", localPlayer.username)
                     .param("server", server.name)
             )

@@ -56,7 +56,7 @@ class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add
         val config = serversConfig?.get()
 
         if (config == null) {
-            context.sendMessage(Message.translation("ezlobby_messages.error.config_missing_add"))
+            context.sendMessage(Message.translation("ezlobby.messages.error.config.missing.add"))
             return
         }
 
@@ -73,7 +73,7 @@ class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add
         config.servers.add(Server(uuid, name, host, port, uiIcon, uiColorTint, uiBackground, displayName, description))
 
         context.sendMessage(
-            Message.translation("ezlobby_messages.success.server_added")
+            Message.translation("ezlobby.messages.success.server.added")
                 .param("name", name)
                 .param("id", uuid.toString())
                 .param("host", host)

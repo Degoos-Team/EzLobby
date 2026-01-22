@@ -34,7 +34,7 @@ class ServersCommand : AbstractServerCommand("servers", "ezlobby.commands.server
                 }
 
             if (localPlayer == null) {
-                context.sendMessage(Message.translation("ezlobby_messages.error.player_not_found"))
+                context.sendMessage(Message.translation("ezlobby.messages.error.player.not.found"))
                 return@launch
             }
 

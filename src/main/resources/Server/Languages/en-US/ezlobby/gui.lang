@@ -8,3 +8,18 @@ serverlist.title = Server List
 serverrow.tooltip = Click to connect to this server
 serverrow.name = Server Name
 serverrow.description = Server Description
+
+# Admin Server List Page
+admin.serverlist.title = Server Management
+
+# Admin Server Row
+admin.serverrow.connect.tooltip = Click to connect to this server
+admin.serverrow.edit.tooltip = Edit server settings
+admin.serverrow.name = Server Name
+admin.serverrow.description = Server Description
+admin.serverrow.host.label = Address:
+admin.serverrow.host = localhost:25565
+admin.serverrow.id.label = ID:
+admin.serverrow.id = 00000000-0000-0000-0000-000000000000
+admin.serverrow.edit.button = EDIT
+

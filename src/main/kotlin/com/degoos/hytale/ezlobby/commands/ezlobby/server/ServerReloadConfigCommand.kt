@@ -9,10 +9,10 @@ import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase
 class ServerReloadConfigCommand : CommandBase("reload", "ezlobby.commands.ezlobby.server.reload.desc") {
 
     override fun executeSync(context: CommandContext) {
-        context.sendMessage(Message.translation("ezlobby_messages.success.config_reloading"))
+        context.sendMessage(Message.translation("ezlobby.messages.success.config.reloading"))
         EzLobby.getServersConfig()?.load()?.thenRun {
             ServerIconsStorage.recreateIcons()
-            context.sendMessage(Message.translation("ezlobby_messages.success.config_reloaded"))
+            context.sendMessage(Message.translation("ezlobby.messages.success.config.reloaded"))
         }
     }
 }

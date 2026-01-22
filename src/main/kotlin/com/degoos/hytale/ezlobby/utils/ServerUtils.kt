@@ -26,12 +26,12 @@ fun validateServersConfig(context: CommandContext): ServersConfig? {
     val config = serversConfig?.get()
 
     if (config == null) {
-        context.sendMessage(Message.translation("ezlobby_messages.error.config_missing"))
+        context.sendMessage(Message.translation("ezlobby.messages.error.config.missing"))
         return null
     }
 
     if (config.servers.isEmpty()) {
-        context.sendMessage(Message.translation("ezlobby_messages.error.servers_empty"))
+        context.sendMessage(Message.translation("ezlobby.messages.error.servers.empty"))
         return null
     }
 

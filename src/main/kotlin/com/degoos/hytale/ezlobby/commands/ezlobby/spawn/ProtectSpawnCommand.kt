@@ -19,7 +19,7 @@ class ProtectSpawnCommand :
         val spawnWorld = if (worldName != null) Universe.get().getWorld(worldName) else null
 
         if (spawnWorld == null) {
-            context.sendMessage(Message.translation("ezlobby_messages.error.spawn_world_not_found").param("name", worldName ?: "null"))
+            context.sendMessage(Message.translation("ezlobby.messages.error.spawn.world.not.found").param("name", worldName ?: "null"))
             return null
         }
 
@@ -29,7 +29,7 @@ class ProtectSpawnCommand :
             spawnWorld.worldConfig.isPvpEnabled = false
 
             Universe.get().worldConfigProvider.save(spawnWorld.savePath, spawnWorld.worldConfig, spawnWorld).thenRun {
-                context.sendMessage(Message.translation("ezlobby_messages.success.spawn_protected").param("name", spawnWorld.name))
+                context.sendMessage(Message.translation("ezlobby.messages.success.spawn.protected").param("name", spawnWorld.name))
             }
         }
 

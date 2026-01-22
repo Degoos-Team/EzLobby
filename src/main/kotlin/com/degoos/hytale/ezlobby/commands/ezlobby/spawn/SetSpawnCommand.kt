@@ -22,7 +22,7 @@ class SetSpawnCommand : AbstractPlayerCommand("set", "ezlobby.commands.ezlobby.s
         val config = mainConfig?.get()
 
         if (config == null) {
-            context.sendMessage(Message.translation("ezlobby_messages.error.spawn_config_missing"))
+            context.sendMessage(Message.translation("ezlobby.messages.error.spawn.config.missing"))
             return
         }
 
@@ -32,7 +32,7 @@ class SetSpawnCommand : AbstractPlayerCommand("set", "ezlobby.commands.ezlobby.s
 
         mainConfig.save()
         context.sendMessage(
-            Message.translation("ezlobby_messages.success.spawn_set")
+            Message.translation("ezlobby.messages.success.spawn.set")
                 .param("name", world.name)
                 .param("position", playerRef.transform.position.toString())
                 .param("rotation", playerRef.transform.rotation.toString())

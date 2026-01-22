@@ -1,10 +1,25 @@
 # EzLobby GUI Language File (es-ES)
-serverrow.description = Descripción del Servidor
-serverrow.name = Nombre del Servidor
-serverrow.tooltip = Haz clic para conectarte a este servidor
-# Fila de servidor
-
-serverlist.title = Lista de Servidores
-# Página de lista de servidores
-
 # Formato: clave = valor
+
+# Página de lista de servidores
+serverlist.title = Lista de Servidores
+
+# Fila de servidor
+serverrow.tooltip = Haz clic para conectarte a este servidor
+serverrow.name = Nombre del Servidor
+serverrow.description = Descripción del Servidor
+
+# Página de lista de servidores de administrador
+admin.serverlist.title = Gestión de Servidores
+
+# Fila de servidor de administrador
+admin.serverrow.connect.tooltip = Haz clic para conectarte a este servidor
+admin.serverrow.edit.tooltip = Editar configuración del servidor
+admin.serverrow.name = Nombre del Servidor
+admin.serverrow.description = Descripción del Servidor
+admin.serverrow.host.label = Dirección:
+admin.serverrow.host = localhost:25565
+admin.serverrow.id.label = ID:
+admin.serverrow.id = 00000000-0000-0000-0000-000000000000
+admin.serverrow.edit.button = EDITAR
+
