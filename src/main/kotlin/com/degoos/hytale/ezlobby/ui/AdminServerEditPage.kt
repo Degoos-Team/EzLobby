@@ -231,19 +231,22 @@ class AdminServerEditPage(player: PlayerRef, private val serverIndex: Int) :
                 }
 
                 if (previewNeedsUpdate && server != null) {
-                    server.name = currentName
-                    server.displayName = currentDisplayName
-                    server.description = currentDescription
-                    server.uiIcon = currentIcon
-                    server.uiColorTint = currentColorTint
+                    // Create a temporary server instance with current values for preview
+                    val previewServer = Server(
+                        id = server.id,
+                        name = currentName,
+                        displayName = currentDisplayName,
+                        description = currentDescription,
+                        host = currentHost,
+                        port = currentPort,
+                        uiIcon = currentIcon,
+                        uiColorTint = currentColorTint
+                    )
 
-
-                    // Update preview using utility
+                    // Update only the preview component using the utility
                     val commandBuilder = UICommandBuilder()
-                    val eventBuilder = UIEventBuilder()
-//                    updatePreview(commandBuilder, previewServer)
-                    build(ref, commandBuilder, eventBuilder, store)
-                    sendUpdate(commandBuilder, eventBuilder, true)
+                    ServerRowUtils.populateServerRow(commandBuilder, "#PreviewContainer[0]", previewServer)
+                    sendUpdate(commandBuilder, UIEventBuilder(), false)
                 }
             }
         }

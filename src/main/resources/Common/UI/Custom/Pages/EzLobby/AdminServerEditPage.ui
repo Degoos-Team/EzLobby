@@ -136,35 +136,6 @@ $Common.@PageOverlay {
                   OutlineSize: 0.5;
                 }
 
-                Label {
-                  Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true, RenderUppercase: true);
-                  Text: %ezlobby.gui.admin.serveredit.section.icon;
-                  Anchor: (Bottom: 10);
-                }
-
-                Group {
-                    LayoutMode: Top;
-                    Anchor: (Bottom: 15);
-
-                    Label {
-                      Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);
-                      Text: %ezlobby.gui.admin.serveredit.field.icon;
-                      Anchor: (Bottom: 5);
-                    }
-
-                    $Common.@TextField #IconField {
-                      Anchor: (Bottom: 0, Height: 38);
-                      Style: (FontSize: 13, TextColor: #ffffff(0.85));
-                      PlaceholderText: %ezlobby.gui.admin.serveredit.placeholder.icon;
-                      PlaceholderStyle: (FontSize: 13, TextColor: #6e7da1, RenderItalics: true);
-                    }
-                }
-
-                Group {
-                  Anchor: (Height: 1, Top: 10, Bottom: 10);
-                  OutlineColor: #93844c;
-                  OutlineSize: 0.5;
-                }
 
                 Label {
                   Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true, RenderUppercase: true);
@@ -187,6 +158,25 @@ $Common.@PageOverlay {
                   Text: %ezlobby.gui.admin.serveredit.section.appearance;
                   Anchor: (Bottom: 10);
                 }
+
+                Group {
+                    LayoutMode: Top;
+                    Anchor: (Bottom: 15);
+
+                    Label {
+                      Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);
+                      Text: %ezlobby.gui.admin.serveredit.field.icon;
+                      Anchor: (Bottom: 5);
+                    }
+
+                    $Common.@TextField #IconField {
+                      Anchor: (Bottom: 0, Height: 38);
+                      Style: (FontSize: 13, TextColor: #ffffff(0.85));
+                      PlaceholderText: %ezlobby.gui.admin.serveredit.placeholder.icon;
+                      PlaceholderStyle: (FontSize: 13, TextColor: #6e7da1, RenderItalics: true);
+                    }
+                }
+
 
                 Label {
                   Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);

@@ -16,13 +16,16 @@ object ServerRowUtils {
         val icon = ServerIconsStorage.findIconForServer(server.id)
         if (icon == null && server.uiIcon == null) {
             uiCommandBuilder.set("$selector #Icon.ItemId", EzLobby.getServersConfig()?.get()?.fallbackIcon ?: "Unknown")
-            uiCommandBuilder.remove("$selector #Image")
+            uiCommandBuilder.set("$selector #Icon.Visible", true)
+            uiCommandBuilder.set("$selector #Image.Visible", false)
         } else if (server.uiIcon != null) {
             uiCommandBuilder.set("$selector #Icon.ItemId", server.uiIcon!!)
-            uiCommandBuilder.remove("$selector #Image")
+            uiCommandBuilder.set("$selector #Icon.Visible", true)
+            uiCommandBuilder.set("$selector #Image.Visible", false)
         } else {
             uiCommandBuilder.set("$selector #Image.AssetPath", icon!!.name)
-            uiCommandBuilder.remove("$selector #Icon")
+            uiCommandBuilder.set("$selector #Icon.Visible", false)
+            uiCommandBuilder.set("$selector #Image.Visible", true)
         }
 
         if (server.uiColorTint != null) {
@@ -41,13 +44,16 @@ object ServerRowUtils {
         val icon = ServerIconsStorage.findIconForServer(server.id)
         if (icon == null && server.uiIcon == null) {
             uiCommandBuilder.set("$selector #Icon.ItemId", EzLobby.getServersConfig()?.get()?.fallbackIcon ?: "Unknown")
-            uiCommandBuilder.remove("$selector #Image")
+            uiCommandBuilder.set("$selector #Icon.Visible", true)
+            uiCommandBuilder.set("$selector #Image.Visible", false)
         } else if (server.uiIcon != null) {
             uiCommandBuilder.set("$selector #Icon.ItemId", server.uiIcon!!)
-            uiCommandBuilder.remove("$selector #Image")
+            uiCommandBuilder.set("$selector #Icon.Visible", true)
+            uiCommandBuilder.set("$selector #Image.Visible", false)
         } else {
             uiCommandBuilder.set("$selector #Image.AssetPath", icon!!.name)
-            uiCommandBuilder.remove("$selector #Icon")
+            uiCommandBuilder.set("$selector #Icon.Visible", false)
+            uiCommandBuilder.set("$selector #Image.Visible", true)
         }
 
         if (server.uiColorTint != null) {
