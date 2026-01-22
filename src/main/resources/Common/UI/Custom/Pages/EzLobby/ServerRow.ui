@@ -1,13 +1,18 @@
 $Common = "../../Common.ui";
 
+@ServerRowDefaultBackground = PatchStyle(TexturePath: "../../Common/Buttons/Primary.png", Border: 12, Color: #ffffff);
+@ServerRowHoveredBackground = PatchStyle(TexturePath: "../../Common/Buttons/Primary_Hovered.png", Border: 12, Color: #ffffff);
+@ServerRowPressedBackground = PatchStyle(TexturePath: "../../Common/Buttons/Primary_Pressed.png", Border: 12, Color: #ffffff);
+@ServerRowDisabledBackground = PatchStyle(TexturePath: "../../Common/Buttons/Disabled.png", Border: 12, Color: #ffffff);
+
 Button {
     TooltipText: %ezlobby.gui.serverrow.tooltip;
 
     Style: (
-      Default: (Background: $Common.@DefaultButtonDefaultBackground),
-      Hovered: (Background: $Common.@DefaultButtonHoveredBackground),
-      Pressed: (Background: $Common.@DefaultButtonPressedBackground),
-      Disabled: (Background: $Common.@DefaultButtonDisabledBackground)
+      Default: (Background: @ServerRowDefaultBackground),
+      Hovered: (Background: @ServerRowHoveredBackground),
+      Pressed: (Background: @ServerRowHoveredBackground),
+      Disabled: (Background: @ServerRowHoveredBackground)
     );
 
     LayoutMode: Left;
@@ -16,6 +21,8 @@ Button {
 
     Group #IconGroup {
       Anchor: (Width: 80, Height: 80, Right: 15);
+      Background: PatchStyle(TexturePath: "../../Common/ContainerFullPatch.png", Color: #ffffff);
+
       ItemIcon #Icon {
           Anchor: (Width: 64, Height: 64);
           HitTestVisible: false;

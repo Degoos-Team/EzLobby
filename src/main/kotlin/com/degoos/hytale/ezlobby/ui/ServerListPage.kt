@@ -65,6 +65,7 @@ class ServerListPage(player: PlayerRef) :
             val buttonSelector = "#Content[$index]"
             val nameSelector = "#Content[$index] #Name"
             val descriptionSelector = "#Content[$index] #Description"
+            val iconGroupSelector = "#Content[$index] #IconGroup"
             val iconSelector = "#Content[$index] #Icon"
             val imageSelector = "#Content[$index] #Image"
             uiCommandBuilder.append("#Content", "Pages/EzLobby/ServerRow.ui")
@@ -92,10 +93,12 @@ class ServerListPage(player: PlayerRef) :
                 val stateColors = ColorUtils.generateButtonStateColors(server.uiColorTint!!)
                 stateColors.forEach { (state, color) ->
                     uiCommandBuilder.set(
-                        "$buttonSelector.Style.$state.Background",
+                        "$buttonSelector.Style.$state.Background.Color",
                         color
                     )
                 }
+
+                uiCommandBuilder.set("$iconGroupSelector.Background.Color", server.uiColorTint!!)
             }
 
             uiEventBuilder.addEventBinding(
