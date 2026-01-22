@@ -1,5 +1,6 @@
 # EzLobby Messages Language File (en-US)
 # Format: key = value
+# Key requisites: DO NOT USE UNDERSCORES (_). Use dots (.) to separate words.
 
 # Error messages
 error.config.missing = [EzLobby] What? There is no servers file :/
@@ -13,6 +14,7 @@ error.spawn.world.not.found = [EzLobby] Could not set spawn point, World(name={n
 # Success messages
 success.server.added = [EzLobby] Added server '{name}' ({id}) with address {host}:{port}
 success.server.removed = [EzLobby] Server '{name}' ({id}) with address '{host}:{port}' was removed
+success.server.updated = [EzLobby] Server '{name}' has been updated successfully!
 success.config.reloading = [EzLobby] Reloading server list from config...
 success.config.reloaded = [EzLobby] Servers list reloaded!
 success.spawn.set = [EzLobby] Spawn point set to your current location: {name}<{position}, {rotation}>

@@ -1,5 +1,6 @@
 # EzLobby Commands Language File (en-US)
 # Format: key = value
+# Key requisites: DO NOT USE UNDERSCORES (_). Use dots (.) to separate words.
 
 # Main command
 ezlobby.desc = Manage EzLobby plugin settings and features

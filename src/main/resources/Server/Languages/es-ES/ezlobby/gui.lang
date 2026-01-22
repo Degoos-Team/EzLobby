@@ -23,3 +23,27 @@ admin.serverrow.id.label = ID:
 admin.serverrow.id = 00000000-0000-0000-0000-000000000000
 admin.serverrow.edit.button = EDITAR
 
+# Página de edición de servidor de administrador
+admin.serveredit.title = Editar Servidor
+admin.serveredit.section.basic = Información Básica
+admin.serveredit.section.connection = Configuración de Conexión
+admin.serveredit.section.icon = Icono del Servidor
+admin.serveredit.section.preview = Vista Previa en Vivo
+admin.serveredit.section.appearance = Apariencia
+admin.serveredit.field.name = Nombre del Servidor
+admin.serveredit.field.displayname = Nombre para Mostrar
+admin.serveredit.field.description = Descripción
+admin.serveredit.field.host = Dirección del Host
+admin.serveredit.field.port = Puerto
+admin.serveredit.field.icon = ID del Icono
+admin.serveredit.field.colortint = Tinte de Color
+admin.serveredit.placeholder.name = Ingresa el nombre del servidor
+admin.serveredit.placeholder.displayname = Ingresa el nombre para mostrar (opcional)
+admin.serveredit.placeholder.description = Ingresa la descripción (opcional)
+admin.serveredit.placeholder.host = localhost
+admin.serveredit.placeholder.port = 25565
+admin.serveredit.placeholder.icon = Ingredient_Poop (opcional)
+admin.serveredit.placeholder.colortint = #ffffff (opcional)
+admin.serveredit.button.save = GUARDAR
+admin.serveredit.button.cancel = CANCELAR
+

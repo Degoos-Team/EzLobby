@@ -1,5 +1,6 @@
 # EzLobby GUI Language File (en-US)
 # Format: key = value
+# Key requisites: DO NOT USE UNDERSCORES (_). Use dots (.) to separate words.
 
 # Server List Page
 serverlist.title = Server List
@@ -22,4 +23,28 @@ admin.serverrow.host = localhost:25565
 admin.serverrow.id.label = ID:
 admin.serverrow.id = 00000000-0000-0000-0000-000000000000
 admin.serverrow.edit.button = EDIT
+
+# Admin Server Edit Page
+admin.serveredit.title = Edit Server
+admin.serveredit.section.basic = Basic Information
+admin.serveredit.section.connection = Connection Settings
+admin.serveredit.section.icon = Server Icon
+admin.serveredit.section.preview = Live Preview
+admin.serveredit.section.appearance = Appearance
+admin.serveredit.field.name = Server Name
+admin.serveredit.field.displayname = Display Name
+admin.serveredit.field.description = Description
+admin.serveredit.field.host = Host Address
+admin.serveredit.field.port = Port
+admin.serveredit.field.icon = Icon ID
+admin.serveredit.field.colortint = Color Tint
+admin.serveredit.placeholder.name = Enter server name
+admin.serveredit.placeholder.displayname = Enter display name (optional)
+admin.serveredit.placeholder.description = Enter description (optional)
+admin.serveredit.placeholder.host = localhost
+admin.serveredit.placeholder.port = 25565
+admin.serveredit.placeholder.icon = Ingredient_Poop (optional)
+admin.serveredit.placeholder.colortint = #ffffff (optional)
+admin.serveredit.button.save = SAVE
+admin.serveredit.button.cancel = CANCEL
 

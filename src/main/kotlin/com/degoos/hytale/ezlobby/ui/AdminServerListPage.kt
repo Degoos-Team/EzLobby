@@ -1,8 +1,6 @@
 package com.degoos.hytale.ezlobby.ui
 
 import com.degoos.hytale.ezlobby.EzLobby
-import com.degoos.hytale.ezlobby.assets.ServerIconsStorage
-import com.degoos.hytale.ezlobby.dsl.parseColors
 import com.degoos.kayle.dsl.dispatcher
 import com.degoos.kayle.dsl.world
 import com.hypixel.hytale.codec.Codec
@@ -12,7 +10,7 @@ import com.hypixel.hytale.component.Ref
 import com.hypixel.hytale.component.Store
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType
-import com.hypixel.hytale.server.core.Message
+import com.hypixel.hytale.server.core.entity.entities.Player
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage
 import com.hypixel.hytale.server.core.ui.builder.EventData
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder
@@ -62,62 +60,20 @@ class AdminServerListPage(player: PlayerRef) :
         uiCommandBuilder.append("Pages/EzLobby/AdminServerListPage.ui")
 
         EzLobby.getServersConfig()?.get()?.servers?.forEachIndexed { index, server ->
-            val connectButtonSelector = "#Content[$index] #ConnectButton"
-            val editButtonSelector = "#Content[$index] #EditButton"
-            val nameSelector = "#Content[$index] #Name"
-            val descriptionSelector = "#Content[$index] #Description"
-            val hostSelector = "#Content[$index] #Host"
-            val idSelector = "#Content[$index] #Id"
-            val iconGroupSelector = "#Content[$index] #IconGroup"
-            val iconSelector = "#Content[$index] #Icon"
-            val imageSelector = "#Content[$index] #Image"
-
             uiCommandBuilder.append("#Content", "Pages/EzLobby/AdminServerRow.ui")
 
-            uiCommandBuilder.set(
-                "$nameSelector.TextSpans",
-                Message.raw(server.displayName ?: server.name).parseColors()
-            )
+            // Use utility to populate the server row
+            ServerRowUtils.populateAdminServerRow(uiCommandBuilder, "#Content[$index]", server)
 
-            if (server.description != null) {
-                uiCommandBuilder.set("$descriptionSelector.TextSpans", Message.raw(server.description!!).parseColors())
-            }
-
-            uiCommandBuilder.set(
-                "$hostSelector.Text",
-                "${server.host}:${server.port}"
-            )
-
-            uiCommandBuilder.set(
-                "$idSelector.Text",
-                server.id.toString()
-            )
-
-            val icon = ServerIconsStorage.findIconForServer(server.id)
-
-            if (icon == null && server.uiIcon == null) {
-                uiCommandBuilder.set("$iconSelector.ItemId", EzLobby.getServersConfig()?.get()?.fallbackIcon ?: "Unknown")
-                uiCommandBuilder.remove(imageSelector)
-            } else if (server.uiIcon != null) {
-                uiCommandBuilder.set("$iconSelector.ItemId", server.uiIcon!!)
-                uiCommandBuilder.remove(imageSelector)
-            } else {
-                uiCommandBuilder.set("$imageSelector.AssetPath", icon!!.name)
-                uiCommandBuilder.remove(iconSelector)
-            }
-
-            if(server.uiColorTint != null) {
-                uiCommandBuilder.set("$iconGroupSelector.Background.Color", server.uiColorTint!!)
-            }
-
+            // Bind events
             uiEventBuilder.addEventBinding(
-                CustomUIEventBindingType.Activating, connectButtonSelector,
+                CustomUIEventBindingType.Activating, "#Content[$index] #ConnectButton",
                 EventData.of(AdminServerListEvent.KEY_ACTION, AdminServerListEvent.ACTION_CONNECT)
                     .append(AdminServerListEvent.KEY_SERVER, index.toString())
             )
 
             uiEventBuilder.addEventBinding(
-                CustomUIEventBindingType.Activating, editButtonSelector,
+                CustomUIEventBindingType.Activating, "#Content[$index] #EditButton",
                 EventData.of(AdminServerListEvent.KEY_ACTION, AdminServerListEvent.ACTION_EDIT)
                     .append(AdminServerListEvent.KEY_SERVER, index.toString())
             )
@@ -140,12 +96,12 @@ class AdminServerListPage(player: PlayerRef) :
             }
             AdminServerListEvent.ACTION_EDIT -> {
                 val serverIndex = data.serverIndex ?: return
-                val server = EzLobby.getServersConfig()?.get()?.servers?.getOrNull(serverIndex) ?: return
-                // TODO: Open AdminServerEditPage when it's implemented
+                EzLobby.getServersConfig()?.get()?.servers?.getOrNull(serverIndex) ?: return
+
                 EzLobby.instance?.launch(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
-                    // For now, just send a message
-                    playerRef.sendMessage(Message.translation("ezlobby.messages.admin.edit.not.implemented")
-                        .param("server", server.name))
+                    val player = playerRef.reference?.store?.getComponent(playerRef.reference!!, Player.getComponentType()) ?: return@launch
+                    val reference = player.reference ?: return@launch
+                    player.pageManager.openCustomPage(reference, reference.store, AdminServerEditPage(playerRef, serverIndex))
                 }
             }
         }

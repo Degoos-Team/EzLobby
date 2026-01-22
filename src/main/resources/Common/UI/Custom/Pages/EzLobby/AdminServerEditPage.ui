@@ -1,0 +1,224 @@
+$Common = "../../Common.ui";
+
+$Common.@PageOverlay {
+  $Common.@Container {
+        Anchor: (Width: 900, Height: 700);
+        #Title {
+          Group {
+            Label {
+              Style: (FontSize: 24, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center);
+              Text: %ezlobby.gui.admin.serveredit.title;
+            }
+          }
+        }
+        #Content {
+            FlexWeight: 1;
+            LayoutMode: Left;
+            Padding: (Horizontal: 20, Vertical: 10);
+
+            Group #LeftColumn {
+                FlexWeight: 2;
+                LayoutMode: TopScrolling;
+                ScrollbarStyle: $Common.@DefaultScrollbarStyle;
+                Padding: (Right: 10);
+
+                Label {
+                  Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true, RenderUppercase: true);
+                  Text: %ezlobby.gui.admin.serveredit.section.basic;
+                  Anchor: (Bottom: 10);
+                }
+
+                Group {
+                    LayoutMode: Top;
+                    Anchor: (Bottom: 15);
+
+                    Label {
+                      Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);
+                      Text: %ezlobby.gui.admin.serveredit.field.name;
+                      Anchor: (Bottom: 5);
+                    }
+
+                    $Common.@TextField #NameField {
+                      Anchor: (Bottom: 0, Height: 38);
+                      Style: (FontSize: 13, TextColor: #ffffff(0.85));
+                      PlaceholderText: %ezlobby.gui.admin.serveredit.placeholder.name;
+                      PlaceholderStyle: (FontSize: 13, TextColor: #6e7da1, RenderItalics: true);
+                    }
+                }
+
+                Group {
+                    LayoutMode: Top;
+                    Anchor: (Bottom: 15);
+
+                    Label {
+                      Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);
+                      Text: %ezlobby.gui.admin.serveredit.field.displayname;
+                      Anchor: (Bottom: 5);
+                    }
+
+                    $Common.@TextField #DisplayNameField {
+                      Anchor: (Bottom: 0, Height: 38);
+                      Style: (FontSize: 13, TextColor: #ffffff(0.85));
+                      PlaceholderText: %ezlobby.gui.admin.serveredit.placeholder.displayname;
+                      PlaceholderStyle: (FontSize: 13, TextColor: #6e7da1, RenderItalics: true);
+                    }
+                }
+
+                Group {
+                    LayoutMode: Top;
+                    Anchor: (Bottom: 15);
+
+                    Label {
+                      Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);
+                      Text: %ezlobby.gui.admin.serveredit.field.description;
+                      Anchor: (Bottom: 5);
+                    }
+
+                    $Common.@TextField #DescriptionField {
+                      Anchor: (Bottom: 0, Height: 38);
+                      Style: (FontSize: 13, TextColor: #ffffff(0.85));
+                      PlaceholderText: %ezlobby.gui.admin.serveredit.placeholder.description;
+                      PlaceholderStyle: (FontSize: 13, TextColor: #6e7da1, RenderItalics: true);
+                    }
+                }
+
+                Group {
+                  Anchor: (Height: 1, Top: 10, Bottom: 10);
+                  OutlineColor: #93844c;
+                  OutlineSize: 0.5;
+                }
+
+                Label {
+                  Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true, RenderUppercase: true);
+                  Text: %ezlobby.gui.admin.serveredit.section.connection;
+                  Anchor: (Bottom: 10);
+                }
+
+                Group {
+                    LayoutMode: Top;
+                    Anchor: (Bottom: 15);
+
+                    Label {
+                      Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);
+                      Text: %ezlobby.gui.admin.serveredit.field.host;
+                      Anchor: (Bottom: 5);
+                    }
+
+                    $Common.@TextField #HostField {
+                      Anchor: (Bottom: 0, Height: 38);
+                      Style: (FontSize: 13, TextColor: #ffffff(0.85));
+                      PlaceholderText: %ezlobby.gui.admin.serveredit.placeholder.host;
+                      PlaceholderStyle: (FontSize: 13, TextColor: #6e7da1, RenderItalics: true);
+                    }
+                }
+
+                Group {
+                    LayoutMode: Top;
+                    Anchor: (Bottom: 15);
+
+                    Label {
+                      Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);
+                      Text: %ezlobby.gui.admin.serveredit.field.port;
+                      Anchor: (Bottom: 5);
+                    }
+
+                    $Common.@TextField #PortField {
+                      Anchor: (Bottom: 0, Height: 38);
+                      Style: (FontSize: 13, TextColor: #ffffff(0.85));
+                      PlaceholderText: %ezlobby.gui.admin.serveredit.placeholder.port;
+                      PlaceholderStyle: (FontSize: 13, TextColor: #6e7da1, RenderItalics: true);
+                    }
+                }
+
+                Group {
+                  Anchor: (Height: 1, Top: 10, Bottom: 10);
+                  OutlineColor: #93844c;
+                  OutlineSize: 0.5;
+                }
+
+                Label {
+                  Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true, RenderUppercase: true);
+                  Text: %ezlobby.gui.admin.serveredit.section.icon;
+                  Anchor: (Bottom: 10);
+                }
+
+                Group {
+                    LayoutMode: Top;
+                    Anchor: (Bottom: 15);
+
+                    Label {
+                      Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);
+                      Text: %ezlobby.gui.admin.serveredit.field.icon;
+                      Anchor: (Bottom: 5);
+                    }
+
+                    $Common.@TextField #IconField {
+                      Anchor: (Bottom: 0, Height: 38);
+                      Style: (FontSize: 13, TextColor: #ffffff(0.85));
+                      PlaceholderText: %ezlobby.gui.admin.serveredit.placeholder.icon;
+                      PlaceholderStyle: (FontSize: 13, TextColor: #6e7da1, RenderItalics: true);
+                    }
+                }
+
+                Group {
+                  Anchor: (Height: 1, Top: 10, Bottom: 10);
+                  OutlineColor: #93844c;
+                  OutlineSize: 0.5;
+                }
+
+                Label {
+                  Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true, RenderUppercase: true);
+                  Text: %ezlobby.gui.admin.serveredit.section.preview;
+                  Anchor: (Bottom: 10);
+                }
+
+                Group #PreviewContainer {
+                    Anchor: (Bottom: 15);
+                }
+            }
+
+            Group #RightColumn {
+                FlexWeight: 1;
+                LayoutMode: Top;
+                Padding: (Left: 10);
+
+                Label {
+                  Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true, RenderUppercase: true);
+                  Text: %ezlobby.gui.admin.serveredit.section.appearance;
+                  Anchor: (Bottom: 10);
+                }
+
+                Label {
+                  Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);
+                  Text: %ezlobby.gui.admin.serveredit.field.colortint;
+                  Anchor: (Bottom: 5);
+                }
+
+                ColorPicker #ColorTintPicker {
+                  Anchor: (Top: 10, Bottom: 20, Left: 0, Right: 0, Height: 350);
+                  DisplayTextField: true;
+                  Style: $Common.@DefaultColorPickerStyle;
+                }
+
+                Label {FlexWeight: 1;}
+
+                Group {
+                    LayoutMode: Right;
+                    Anchor: (Top: 20, Bottom: 20);
+
+                    $Common.@CancelTextButton #CancelButton {
+                      Text: %ezlobby.gui.admin.serveredit.button.cancel;
+                      Padding: (Left: 12, Right: 12, Top: 6, Bottom: 6);
+                      Anchor: (Right: 10);
+                    }
+
+                    $Common.@TextButton #SaveButton {
+                      Text: %ezlobby.gui.admin.serveredit.button.save;
+                      Padding: (Left: 12, Right: 12, Top: 6, Bottom: 6);
+                      Anchor: (Right: 10);
+                    }
+                }
+            }
+        }
+    }
+}
