@@ -187,7 +187,7 @@ class AdminServerEditPage(player: PlayerRef, private val serverIndex: Int) :
     }
 
     private fun updatePreview(uiCommandBuilder: UICommandBuilder, server: Server) {
-        // Use utility to populate the preview
+        // Use utility to populate the preview with button tinting
         ServerRowUtils.populateServerRow(uiCommandBuilder, "#PreviewContainer[0]", server)
     }
 
@@ -243,7 +243,7 @@ class AdminServerEditPage(player: PlayerRef, private val serverIndex: Int) :
                         uiColorTint = currentColorTint
                     )
 
-                    // Update only the preview component using the utility
+                    // Update only the preview component using the utility with button tinting
                     val commandBuilder = UICommandBuilder()
                     ServerRowUtils.populateServerRow(commandBuilder, "#PreviewContainer[0]", previewServer)
                     sendUpdate(commandBuilder, UIEventBuilder(), false)

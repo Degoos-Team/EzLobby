@@ -63,7 +63,7 @@ class AdminServerListPage(player: PlayerRef) :
             uiCommandBuilder.append("#Content", "Pages/EzLobby/AdminServerRow.ui")
 
             // Use utility to populate the server row
-            ServerRowUtils.populateAdminServerRow(uiCommandBuilder, "#Content[$index]", server)
+            ServerRowUtils.populateAdminServerRow(uiCommandBuilder, "#Content[$index] #ConnectButton", server)
 
             // Bind events
             uiEventBuilder.addEventBinding(

@@ -1,7 +1,6 @@
 package com.degoos.hytale.ezlobby.ui
 
 import com.degoos.hytale.ezlobby.EzLobby
-import com.degoos.hytale.ezlobby.utils.ColorUtils
 import com.degoos.kayle.dsl.dispatcher
 import com.degoos.kayle.dsl.world
 import com.hypixel.hytale.codec.Codec
@@ -63,19 +62,9 @@ class ServerListPage(player: PlayerRef) :
 
             uiCommandBuilder.append("#Content", "Pages/EzLobby/ServerRow.ui")
 
-            // Use utility to populate the server row
+            // Use utility to populate the server row with button tinting
             ServerRowUtils.populateServerRow(uiCommandBuilder, buttonSelector, server)
 
-            // Apply color tint to button states if present
-            if (server.uiColorTint != null) {
-                val stateColors = ColorUtils.generateButtonStateColors(server.uiColorTint!!)
-                stateColors.forEach { (state, color) ->
-                    uiCommandBuilder.set(
-                        "$buttonSelector.Style.$state.Background.Color",
-                        color
-                    )
-                }
-            }
 
             // Bind connect event
             uiEventBuilder.addEventBinding(
