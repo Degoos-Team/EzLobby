@@ -73,7 +73,7 @@ class ServerAddCommand : CommandBase("add", "ezlobby.commands.ezlobby.server.add
         config.servers.add(Server(uuid, name, host, port, uiIcon, uiColorTint, uiBackground, displayName, description))
 
         context.sendMessage(
-            Message.raw("ezlobby_messages.success.server_added")
+            Message.translation("ezlobby_messages.success.server_added")
                 .param("name", name)
                 .param("id", uuid.toString())
                 .param("host", host)

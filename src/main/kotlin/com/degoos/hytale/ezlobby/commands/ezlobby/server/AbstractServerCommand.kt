@@ -48,7 +48,7 @@ abstract class AbstractServerCommand(
             val selector = (if (index != null) "--index $index " else "") +
                     (if (id != null) "--id $id " else "") +
                     (if (name != null) "--name $name" else "")
-            return Message.raw("ezlobby_messages.error.server_not_found").param("selector", selector.trim())
+            return Message.translation("ezlobby_messages.error.server_not_found").param("selector", selector.trim())
         }
 
 }

@@ -32,7 +32,7 @@ class SetSpawnCommand : AbstractPlayerCommand("set", "ezlobby.commands.ezlobby.s
 
         mainConfig.save()
         context.sendMessage(
-            Message.raw("ezlobby_messages.success.spawn_set")
+            Message.translation("ezlobby_messages.success.spawn_set")
                 .param("name", world.name)
                 .param("position", playerRef.transform.position.toString())
                 .param("rotation", playerRef.transform.rotation.toString())

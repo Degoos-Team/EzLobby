@@ -36,7 +36,7 @@ class BreakEventSystem : EntityEventSystem<EntityStore, BreakBlockEvent>(BreakBl
     ) {
         val player = fetchPlayer(index, chunkArchetype) ?: return
         if (!canDoBlockEvent(player, "ezlobby.block.break")) {
-            player.sendMessage(Message.raw("You don't have permission to break blocks!"))
+            player.sendMessage(Message.translation("ezlobby_messages.error.break_blocks"))
             event.isCancelled = true
         }
     }
@@ -56,7 +56,7 @@ class PlaceEventSystem : EntityEventSystem<EntityStore, PlaceBlockEvent>(PlaceBl
     ) {
         val player = fetchPlayer(index, chunkArchetype) ?: return
         if (!canDoBlockEvent(player,"ezlobby.block.place")) {
-            player.sendMessage(Message.raw("You don't have permission to place blocks!"))
+            player.sendMessage(Message.translation("ezlobby_messages.error.place_blocks"))
             event.isCancelled = true
         }
     }
@@ -76,7 +76,7 @@ class DamageEventSystem : EntityEventSystem<EntityStore, DamageBlockEvent>(Damag
     ) {
         val player = fetchPlayer(index, chunkArchetype) ?: return
         if (!canDoBlockEvent(player,"ezlobby.block.damage")) {
-            player.sendMessage(Message.raw("You don't have permission to damage blocks!"))
+            player.sendMessage(Message.translation("ezlobby_messages.error.damage_blocks"))
             event.isCancelled = true
         }
     }
@@ -96,7 +96,7 @@ class UseEventSystem : EntityEventSystem<EntityStore, UseBlockEvent.Pre>(UseBloc
     ) {
         val player = fetchPlayer(index, chunkArchetype) ?: return
         if (!canDoBlockEvent(player,"ezlobby.block.use")) {
-            player.sendMessage(Message.raw("You don't have permission to use blocks!"))
+            player.sendMessage(Message.translation("ezlobby_messages.error.use_blocks"))
             event.isCancelled = true
         }
     }
@@ -117,7 +117,7 @@ class PickupEventSystem :
     ) {
         val player = fetchPlayer(index, chunkArchetype) ?: return
         if (!canDoBlockEvent(player,"ezlobby.block.pickup")) {
-            player.sendMessage(Message.raw("You don't have permission to use blocks!"))
+            player.sendMessage(Message.translation("ezlobby_messages.error.pickup_blocks"))
             event.isCancelled = true
         }
     }

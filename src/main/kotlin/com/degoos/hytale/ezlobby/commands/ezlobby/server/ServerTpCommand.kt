@@ -49,7 +49,7 @@ class ServerTpCommand() :
             }
 
             context.sendMessage(
-                Message.raw("ezlobby_messages.success.player_teleporting")
+                Message.translation("ezlobby_messages.success.player_teleporting")
                     .param("player", localPlayer.username)
                     .param("server", server.name)
             )
