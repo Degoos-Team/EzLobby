@@ -1,17 +1,15 @@
 package com.degoos.hytale.ezlobby
 
 import com.degoos.hytale.ezlobby.assets.ServerIconsStorage
-import com.degoos.hytale.ezlobby.assets.ServerMenuItemInteraction
+import com.degoos.hytale.ezlobby.interactions.ServerMenuItemInteraction
 import com.degoos.hytale.ezlobby.commands.ServersCommand
 import com.degoos.hytale.ezlobby.commands.TitleCommand
 import com.degoos.hytale.ezlobby.commands.ezlobby.EzLobbyCommand
 import com.degoos.hytale.ezlobby.configs.EzLobbyConfig
 import com.degoos.hytale.ezlobby.configs.ServersConfig
 import com.degoos.hytale.ezlobby.listeners.globals.PlayerConnectListener
-import com.degoos.hytale.ezlobby.listeners.locals.playerMouseButtonEventConsumer
 import com.degoos.hytale.ezlobby.systems.*
 import com.degoos.kayle.KotlinPlugin
-import com.hypixel.hytale.event.EventPriority
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerMouseButtonEvent
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction
