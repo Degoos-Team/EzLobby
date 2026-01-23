@@ -1,7 +1,7 @@
 {
   "TranslationProperties": {
-    "Name": "items.Degoos_Compass.name",
-    "Description": "items.Degoos_Compass.description"
+    "Name": "ezlobby.items.compass.server.name",
+    "Description": "ezlobby.items.compass.server.description"
   },
   "Icon": "Icons/ItemsGenerated/degoos_compass_icon.png",
   "ItemLevel": 1,
