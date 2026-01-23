@@ -1,0 +1,25 @@
+{
+  "TranslationProperties": {
+    "Name": "items.Degoos_Compass.name",
+    "Description": "items.Degoos_Compass.description"
+  },
+  "Icon": "Icons/ItemsGenerated/degoos_compass_icon.png",
+  "ItemLevel": 1,
+  "Model": "Items/Tools/Degoos_Compass/DegoosCompass.blockymodel",
+  "Texture": "Items/Tools/Degoos_Compass/compass_texture.png",
+  "Recipe": {},
+  "Quality": "Rare",
+  "Scale": 1.5,
+  "PlayerAnimationsId": "Item",
+  "UsePlayerAnimations": true,
+  "MaxStack": 1,
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "ezlobby:server_menu_item_interaction"
+        }
+      ]
+    }
+  }
+}

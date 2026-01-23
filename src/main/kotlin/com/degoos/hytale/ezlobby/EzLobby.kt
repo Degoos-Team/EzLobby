@@ -1,15 +1,20 @@
 package com.degoos.hytale.ezlobby
 
 import com.degoos.hytale.ezlobby.assets.ServerIconsStorage
+import com.degoos.hytale.ezlobby.assets.ServerMenuItemInteraction
 import com.degoos.hytale.ezlobby.commands.ServersCommand
 import com.degoos.hytale.ezlobby.commands.TitleCommand
 import com.degoos.hytale.ezlobby.commands.ezlobby.EzLobbyCommand
 import com.degoos.hytale.ezlobby.configs.EzLobbyConfig
 import com.degoos.hytale.ezlobby.configs.ServersConfig
-import com.degoos.hytale.ezlobby.listeners.PlayerConnectListener
+import com.degoos.hytale.ezlobby.listeners.globals.PlayerConnectListener
+import com.degoos.hytale.ezlobby.listeners.locals.playerMouseButtonEventConsumer
 import com.degoos.hytale.ezlobby.systems.*
 import com.degoos.kayle.KotlinPlugin
+import com.hypixel.hytale.event.EventPriority
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
+import com.hypixel.hytale.server.core.event.events.player.PlayerMouseButtonEvent
+import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
 import com.hypixel.hytale.server.core.util.Config
 
@@ -29,11 +34,14 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
     }
 
     override fun start() {
+        // region Systems
         entityStoreRegistry.registerSystem(BreakEventSystem())
         entityStoreRegistry.registerSystem(PlaceEventSystem())
         entityStoreRegistry.registerSystem(DamageEventSystem())
         entityStoreRegistry.registerSystem(UseEventSystem())
         entityStoreRegistry.registerSystem(PickupEventSystem())
+        entityStoreRegistry.registerSystem(DropItemSystem())
+        //
 
         // region Commands
         commandRegistry.registerCommand(EzLobbyCommand())
@@ -41,10 +49,31 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
         commandRegistry.registerCommand(ServersCommand())
         // endregion
 
-        // region Events
+        // region Global Events
         this.eventRegistry.registerGlobal(
             PlayerConnectEvent::class.java
         ) { event: PlayerConnectEvent -> PlayerConnectListener().onPlayerReady(event) }
+        // endregion
+
+        // region Events
+//        this.eventRegistry.registerGlobal(
+//            EventPriority.EARLY,
+//            PlayerMouseButtonEvent::class.java,
+//            playerMouseButtonEventConsumer
+//        )
+
+
+
+        this.eventRegistry.registerGlobal(PlayerMouseButtonEvent::class.java) {
+                println("[EzLobby] Player Mouse Button Event")
+        }
+        // endregion
+
+        // region Interactions
+        this.getCodecRegistry(Interaction.CODEC).register(
+            ServerMenuItemInteraction.INTERACTION_ID,
+            ServerMenuItemInteraction::class.java, ServerMenuItemInteraction.CODEC
+        )
         // endregion
 
         // Load icons from storage.
@@ -67,6 +96,8 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
             return instance?.serversConfig
         }
 
-        fun getEvetRegistry() = instance?.eventRegistry
+        fun getEventRegistry() = instance?.eventRegistry
+
+        fun getAssetRegistry() = instance?.assetRegistry
     }
 }
