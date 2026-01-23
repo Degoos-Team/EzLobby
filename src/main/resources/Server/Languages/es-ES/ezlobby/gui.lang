@@ -11,6 +11,7 @@ serverrow.description = Descripción del Servidor
 
 # Página de lista de servidores de administrador
 admin.serverlist.title = Gestión de Servidores
+admin.serverlist.button.add = AÑADIR SERVIDOR
 
 # Fila de servidor de administrador
 admin.serverrow.connect.tooltip = Haz clic para conectarte a este servidor

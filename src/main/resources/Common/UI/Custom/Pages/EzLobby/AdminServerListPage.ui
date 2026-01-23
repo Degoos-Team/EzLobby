@@ -3,6 +3,7 @@ $Common = "../../Common.ui";
 $Common.@PageOverlay {
   $Common.@Container {
         Anchor: (Width: 800, Height: 700);
+
         #Title {
           Group {
             Label {
@@ -11,10 +12,27 @@ $Common.@PageOverlay {
             }
           }
         }
+
         #Content {
+            Padding: (Vertical: 20, Horizontal: 10);
             FlexWeight: 1;
             LayoutMode: TopScrolling;
             ScrollbarStyle: $Common.@DefaultScrollbarStyle;
+        }
+
+        Group {
+            LayoutMode: Bottom;
+            Anchor: (Bottom: -50);
+
+            Group {
+                LayoutMode: Center;
+
+                $Common.@TextButton #AddServerButton {
+                  FlexWeight: 1;
+                  Text: %ezlobby.gui.admin.serverlist.button.add;
+                  Padding: (Left: 20, Right: 20, Top: 8, Bottom: 8);
+                }
+            }
         }
     }
 }

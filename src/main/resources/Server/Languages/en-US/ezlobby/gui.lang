@@ -12,6 +12,7 @@ serverrow.description = Server Description
 
 # Admin Server List Page
 admin.serverlist.title = Server Management
+admin.serverlist.button.add = ADD SERVER
 
 # Admin Server Row
 admin.serverrow.connect.tooltip = Click to connect to this server

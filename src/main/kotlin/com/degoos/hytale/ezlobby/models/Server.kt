@@ -14,7 +14,7 @@ class Server(
     var host: String,
     var port: Int,
     var uiIcon: String? = null,
-    var uiColorTint: String? = null,
+    var uiColorTint: String? = "#FFFFFF",
     var uiBackground: String? = null,
     var displayName: String? = null,
     var description: String? = null,
