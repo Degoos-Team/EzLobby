@@ -46,4 +46,6 @@ admin.serveredit.placeholder.icon = Ingredient_Poop (opcional)
 admin.serveredit.placeholder.colortint = #ffffff (opcional)
 admin.serveredit.button.save = GUARDAR
 admin.serveredit.button.cancel = CANCELAR
+admin.serveredit.button.delete = ELIMINAR
+admin.serveredit.button.delete.confirm = SEGURO?
 

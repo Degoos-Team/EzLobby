@@ -13,6 +13,7 @@ error.spawn.world.not.found = [EzLobby] No se pudo establecer el punto de aparic
 # Mensajes de éxito
 success.server.added = [EzLobby] Servidor '{name}' ({id}) agregado con dirección {host}:{port}
 success.server.removed = [EzLobby] Servidor '{name}' ({id}) con dirección '{host}:{port}' fue eliminado
+success.server.deleted = [EzLobby] ¡El servidor '{name}' ha sido eliminado exitosamente!
 success.server.updated = [EzLobby] ¡El servidor '{name}' ha sido actualizado exitosamente!
 success.config.reloading = [EzLobby] Recargando la lista de servidores desde la configuración...
 success.config.reloaded = [EzLobby] ¡Lista de servidores recargada!

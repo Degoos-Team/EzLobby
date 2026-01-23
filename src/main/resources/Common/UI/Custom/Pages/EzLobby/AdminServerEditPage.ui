@@ -2,7 +2,7 @@ $Common = "../../Common.ui";
 
 $Common.@PageOverlay {
   $Common.@Container {
-        Anchor: (Width: 900, Height: 700);
+        Anchor: (Width: 930, Height: 700);
         #Title {
           Group {
             Label {
@@ -194,18 +194,42 @@ $Common.@PageOverlay {
 
                 Group {
                     LayoutMode: Right;
-                    Anchor: (Top: 20, Bottom: 20);
+                    Anchor: (Top: 2, Bottom: 0);
 
-                    $Common.@CancelTextButton #CancelButton {
+                    $Common.@TextButton #SaveButton {
+                      FlexWeight: 1;
+                      Text: %ezlobby.gui.admin.serveredit.button.save;
+                      Padding: (Left: 12, Right: 12, Top: 6, Bottom: 6);
+                      Anchor: (Right: 10);
+                    }
+                }
+
+                Label {FlexWeight: 1;}
+
+                Group {
+                    LayoutMode: Right;
+                    Anchor: (Top: 2, Bottom: 20);
+
+                    $Common.@SecondaryTextButton #CancelButton {
+                      FlexWeight: 1;
                       Text: %ezlobby.gui.admin.serveredit.button.cancel;
                       Padding: (Left: 12, Right: 12, Top: 6, Bottom: 6);
                       Anchor: (Right: 10);
                     }
 
-                    $Common.@TextButton #SaveButton {
-                      Text: %ezlobby.gui.admin.serveredit.button.save;
+                    $Common.@CancelTextButton #DeleteButton {
+                      FlexWeight: 1;
+                      Text: %ezlobby.gui.admin.serveredit.button.delete;
                       Padding: (Left: 12, Right: 12, Top: 6, Bottom: 6);
                       Anchor: (Right: 10);
+                    }
+
+                    $Common.@CancelTextButton #ConfirmDeleteButton {
+                      FlexWeight: 1;
+                      Text: %ezlobby.gui.admin.serveredit.button.delete.confirm;
+                      Padding: (Left: 12, Right: 12, Top: 6, Bottom: 6);
+                      Anchor: (Right: 10);
+                      Visible: false;
                     }
                 }
             }

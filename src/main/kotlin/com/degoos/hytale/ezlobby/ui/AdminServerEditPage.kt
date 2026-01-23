@@ -44,6 +44,8 @@ class AdminServerEditEvent(
 
         const val ACTION_SAVE = "Save"
         const val ACTION_CANCEL = "Cancel"
+        const val ACTION_DELETE = "Delete"
+        const val ACTION_CONFIRM_DELETE = "ConfirmDelete"
 
         @JvmStatic
         val CODEC: BuilderCodec<AdminServerEditEvent> = BuilderCodec.builder(AdminServerEditEvent::class.java, ::AdminServerEditEvent)
@@ -184,6 +186,16 @@ class AdminServerEditPage(player: PlayerRef, private val serverIndex: Int) :
             CustomUIEventBindingType.Activating, "#CancelButton",
             EventData.of(AdminServerEditEvent.KEY_ACTION, AdminServerEditEvent.ACTION_CANCEL)
         )
+
+        uiEventBuilder.addEventBinding(
+            CustomUIEventBindingType.Activating, "#DeleteButton",
+            EventData.of(AdminServerEditEvent.KEY_ACTION, AdminServerEditEvent.ACTION_DELETE)
+        )
+
+        uiEventBuilder.addEventBinding(
+            CustomUIEventBindingType.Activating, "#ConfirmDeleteButton",
+            EventData.of(AdminServerEditEvent.KEY_ACTION, AdminServerEditEvent.ACTION_CONFIRM_DELETE)
+        )
     }
 
     private fun updatePreview(uiCommandBuilder: UICommandBuilder, server: Server) {
@@ -203,6 +215,17 @@ class AdminServerEditPage(player: PlayerRef, private val serverIndex: Int) :
                 close()
             }
             AdminServerEditEvent.ACTION_CANCEL -> {
+                close()
+            }
+            AdminServerEditEvent.ACTION_DELETE -> {
+                // Show confirmation button, hide delete button
+                val commandBuilder = UICommandBuilder()
+                commandBuilder.set("#DeleteButton.Visible", false)
+                commandBuilder.set("#ConfirmDeleteButton.Visible", true)
+                sendUpdate(commandBuilder, UIEventBuilder(), false)
+            }
+            AdminServerEditEvent.ACTION_CONFIRM_DELETE -> {
+                deleteServer()
                 close()
             }
             else -> {
@@ -273,6 +296,27 @@ class AdminServerEditPage(player: PlayerRef, private val serverIndex: Int) :
             playerRef.sendMessage(
                 Message.translation("ezlobby.messages.success.server.updated")
                     .param("name", server.name)
+            )
+        }
+    }
+
+    private fun deleteServer() {
+        val config = EzLobby.getServersConfig() ?: return
+        val serversConfig = config.get() ?: return
+        val server = serversConfig.servers.getOrNull(serverIndex) ?: return
+
+        val serverName = server.name
+
+        // Remove server from list
+        serversConfig.servers.removeAt(serverIndex)
+
+        // Save configuration
+        config.save()
+
+        EzLobby.instance?.launch(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
+            playerRef.sendMessage(
+                Message.translation("ezlobby.messages.success.server.deleted")
+                    .param("name", serverName)
             )
         }
     }

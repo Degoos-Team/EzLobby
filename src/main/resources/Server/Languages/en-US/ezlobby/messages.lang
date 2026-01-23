@@ -14,6 +14,7 @@ error.spawn.world.not.found = [EzLobby] Could not set spawn point, World(name={n
 # Success messages
 success.server.added = [EzLobby] Added server '{name}' ({id}) with address {host}:{port}
 success.server.removed = [EzLobby] Server '{name}' ({id}) with address '{host}:{port}' was removed
+success.server.deleted = [EzLobby] Server '{name}' has been deleted successfully!
 success.server.updated = [EzLobby] Server '{name}' has been updated successfully!
 success.config.reloading = [EzLobby] Reloading server list from config...
 success.config.reloaded = [EzLobby] Servers list reloaded!
