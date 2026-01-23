@@ -69,23 +69,22 @@ class AdminServerListPage(player: PlayerRef) :
             ServerRowUtils.populateAdminServerRow(uiCommandBuilder, "#Content[$index] #ConnectButton", server)
 
             // Bind events
-            uiEventBuilder.addEventBinding(
-                CustomUIEventBindingType.Activating, "#Content[$index] #ConnectButton",
-                EventData.of(AdminServerListEvent.KEY_ACTION, AdminServerListEvent.ACTION_CONNECT)
-                    .append(AdminServerListEvent.KEY_SERVER, index.toString())
-            )
-
-            uiEventBuilder.addEventBinding(
-                CustomUIEventBindingType.Activating, "#Content[$index] #EditButton",
-                EventData.of(AdminServerListEvent.KEY_ACTION, AdminServerListEvent.ACTION_EDIT)
-                    .append(AdminServerListEvent.KEY_SERVER, index.toString())
-            )
+            bindServerActionButton(uiEventBuilder, index, AdminServerListEvent.ACTION_CONNECT, "#ConnectButton")
+            bindServerActionButton(uiEventBuilder, index, AdminServerListEvent.ACTION_EDIT, "#EditButton")
         }
 
         // Bind Add Server button
         uiEventBuilder.addEventBinding(
             CustomUIEventBindingType.Activating, "#AddServerButton",
             EventData.of(AdminServerListEvent.KEY_ACTION, AdminServerListEvent.ACTION_ADD)
+        )
+    }
+
+    private fun bindServerActionButton(uiEventBuilder: UIEventBuilder, index: Int, action: String, buttonId: String) {
+        uiEventBuilder.addEventBinding(
+            CustomUIEventBindingType.Activating, "#Content[$index] $buttonId",
+            EventData.of(AdminServerListEvent.KEY_ACTION, action)
+                .append(AdminServerListEvent.KEY_SERVER, index.toString())
         )
     }
 
@@ -99,19 +98,14 @@ class AdminServerListPage(player: PlayerRef) :
             AdminServerListEvent.ACTION_CONNECT -> {
                 val serverIndex = data.serverIndex ?: return
                 val server = EzLobby.getServersConfig()?.get()?.servers?.getOrNull(serverIndex) ?: return
-                EzLobby.instance?.launch(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
+                runInEzLobbyScope {
                     playerRef.referToServer(server.host, server.port)
                 }
             }
             AdminServerListEvent.ACTION_EDIT -> {
                 val serverIndex = data.serverIndex ?: return
                 EzLobby.getServersConfig()?.get()?.servers?.getOrNull(serverIndex) ?: return
-
-                EzLobby.instance?.launch(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
-                    val player = playerRef.reference?.store?.getComponent(playerRef.reference!!, Player.getComponentType()) ?: return@launch
-                    val reference = player.reference ?: return@launch
-                    player.pageManager.openCustomPage(reference, reference.store, AdminServerEditPage(playerRef, serverIndex))
-                }
+                openAdminServerEditPage(serverIndex)
             }
             AdminServerListEvent.ACTION_ADD -> {
                 val config = EzLobby.getServersConfig() ?: return
@@ -132,14 +126,22 @@ class AdminServerListPage(player: PlayerRef) :
                 config.save()
 
                 // Open edit page for the new server
-                val newServerIndex = serversConfig.servers.size - 1
-                EzLobby.instance?.launch(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
-                    val player = playerRef.reference?.store?.getComponent(playerRef.reference!!, Player.getComponentType()) ?: return@launch
-                    val reference = player.reference ?: return@launch
-                    player.pageManager.openCustomPage(reference, reference.store, AdminServerEditPage(playerRef, newServerIndex))
-                }
+                openAdminServerEditPage(serversConfig.servers.size - 1)
             }
         }
     }
 
+    private fun openAdminServerEditPage(serverIndex: Int) {
+        runInEzLobbyScope {
+            val player = playerRef.reference?.store?.getComponent(playerRef.reference!!, Player.getComponentType()) ?: return@runInEzLobbyScope
+            val reference = player.reference ?: return@runInEzLobbyScope
+            player.pageManager.openCustomPage(reference, reference.store, AdminServerEditPage(playerRef, serverIndex))
+        }
+    }
+
+    private fun runInEzLobbyScope(block: suspend () -> Unit) {
+        EzLobby.instance?.launch(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
+            block()
+        }
+    }
 }

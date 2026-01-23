@@ -14,7 +14,7 @@ $Common.@PageOverlay {
         }
 
         #Content {
-            Padding: (Vertical: 20, Horizontal: 10);
+            Padding: (Top: 12, Horizontal: 10, Bottom: 62);
             FlexWeight: 1;
             LayoutMode: TopScrolling;
             ScrollbarStyle: $Common.@DefaultScrollbarStyle;
@@ -22,7 +22,7 @@ $Common.@PageOverlay {
 
         Group {
             LayoutMode: Bottom;
-            Anchor: (Bottom: -50);
+            Padding: (Horizontal: 10, Vertical: 10);
 
             Group {
                 LayoutMode: Center;
