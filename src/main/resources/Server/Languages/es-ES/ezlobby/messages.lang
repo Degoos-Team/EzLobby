@@ -3,7 +3,7 @@
 
 # Mensajes de error
 error.config.missing = [EzLobby] ¿Qué? No hay archivo de servidores :/
-error.servers.empty = [EzLobby] Aún no hay servidores agregados. ¡Usa `/server add` para agregar uno!
+error.servers.empty = [EzLobby] Aún no hay servidores agregados. ¡Usa `/ezlobby server add` para agregar uno!
 error.config.missing.add = [EzLobby] No se pudo agregar el servidor, falta el archivo de servidores :/
 error.player.not.found = [EzLobby] Algo realmente extraño ha sucedido. No se pudo encontrar ningún jugador, ni siquiera tú mismo :o/
 error.server.not.found = [EzLobby] No se encontró ningún servidor con el selector proporcionado: {selector}
