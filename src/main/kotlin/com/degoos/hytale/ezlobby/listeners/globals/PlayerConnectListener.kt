@@ -5,6 +5,7 @@ import com.hypixel.hytale.registry.Registration
 import com.hypixel.hytale.server.core.entity.entities.Player
 import com.hypixel.hytale.server.core.event.events.player.AddPlayerToWorldEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
+import com.hypixel.hytale.server.core.modules.entity.component.HeadRotation
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent
 import com.hypixel.hytale.server.core.universe.Universe
 import com.hypixel.hytale.server.core.util.PositionUtil
@@ -34,6 +35,8 @@ class PlayerConnectListener {
             TransformComponent.getComponentType(),
             transformComponent
         )
+
+        event.holder.ensureComponent(HeadRotation.getComponentType())
 
         if (!ezLobbyConfig.serverMenuItemOnJoin) return
 
