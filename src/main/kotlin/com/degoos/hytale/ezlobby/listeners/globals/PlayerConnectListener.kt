@@ -7,6 +7,7 @@ import com.hypixel.hytale.server.core.event.events.player.AddPlayerToWorldEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent
 import com.hypixel.hytale.server.core.universe.Universe
+import com.hypixel.hytale.server.core.util.PositionUtil
 
 
 class PlayerConnectListener {
@@ -15,15 +16,23 @@ class PlayerConnectListener {
 
         val spawnPointWorldName = ezLobbyConfig.spawnPointWorldName ?: return
         val spawnPointPosition = ezLobbyConfig.spawnPointPosition ?: return
-        val spawnPointRotation = ezLobbyConfig.spawnPointRotation ?: return
+        val spawnPointBodyRotation = ezLobbyConfig.spawnPointBodyRotation ?: return
+        val spawnPointHeadRotation = ezLobbyConfig.spawnPointHeadRotation ?: return
 
         val world = Universe.get().getWorld(spawnPointWorldName) ?: return
+
+
+        val transformComponent = TransformComponent(spawnPointPosition, spawnPointBodyRotation)
+        val transform = transformComponent.sentTransform
+        PositionUtil.assign(transform.position!!, spawnPointPosition)
+        PositionUtil.assign(transform.bodyOrientation!!, spawnPointBodyRotation)
+        PositionUtil.assign(transform.lookOrientation!!, spawnPointHeadRotation)
 
         event.world = world
         event.holder.tryRemoveComponent(TransformComponent.getComponentType())
         event.holder.addComponent(
             TransformComponent.getComponentType(),
-            TransformComponent(spawnPointPosition, spawnPointRotation)
+            transformComponent
         )
 
         if (!ezLobbyConfig.serverMenuItemOnJoin) return

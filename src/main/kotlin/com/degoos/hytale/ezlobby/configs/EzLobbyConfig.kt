@@ -12,7 +12,8 @@ import com.hypixel.hytale.server.core.inventory.ItemStack
 class EzLobbyConfig {
     var spawnPointWorldName: String? = null
     var spawnPointPosition: Vector3d? = null
-    var spawnPointRotation: Vector3f? = null
+    var spawnPointBodyRotation: Vector3f? = null
+    var spawnPointHeadRotation: Vector3f? = null
 
     var serverMenuItemOnJoin: Boolean = false
     var serversMenuItemStack: ItemStack? = ItemStack("Degoos_Compass", 1)
@@ -62,18 +63,42 @@ class EzLobbyConfig {
 
             .append(
                 KeyedCodec(
-                    "SpawnPointRotation",
+                    "SpawnPointBodyRotation",
                     Codec.DOUBLE_ARRAY
                 ),
                 { config: EzLobbyConfig, value: DoubleArray?, info: ExtraInfo? ->
-                    config.spawnPointRotation = if (value != null) Vector3f(
+                    config.spawnPointBodyRotation = if (value != null) Vector3f(
                         value[0].toFloat(),
                         value[1].toFloat(),
                         value[2].toFloat()
                     ) else null
                 },
                 { config: EzLobbyConfig, info: ExtraInfo? ->
-                    config.spawnPointRotation?.let {
+                    config.spawnPointBodyRotation?.let {
+                        doubleArrayOf(
+                            it.x.toDouble(),
+                            it.y.toDouble(),
+                            it.z.toDouble()
+                        )
+                    }
+                }
+            )
+            .add()
+
+            .append(
+                KeyedCodec(
+                    "SpawnPointHeadRotation",
+                    Codec.DOUBLE_ARRAY
+                ),
+                { config: EzLobbyConfig, value: DoubleArray?, info: ExtraInfo? ->
+                    config.spawnPointHeadRotation = if (value != null) Vector3f(
+                        value[0].toFloat(),
+                        value[1].toFloat(),
+                        value[2].toFloat()
+                    ) else null
+                },
+                { config: EzLobbyConfig, info: ExtraInfo? ->
+                    config.spawnPointHeadRotation?.let {
                         doubleArrayOf(
                             it.x.toDouble(),
                             it.y.toDouble(),
