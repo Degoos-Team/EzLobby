@@ -1,0 +1,38 @@
+$Common = "../../Common.ui";
+
+$Common.@PageOverlay {
+  $Common.@Container {
+        Anchor: (Width: 800, Height: 700);
+
+        #Title {
+          Group {
+            Label {
+              Style: (FontSize: 24, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center);
+              Text: %ezlobby.linkedserver.ui.lobbyserverlist.title;
+            }
+          }
+        }
+
+        #Content {
+            Padding: (Top: 12, Horizontal: 10, Bottom: 62);
+            FlexWeight: 1;
+            LayoutMode: TopScrolling;
+            ScrollbarStyle: $Common.@DefaultScrollbarStyle;
+        }
+
+        Group {
+            LayoutMode: Bottom;
+            Padding: (Horizontal: 10, Vertical: 10);
+
+            Group {
+                LayoutMode: Center;
+
+                $Common.@TextButton #AddServerButton {
+                  FlexWeight: 1;
+                  Text: %ezlobby.linkedserver.ui.lobbyserverlist.button.add;
+                  Padding: (Left: 20, Right: 20, Top: 8, Bottom: 8);
+                }
+            }
+        }
+    }
+}

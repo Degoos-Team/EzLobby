@@ -1,0 +1,107 @@
+$Common = "../../Common.ui";
+
+$Common.@PageOverlay {
+  $Common.@Container {
+        Anchor: (Width: 720, Height: 500);
+
+        #Title {
+          Group {
+            Label {
+              Style: (FontSize: 24, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center);
+              Text: %ezlobby.linkedserver.ui.lobbyserveredit.title;
+            }
+          }
+        }
+
+        #Content {
+            FlexWeight: 1;
+            LayoutMode: Top;
+            Padding: (Horizontal: 20, Vertical: 10);
+
+            Label {
+              Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true, RenderUppercase: true);
+              Text: %ezlobby.linkedserver.ui.lobbyserveredit.section.connection;
+              Anchor: (Bottom: 10);
+            }
+
+            Group {
+                LayoutMode: Top;
+                Anchor: (Bottom: 15);
+
+                Label {
+                  Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);
+                  Text: %ezlobby.linkedserver.ui.lobbyserveredit.field.host;
+                  Anchor: (Bottom: 5);
+                }
+
+                $Common.@TextField #HostField {
+                  Anchor: (Bottom: 0, Height: 38);
+                  Style: (FontSize: 13, TextColor: #ffffff(0.85));
+                  PlaceholderText: %ezlobby.linkedserver.ui.lobbyserveredit.placeholder.host;
+                  PlaceholderStyle: (FontSize: 13, TextColor: #6e7da1, RenderItalics: true);
+                }
+            }
+
+            Group {
+                LayoutMode: Top;
+                Anchor: (Bottom: 15);
+
+                Label {
+                  Style: (FontSize: 14, TextColor: #96a9be, RenderBold: true, RenderUppercase: true);
+                  Text: %ezlobby.linkedserver.ui.lobbyserveredit.field.port;
+                  Anchor: (Bottom: 5);
+                }
+
+                $Common.@TextField #PortField {
+                  Anchor: (Bottom: 0, Height: 38);
+                  Style: (FontSize: 13, TextColor: #ffffff(0.85));
+                  PlaceholderText: %ezlobby.linkedserver.ui.lobbyserveredit.placeholder.port;
+                  PlaceholderStyle: (FontSize: 13, TextColor: #6e7da1, RenderItalics: true);
+                }
+            }
+
+            Label {FlexWeight: 1;}
+
+            Group {
+                LayoutMode: Right;
+                Anchor: (Top: 2, Bottom: 0);
+
+                $Common.@TextButton #SaveButton {
+                  FlexWeight: 1;
+                  Text: %ezlobby.linkedserver.ui.common.save;
+                  Padding: (Left: 12, Right: 12, Top: 6, Bottom: 6);
+                  Anchor: (Right: 10);
+                }
+            }
+
+            Label {FlexWeight: 1;}
+
+            Group {
+                LayoutMode: Right;
+                Anchor: (Top: 2, Bottom: 20);
+
+                $Common.@SecondaryTextButton #CancelButton {
+                  FlexWeight: 1;
+                  Text: %ezlobby.linkedserver.ui.common.cancel;
+                  Padding: (Left: 12, Right: 12, Top: 6, Bottom: 6);
+                  Anchor: (Right: 10);
+                }
+
+                $Common.@CancelTextButton #DeleteButton {
+                  FlexWeight: 1;
+                  Text: %ezlobby.linkedserver.ui.common.delete;
+                  Padding: (Left: 12, Right: 12, Top: 6, Bottom: 6);
+                  Anchor: (Right: 10);
+                }
+
+                $Common.@CancelTextButton #ConfirmDeleteButton {
+                  FlexWeight: 1;
+                  Text: %ezlobby.linkedserver.ui.common.delete.confirm;
+                  Padding: (Left: 12, Right: 12, Top: 6, Bottom: 6);
+                  Anchor: (Right: 10);
+                  Visible: false;
+                }
+            }
+        }
+    }
+}

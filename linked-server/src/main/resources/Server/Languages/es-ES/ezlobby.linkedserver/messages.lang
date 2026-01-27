@@ -1,0 +1,11 @@
+# Mensajes de EzLobby LinkedServer (es-ES)
+
+# Mensajes de error
+error.config.missing = [EzLobby] ¿Qué? No hay archivo de servidores :/
+error.servers.empty = [EzLobby] Todavía no hay servidores añadidos. Usa `/ezlobby server add` para añadir uno.
+error.player.not.found = [EzLobby] Algo muy raro ha pasado. No se encontró ningún jugador, ni siquiera tú mismo :o/
+
+# Mensajes del comando lobby
+lobby.countdown = Yendo al lobby en: {seconds} segundos
+lobby.cancelled.moved = Teletransporte cancelado porque te has movido
+lobby.teleporting = ¡Teletransportando al lobby!

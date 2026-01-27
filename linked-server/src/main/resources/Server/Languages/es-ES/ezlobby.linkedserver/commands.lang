@@ -1,0 +1,8 @@
+# EzLobby Commands Language File (es-ES)
+# Formato: clave = valor
+
+# Comando de servidores (para jugadores)
+lobbyservers.desc = Ir de vuelta al Lobby
+
+# Comando de gestión de servidores de lobby
+lobbyservers.admin.desc = Abrir el gestor de servidores de lobby

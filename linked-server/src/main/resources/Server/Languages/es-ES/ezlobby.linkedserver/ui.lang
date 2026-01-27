@@ -1,0 +1,25 @@
+# Traducciones de la UI para EzLobby Linked Server (es-ES)
+common.save = Guardar
+common.cancel = Cancelar
+common.delete = Eliminar
+common.delete.confirm = Seguro?
+
+# Lista de servidores de lobby
+lobbyserverlist.title = Servidores de Lobby
+lobbyserverlist.button.add = Agregar Servidor
+
+# Fila de servidor de lobby
+lobbyserverrow.label.host = Host:
+lobbyserverrow.host = ???
+lobbyserverrow.label.port = Puerto:
+lobbyserverrow.port = ???
+lobbyserverrow.button.edit = Editar
+lobbyserverrow.button.delete = Eliminar
+
+# Página de edición de servidor de lobby
+lobbyserveredit.title = Editar Servidor de Lobby
+lobbyserveredit.section.connection = Configuración de Conexión
+lobbyserveredit.field.host = Host
+lobbyserveredit.placeholder.host = 127.0.0.1
+lobbyserveredit.field.port = Puerto
+lobbyserveredit.placeholder.port = 5520

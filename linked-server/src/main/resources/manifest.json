@@ -1,0 +1,27 @@
+{
+  "Group": "Degoos",
+  "Name": "EzLobby-LinkedServer",
+  "Version": "0.1.0",
+  "Description": "Simple plugin to allow users to go back to the lobby from linked servers",
+  "Authors": [
+    {
+      "Name": "Gael Rial",
+      "Email": "your.email@example.com",
+      "Url": "https://grialc.com"
+    },
+    {
+      "Name": "Antonio Terrero",
+      "Email": "atalgaba@gmail.com",
+      "Url": "https://atalgaba.com"
+    }
+  ],
+  "Website": "",
+  "Main": "com.degoos.hytale.ezlobby_linkedserver.EzLobbyLinkedServer",
+  "ServerVersion": "*",
+  "Dependencies": {
+    "Degoos:Kayle": "*"
+  },
+  "OptionalDependencies": {},
+  "DisabledByDefault": false,
+  "IncludesAssetPack": true
+}
