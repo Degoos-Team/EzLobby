@@ -17,6 +17,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 
 class LobbyCommand : CommandBase("lobby", "ezlobby.linkedserver.commands.lobbyservers.desc") {
     init {
+        this.requirePermission("ezlobby.linkedserver.use")
         this.addAliases("hub")
     }
 
