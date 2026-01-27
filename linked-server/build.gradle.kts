@@ -35,7 +35,7 @@ tasks.test {
 }
 
 tasks.shadowJar {
-    archiveBaseName.set(rootProject.name)
+    archiveBaseName.set("EzLobby-LinkedServer")
     archiveClassifier.set("")
 
     dependencies {
