@@ -1,0 +1,24 @@
+{
+  "TranslationProperties": {
+    "Name": "ezlobby.items.visibilitytoggler.server.name",
+    "Description": "ezlobby.items.visibilitytoggler.server.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Media_RemoteControl.png",
+  "ItemLevel": 1,
+  "Model": "Items/Remote_Controller.blockymodel",
+  "Texture": "Items/Remote_Controller_Texture.png",
+  "Quality": "Rare",
+  "Scale": 1.5,
+  "PlayerAnimationsId": "Item",
+  "UsePlayerAnimations": true,
+  "MaxStack": 1,
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "ezlobby:visibility_toggler_item_interaction"
+        }
+      ]
+    }
+  }
+}

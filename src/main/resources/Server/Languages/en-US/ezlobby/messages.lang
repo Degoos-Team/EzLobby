@@ -34,3 +34,7 @@ admin.edit.not.implemented = [EzLobby] Server editing UI for '{server}' is not y
 
 # Server list format
 server.list.entry = [{idx}] {name} - {displayName} ({host}:{port})
+
+# Visibility Toggler messages
+visibilitytoggler.enabled = <c:gold>Players in the lobby are now</c> <c:green>VISIBLE</c><c:gold>.</c>
+visibilitytoggler.disabled = <c:gold>Players in the lobby are now</c> <c:red>INVISIBLE</c><c:gold>.</c>

@@ -33,3 +33,7 @@ admin.edit.not.implemented = [EzLobby] La interfaz de edición del servidor para
 
 # Formato de lista de servidores
 server.list.entry = [{idx}] {name} - {displayName} ({host}:{port})
+
+# Visibility Toggler messages
+visibilitytoggler.enabled = <c:gold>Los jugadores en el lobby ahora son</c> <c:green>VISIBLES</c><c:gold>.</c>
+visibilitytoggler.disabled = <c:gold>Los jugadores en el lobby ahora son</c> <c:red>INVISIBLES</c><c:gold>.</c>

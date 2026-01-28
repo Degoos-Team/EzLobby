@@ -1,2 +1,5 @@
 compass.server.name=Modos de Juego
 compass.server.description=Entra a los modos de juegos disponibles en el servidor.
+
+visibilitytoggler.server.name=Mostrar/Ocultar Jugadores
+visibilitytoggler.server.description=Mostrar u ocultar jugadores de otros servidores en el lobby.

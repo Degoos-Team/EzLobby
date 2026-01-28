@@ -16,7 +16,10 @@ class EzLobbyConfig {
     var spawnPointHeadRotation: Vector3f? = null
 
     var serverMenuItemOnJoin: Boolean = false
-    var serversMenuItemStack: ItemStack? = ItemStack("Degoos_Compass", 1)
+    val serversMenuItemStack: ItemStack = ItemStack("Degoos_Compass", 1)
+
+    var visibilityTogglerItemOnJoin: Boolean = false
+    val visibilityTogglerItemStack: ItemStack = ItemStack("Degoos_VisibilityToggler", 1)
 
     companion object {
         val CODEC: BuilderCodec<EzLobbyConfig> = BuilderCodec.builder(
@@ -113,6 +116,13 @@ class EzLobbyConfig {
                 KeyedCodec("ServerMenuItemOnJoin", Codec.BOOLEAN),
                 EzLobbyConfig::serverMenuItemOnJoin.setter,
                 EzLobbyConfig::serverMenuItemOnJoin
+            )
+            .add()
+
+            .append(
+                KeyedCodec("VisibilityTogglerItemOnJoin", Codec.BOOLEAN),
+                EzLobbyConfig::visibilityTogglerItemOnJoin.setter,
+                EzLobbyConfig::visibilityTogglerItemOnJoin
             )
             .add()
 

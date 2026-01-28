@@ -38,7 +38,7 @@ class PlayerConnectListener {
 
         event.holder.ensureComponent(HeadRotation.getComponentType())
 
-        if (!ezLobbyConfig.serverMenuItemOnJoin) return
+        if (!ezLobbyConfig.serverMenuItemOnJoin && !ezLobbyConfig.visibilityTogglerItemOnJoin) return
 
         var registration: Registration? = null
         registration = EzLobby.getEventRegistry()?.registerGlobal(AddPlayerToWorldEvent::class.java) { addEvent ->
@@ -53,11 +53,22 @@ class PlayerConnectListener {
                     return@execute
                 }
 
-                val playerHasServerMenuItemStack =
-                    player.inventory.combinedHotbarFirst.containsItemStacksStackableWith(ezLobbyConfig.serversMenuItemStack!!)
-                if (!playerHasServerMenuItemStack) {
-                    player.inventory.combinedHotbarFirst.addItemStack(ezLobbyConfig.serversMenuItemStack!!)
+                if(ezLobbyConfig.serverMenuItemOnJoin) {
+                    val playerHasServerMenuItemStack =
+                        player.inventory.combinedHotbarFirst.containsItemStacksStackableWith(ezLobbyConfig.serversMenuItemStack)
+                    if (!playerHasServerMenuItemStack) {
+                        player.inventory.combinedHotbarFirst.setItemStackForSlot(0, ezLobbyConfig.serversMenuItemStack)
+                    }
                 }
+
+                if(ezLobbyConfig.visibilityTogglerItemOnJoin) {
+                    val playerHasVisibilityTogglerItemStack =
+                        player.inventory.combinedHotbarFirst.containsItemStacksStackableWith(ezLobbyConfig.visibilityTogglerItemStack)
+                    if (!playerHasVisibilityTogglerItemStack) {
+                        player.inventory.combinedHotbarFirst.setItemStackForSlot(4, ezLobbyConfig.visibilityTogglerItemStack)
+                    }
+                }
+
                 registration?.unregister()
             }
         }
