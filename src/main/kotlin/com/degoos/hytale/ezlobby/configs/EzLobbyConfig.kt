@@ -10,6 +10,7 @@ import com.hypixel.hytale.server.core.inventory.ItemStack
 
 
 class EzLobbyConfig {
+    var referralId: String = "Main"
     var spawnPointWorldName: String? = null
     var spawnPointPosition: Vector3d? = null
     var spawnPointBodyRotation: Vector3f? = null
@@ -26,6 +27,14 @@ class EzLobbyConfig {
             EzLobbyConfig::class.java
         )
         { EzLobbyConfig() }
+
+            .append(
+                KeyedCodec("ReferralId", Codec.STRING),
+                EzLobbyConfig::referralId.setter,
+                EzLobbyConfig::referralId
+            )
+            .add()
+
             .append(
                 KeyedCodec(
                     "SpawnPointWorldName",

@@ -4,9 +4,13 @@ package com.degoos.hytale.ezlobby_linkedserver
 import com.degoos.hytale.ezlobby_linkedserver.commands.LobbyCommand
 import com.degoos.hytale.ezlobby_linkedserver.commands.LobbyServersAdminCommand
 import com.degoos.hytale.ezlobby_linkedserver.configs.LobbyServersConfig
+import com.degoos.hytale.ezlobby_linkedserver.utils.getRandomServer
+import com.degoos.hytale.ezlobby_linkedserver.utils.validateReferralData
 import com.degoos.kayle.KotlinPlugin
+import com.hypixel.hytale.server.core.event.events.player.PlayerSetupConnectEvent
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
 import com.hypixel.hytale.server.core.util.Config
+
 
 @Suppress("unused")
 class EzLobbyLinkedServer(init: JavaPluginInit) : KotlinPlugin(init) {
@@ -26,6 +30,20 @@ class EzLobbyLinkedServer(init: JavaPluginInit) : KotlinPlugin(init) {
         // region Commands
         commandRegistry.registerCommand(LobbyCommand())
         commandRegistry.registerCommand(LobbyServersAdminCommand())
+        // endregion
+
+        // region Global Events
+        if(lobbyServersConfig.get()?.forceEzLobbyReferral ?: false) {
+            eventRegistry.registerGlobal(
+                PlayerSetupConnectEvent::class.java
+            ) { event ->
+                if(!event.isReferralConnection || !validateReferralData(event.referralData)) {
+                    val server = getRandomServer() ?: return@registerGlobal
+                    event.reason = "EzLobby Linked Server - Forced Referral"
+                    event.referToServer(server.host, server.port)
+                }
+            }
+        }
         // endregion
     }
 

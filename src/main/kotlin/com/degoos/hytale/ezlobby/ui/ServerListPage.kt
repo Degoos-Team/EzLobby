@@ -1,6 +1,7 @@
 package com.degoos.hytale.ezlobby.ui
 
 import com.degoos.hytale.ezlobby.EzLobby
+import com.degoos.hytale.ezlobby.utils.createEzLobbyReferralData
 import com.degoos.kayle.dsl.dispatcher
 import com.degoos.kayle.dsl.world
 import com.hypixel.hytale.codec.Codec
@@ -86,7 +87,7 @@ class ServerListPage(player: PlayerRef) :
                 val serverInde = data.serverIndex ?: return
                 val server = EzLobby.getServersConfig()?.get()?.servers?.getOrNull(serverInde) ?: return
                 EzLobby.instance?.launch(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
-                    playerRef.referToServer(server.host, server.port)
+                    playerRef.referToServer(server.host, server.port, createEzLobbyReferralData())
                 }
             }
         }

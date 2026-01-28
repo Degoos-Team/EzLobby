@@ -3,6 +3,7 @@ package com.degoos.hytale.ezlobby.commands
 import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.hytale.ezlobby.commands.ezlobby.server.AbstractServerCommand
 import com.degoos.hytale.ezlobby.ui.ServerListPage
+import com.degoos.hytale.ezlobby.utils.createEzLobbyReferralData
 import com.degoos.hytale.ezlobby.utils.validateServersConfig
 import com.degoos.kayle.dsl.dispatcher
 import com.degoos.kayle.dsl.world
@@ -33,13 +34,13 @@ class ServersCommand : AbstractServerCommand("servers", "ezlobby.commands.server
                     ref.store.getComponent(ref, PlayerRef.getComponentType())
                 }
 
-            if (localPlayer == null) {
-                context.sendMessage(Message.translation("ezlobby.messages.error.player.not.found"))
-                return@launch
-            }
+                if (localPlayer == null) {
+                    context.sendMessage(Message.translation("ezlobby.messages.error.player.not.found"))
+                    return@launch
+                }
 
                 withContext(localPlayer.world?.dispatcher ?: EmptyCoroutineContext) {
-                    localPlayer.referToServer(server.host, server.port)
+                    localPlayer.referToServer(server.host, server.port, createEzLobbyReferralData())
                 }
             }
         }
