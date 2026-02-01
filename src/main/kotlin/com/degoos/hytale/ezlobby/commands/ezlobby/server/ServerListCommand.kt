@@ -5,7 +5,7 @@ import com.degoos.hytale.ezlobby.dsl.parseColors
 import com.degoos.hytale.ezlobby.ui.AdminServerListPage
 import com.degoos.hytale.ezlobby.ui.ServerListPage
 import com.degoos.hytale.ezlobby.utils.validateServersConfig
-import com.degoos.kayle.dsl.dispatcher
+import com.degoos.kayle.extension.dispatcher
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.CommandContext
 import com.hypixel.hytale.server.core.command.system.arguments.system.DefaultArg

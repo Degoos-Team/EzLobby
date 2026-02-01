@@ -1,7 +1,7 @@
 package com.degoos.hytale.ezlobby.systems
 
 import com.degoos.hytale.ezlobby.EzLobby
-import com.degoos.kayle.dsl.world
+import com.degoos.kayle.extension.world
 import com.hypixel.hytale.component.Archetype
 import com.hypixel.hytale.component.ArchetypeChunk
 import com.hypixel.hytale.component.CommandBuffer

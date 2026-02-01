@@ -1,8 +1,8 @@
 package com.degoos.hytale.ezlobby.commands.ezlobby.server
 
 import com.degoos.hytale.ezlobby.EzLobby
-import com.degoos.kayle.dsl.dispatcher
-import com.degoos.kayle.dsl.world
+import com.degoos.kayle.extension.dispatcher
+import com.degoos.kayle.extension.world
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.CommandContext
 import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalArg

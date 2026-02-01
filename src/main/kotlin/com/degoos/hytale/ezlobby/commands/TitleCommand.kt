@@ -1,7 +1,7 @@
 package com.degoos.hytale.ezlobby.commands
 
-import com.degoos.kayle.dsl.broadcastTitle
-import com.degoos.kayle.dsl.sendTitle
+import com.degoos.kayle.extension.broadcastTitle
+import com.degoos.kayle.extension.sendTitle
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.CommandContext
 import com.hypixel.hytale.server.core.command.system.arguments.system.DefaultArg
