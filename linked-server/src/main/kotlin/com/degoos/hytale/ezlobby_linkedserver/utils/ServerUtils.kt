@@ -20,6 +20,18 @@ fun getRandomServer(): Server? {
     return servers.random()
 }
 
+fun parseEzLobbyReferralData(referralData: ByteArray): String {
+    return String(referralData)
+}
+
+fun validateReferralData(referralData: ByteArray?): Boolean {
+    if (referralData == null) return false
+
+    val dataString = parseEzLobbyReferralData(referralData)
+    val expectedPrefix = "EzLobbyReferral:"
+    return dataString.startsWith(expectedPrefix)
+}
+
 fun validateServersConfig(context: CommandContext, showIfEmpty: Boolean = false): LobbyServersConfig? {
     val serversConfig = EzLobbyLinkedServer.getLobbyServersConfig()
     val config = serversConfig?.get()

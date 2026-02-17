@@ -9,6 +9,7 @@ import com.hypixel.hytale.codec.codecs.array.ArrayCodec
 
 
 class LobbyServersConfig {
+    var forceEzLobbyReferral: Boolean = false
     var defaultDelayInMs: Int = 5
     var lobbyServers: MutableList<Server> = mutableListOf()
 
@@ -19,6 +20,20 @@ class LobbyServersConfig {
             LobbyServersConfig::class.java
         )
         { LobbyServersConfig() }
+            .append(
+                KeyedCodec("ForceEzLobbyReferral", Codec.BOOLEAN),
+                LobbyServersConfig::forceEzLobbyReferral.setter,
+                LobbyServersConfig::forceEzLobbyReferral
+            )
+            .add()
+
+            .append(
+                KeyedCodec("DefaultDelayInMs", Codec.INTEGER),
+                LobbyServersConfig::defaultDelayInMs.setter,
+                LobbyServersConfig::defaultDelayInMs
+            )
+            .add()
+
             .append(
                 KeyedCodec(
                     "LobbyServers",
@@ -31,13 +46,6 @@ class LobbyServersConfig {
                     config!!.lobbyServers.toTypedArray()
                 }
             ).add()
-
-            .append(
-                KeyedCodec("DefaultDelayInMs", Codec.INTEGER),
-                LobbyServersConfig::defaultDelayInMs.setter,
-                LobbyServersConfig::defaultDelayInMs
-            )
-            .add()
 
             .build()
     }

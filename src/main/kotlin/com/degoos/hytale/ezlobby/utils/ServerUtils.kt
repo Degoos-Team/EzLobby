@@ -21,6 +21,12 @@ fun findServer(name: String?, index: Int?, id: UUID?): Server? {
     return null
 }
 
+fun createEzLobbyReferralData(): ByteArray {
+    val referralKey = EzLobby.getMainConfig()?.get()?.referralId ?: "0"
+    val referralData = "EzLobbyReferral:$referralKey"
+    return referralData.toByteArray()
+}
+
 fun validateServersConfig(context: CommandContext, showIfEmpty: Boolean = false): ServersConfig? {
     val serversConfig = EzLobby.getServersConfig()
     val config = serversConfig?.get()

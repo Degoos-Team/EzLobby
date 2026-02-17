@@ -3,6 +3,7 @@ package com.degoos.hytale.ezlobby.commands
 import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.hytale.ezlobby.commands.ezlobby.server.AbstractServerCommand
 import com.degoos.hytale.ezlobby.ui.ServerListPage
+import com.degoos.hytale.ezlobby.utils.createEzLobbyReferralData
 import com.degoos.hytale.ezlobby.utils.validateServersConfig
 import com.degoos.kayle.extension.dispatcher
 import com.degoos.kayle.extension.world
@@ -39,7 +40,7 @@ class ServersCommand : AbstractServerCommand("servers", "ezlobby.commands.server
                 }
 
                 withContext(localPlayer.world?.dispatcher ?: EmptyCoroutineContext) {
-                    localPlayer.referToServer(server.host, server.port)
+                    localPlayer.referToServer(server.host, server.port, createEzLobbyReferralData())
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.degoos.hytale.ezlobby.commands.ezlobby.server
 
 import com.degoos.hytale.ezlobby.EzLobby
+import com.degoos.hytale.ezlobby.utils.createEzLobbyReferralData
 import com.degoos.kayle.extension.dispatcher
 import com.degoos.kayle.extension.world
 import com.hypixel.hytale.server.core.Message
@@ -45,7 +46,7 @@ class ServerTpCommand() :
             }
 
             withContext(localPlayer.world?.dispatcher ?: EmptyCoroutineContext) {
-                localPlayer.referToServer(server.host, server.port)
+                localPlayer.referToServer(server.host, server.port, createEzLobbyReferralData())
             }
 
             context.sendMessage(

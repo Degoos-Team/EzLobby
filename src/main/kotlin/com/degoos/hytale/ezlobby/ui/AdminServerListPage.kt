@@ -2,6 +2,7 @@ package com.degoos.hytale.ezlobby.ui
 
 import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.hytale.ezlobby.models.Server
+import com.degoos.hytale.ezlobby.utils.createEzLobbyReferralData
 import com.degoos.kayle.extension.dispatcher
 import com.degoos.kayle.extension.world
 import com.hypixel.hytale.codec.Codec
@@ -99,7 +100,7 @@ class AdminServerListPage(player: PlayerRef) :
                 val serverIndex = data.serverIndex ?: return
                 val server = EzLobby.getServersConfig()?.get()?.servers?.getOrNull(serverIndex) ?: return
                 runInEzLobbyScope {
-                    playerRef.referToServer(server.host, server.port)
+                    playerRef.referToServer(server.host, server.port, createEzLobbyReferralData())
                 }
             }
             AdminServerListEvent.ACTION_EDIT -> {
