@@ -1,0 +1,3 @@
+# EzLobby LinkedServer Commands (en-US)
+lobbyservers.desc = Teleport back to the Lobby
+lobbyservers.admin.desc = Open the lobby server manager UI

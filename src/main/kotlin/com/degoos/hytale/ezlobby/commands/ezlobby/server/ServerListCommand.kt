@@ -30,7 +30,7 @@ class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.l
     override fun executeSync(context: CommandContext) {
         val sendInChat = context.get<Boolean>(this.chatArg)
 
-        val config = validateServersConfig(context) ?: return
+        val config = validateServersConfig(context, true) ?: return
 
         EzLobby.instance?.launch {
             if (sendInChat || !tryOpenListAsGUI(context)) {

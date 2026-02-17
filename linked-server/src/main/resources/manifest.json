@@ -1,8 +1,8 @@
 {
   "Group": "Degoos",
-  "Name": "EzLobby",
+  "Name": "EzLobby-LinkedServer",
   "Version": "0.1.0",
-  "Description": "Simple plugin to set up and manage your Lobby server",
+  "Description": "Simple plugin to allow users to go back to the lobby from linked servers",
   "Authors": [
     {
       "Name": "Gael Rial",
@@ -15,7 +15,7 @@
     }
   ],
   "Website": "",
-  "Main": "com.degoos.hytale.ezlobby.EzLobby",
+  "Main": "com.degoos.hytale.ezlobby_linkedserver.EzLobbyLinkedServer",
   "ServerVersion": "*",
   "Dependencies": {
     "Degoos:Kayle": "*"

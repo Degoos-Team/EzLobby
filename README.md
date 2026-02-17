@@ -8,7 +8,7 @@ A Hytale server plugin for managing lobby servers. EzLobby provides a graphical 
 |---------|-------------|------------|
 | `/servers` | Opens the server browser or connects to a specific server | `ezlobby.servers` |
 | `/ezlobby` | Main admin command for managing the plugin | `ezlobby.admin` |
-| `/eztitle` | Display titles and subtitles to players | No permission required |
+| `/eztitle` | Display titles and subtitles to players | `ezlobby.title` |
 
 ## /servers Command
 

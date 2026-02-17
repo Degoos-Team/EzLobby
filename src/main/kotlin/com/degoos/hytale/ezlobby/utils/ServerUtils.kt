@@ -21,7 +21,7 @@ fun findServer(name: String?, index: Int?, id: UUID?): Server? {
     return null
 }
 
-fun validateServersConfig(context: CommandContext): ServersConfig? {
+fun validateServersConfig(context: CommandContext, showIfEmpty: Boolean = false): ServersConfig? {
     val serversConfig = EzLobby.getServersConfig()
     val config = serversConfig?.get()
 
@@ -30,7 +30,7 @@ fun validateServersConfig(context: CommandContext): ServersConfig? {
         return null
     }
 
-    if (config.servers.isEmpty()) {
+    if (config.servers.isEmpty() && !showIfEmpty) {
         context.sendMessage(Message.translation("ezlobby.messages.error.servers.empty"))
         return null
     }

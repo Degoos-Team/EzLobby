@@ -6,15 +6,20 @@ import com.hypixel.hytale.codec.KeyedCodec
 import com.hypixel.hytale.codec.builder.BuilderCodec
 import com.hypixel.hytale.math.vector.Vector3d
 import com.hypixel.hytale.math.vector.Vector3f
+import com.hypixel.hytale.server.core.inventory.ItemStack
 
 
 class EzLobbyConfig {
     var spawnPointWorldName: String? = null
     var spawnPointPosition: Vector3d? = null
-    var spawnPointRotation: Vector3f? = null
+    var spawnPointBodyRotation: Vector3f? = null
+    var spawnPointHeadRotation: Vector3f? = null
+
+    var serverMenuItemOnJoin: Boolean = false
+    var serversMenuItemStack: ItemStack? = ItemStack("Degoos_Compass", 1)
 
     companion object {
-        val CODEC: BuilderCodec<EzLobbyConfig?> = BuilderCodec.builder(
+        val CODEC: BuilderCodec<EzLobbyConfig> = BuilderCodec.builder(
             EzLobbyConfig::class.java
         )
         { EzLobbyConfig() }
@@ -23,11 +28,11 @@ class EzLobbyConfig {
                     "SpawnPointWorldName",
                     Codec.STRING
                 ),
-                { config: EzLobbyConfig?, value: String?, info: ExtraInfo? ->
-                    config!!.spawnPointWorldName = value
+                { config: EzLobbyConfig, value: String?, info: ExtraInfo? ->
+                    config.spawnPointWorldName = value
                 },
-                { config: EzLobbyConfig?, info: ExtraInfo? ->
-                    config!!.spawnPointWorldName
+                { config: EzLobbyConfig, info: ExtraInfo? ->
+                    config.spawnPointWorldName
                 }
             )
             .add()
@@ -37,15 +42,15 @@ class EzLobbyConfig {
                     "SpawnPointPosition",
                     Codec.DOUBLE_ARRAY
                 ),
-                { config: EzLobbyConfig?, value: DoubleArray?, info: ExtraInfo? ->
-                    config!!.spawnPointPosition = if (value != null) Vector3d(
+                { config: EzLobbyConfig, value: DoubleArray?, info: ExtraInfo? ->
+                    config.spawnPointPosition = if (value != null) Vector3d(
                         value[0],
                         value[1],
                         value[2]
                     ) else null
                 },
-                { config: EzLobbyConfig?, info: ExtraInfo? ->
-                    config!!.spawnPointPosition?.let {
+                { config: EzLobbyConfig, info: ExtraInfo? ->
+                    config.spawnPointPosition?.let {
                         doubleArrayOf(
                             it.x,
                             it.y,
@@ -58,18 +63,18 @@ class EzLobbyConfig {
 
             .append(
                 KeyedCodec(
-                    "SpawnPointRotation",
+                    "SpawnPointBodyRotation",
                     Codec.DOUBLE_ARRAY
                 ),
-                { config: EzLobbyConfig?, value: DoubleArray?, info: ExtraInfo? ->
-                    config!!.spawnPointRotation = if (value != null) Vector3f(
+                { config: EzLobbyConfig, value: DoubleArray?, info: ExtraInfo? ->
+                    config.spawnPointBodyRotation = if (value != null) Vector3f(
                         value[0].toFloat(),
                         value[1].toFloat(),
                         value[2].toFloat()
                     ) else null
                 },
-                { config: EzLobbyConfig?, info: ExtraInfo? ->
-                    config!!.spawnPointRotation?.let {
+                { config: EzLobbyConfig, info: ExtraInfo? ->
+                    config.spawnPointBodyRotation?.let {
                         doubleArrayOf(
                             it.x.toDouble(),
                             it.y.toDouble(),
@@ -79,6 +84,38 @@ class EzLobbyConfig {
                 }
             )
             .add()
+
+            .append(
+                KeyedCodec(
+                    "SpawnPointHeadRotation",
+                    Codec.DOUBLE_ARRAY
+                ),
+                { config: EzLobbyConfig, value: DoubleArray?, info: ExtraInfo? ->
+                    config.spawnPointHeadRotation = if (value != null) Vector3f(
+                        value[0].toFloat(),
+                        value[1].toFloat(),
+                        value[2].toFloat()
+                    ) else null
+                },
+                { config: EzLobbyConfig, info: ExtraInfo? ->
+                    config.spawnPointHeadRotation?.let {
+                        doubleArrayOf(
+                            it.x.toDouble(),
+                            it.y.toDouble(),
+                            it.z.toDouble()
+                        )
+                    }
+                }
+            )
+            .add()
+
+            .append(
+                KeyedCodec("ServerMenuItemOnJoin", Codec.BOOLEAN),
+                EzLobbyConfig::serverMenuItemOnJoin.setter,
+                EzLobbyConfig::serverMenuItemOnJoin
+            )
+            .add()
+
             .build()
     }
 }

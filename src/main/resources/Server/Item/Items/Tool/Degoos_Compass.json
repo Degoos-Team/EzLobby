@@ -1,0 +1,24 @@
+{
+  "TranslationProperties": {
+    "Name": "ezlobby.items.compass.server.name",
+    "Description": "ezlobby.items.compass.server.description"
+  },
+  "Icon": "Icons/ItemsGenerated/degoos_compass_icon.png",
+  "ItemLevel": 1,
+  "Model": "Items/Tools/DegoosCompass/DegoosCompass.blockymodel",
+  "Texture": "Items/Tools/DegoosCompass/compass_texture.png",
+  "Quality": "Rare",
+  "Scale": 1.5,
+  "PlayerAnimationsId": "Item",
+  "UsePlayerAnimations": true,
+  "MaxStack": 1,
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "ezlobby:server_menu_item_interaction"
+        }
+      ]
+    }
+  }
+}

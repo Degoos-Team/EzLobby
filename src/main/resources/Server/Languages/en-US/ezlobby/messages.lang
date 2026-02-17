@@ -4,7 +4,7 @@
 
 # Error messages
 error.config.missing = [EzLobby] What? There is no servers file :/
-error.servers.empty = [EzLobby] There are no servers added yet. Use `/server add` to add one!
+error.servers.empty = [EzLobby] There are no servers added yet. Use `/ezlobby server add` to add one!
 error.config.missing.add = [EzLobby] Could not add a server, servers file is missing :/
 error.player.not.found = [EzLobby] Something really weird has happened. No player could be found, not even yourself :o/
 error.server.not.found = [EzLobby] No server found with the provided selector: {selector}

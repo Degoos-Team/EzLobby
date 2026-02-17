@@ -28,7 +28,8 @@ class SetSpawnCommand : AbstractPlayerCommand("set", "ezlobby.commands.ezlobby.s
 
         config.spawnPointWorldName = world.name
         config.spawnPointPosition = playerRef.transform.position
-        config.spawnPointRotation = playerRef.transform.rotation
+        config.spawnPointBodyRotation = playerRef.transform.rotation
+        config.spawnPointHeadRotation = playerRef.headRotation
 
         mainConfig.save()
         context.sendMessage(

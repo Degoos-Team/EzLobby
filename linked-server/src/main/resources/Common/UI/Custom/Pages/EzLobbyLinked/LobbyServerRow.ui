@@ -1,0 +1,65 @@
+$Common = "../../Common.ui";
+
+Group {
+    LayoutMode: Left;
+    Anchor: (Horizontal: 10, Height: 90, Top: 8);
+    Padding: (Horizontal: 12, Vertical: 10);
+    Background: PatchStyle(TexturePath: "../../Common/Buttons/Primary.png", Border: 12, Color: #ffffff);
+
+    Group {
+        LayoutMode: Top;
+        FlexWeight: 2;
+        Padding: (Top: 4);
+
+        Group {
+            LayoutMode: Left;
+            Anchor: (Height: 16, Bottom: 4);
+
+            Label {
+                Style: (FontSize: 18, TextColor: #66ccff, RenderBold: true);
+                Text: %ezlobby.linkedserver.ui.lobbyserverrow.label.host;
+                Anchor: (Right: 5);
+            }
+
+            Label #Host {
+                Style: (FontSize: 18, TextColor: #cccccc, RenderBold: true);
+                Text: %ezlobby.linkedserver.ui.lobbyserverrow.host;
+            }
+        }
+
+        Group {
+            LayoutMode: Left;
+            Anchor: (Height: 18, Top: 8);
+
+            Label {
+                Style: (FontSize: 18, TextColor: #66ccff, RenderBold: true);
+                Text: %ezlobby.linkedserver.ui.lobbyserverrow.label.port;
+                Anchor: (Right: 5);
+            }
+
+            Label #Port {
+                Style: (FontSize: 18, TextColor: #cccccc, RenderBold: true);
+                Text: %ezlobby.linkedserver.ui.lobbyserverrow.port;
+            }
+        }
+    }
+
+    $Common.@SecondaryTextButton #EditButton {
+        FlexWeight: 1;
+        Anchor: (Right: 10);
+        Text: %ezlobby.linkedserver.ui.lobbyserverrow.button.edit;
+    }
+
+    $Common.@CancelTextButton #DeleteButton {
+        FlexWeight: 1;
+        Anchor: (Right: 10);
+        Text: %ezlobby.linkedserver.ui.lobbyserverrow.button.delete;
+    }
+
+    $Common.@CancelTextButton #ConfirmDeleteButton {
+        FlexWeight: 1;
+        Anchor: (Right: 10);
+        Text: %ezlobby.linkedserver.ui.common.delete.confirm;
+        Visible: false;
+    }
+}
