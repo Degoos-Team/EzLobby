@@ -1,6 +1,6 @@
 package com.degoos.hytale.ezlobby.managers
 
-import com.degoos.kayle.dsl.world
+import com.degoos.kayle.extension.world
 import com.hypixel.hytale.server.core.entity.entities.Player
 import com.hypixel.hytale.server.core.universe.PlayerRef
 import com.hypixel.hytale.server.core.universe.world.World
