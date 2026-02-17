@@ -1,2 +1,5 @@
 compass.server.name=Server Compass
 compass.server.description=A compass that displays the available servers to join in the network.
+
+visibilitytoggler.server.name=Visibility Toggler
+visibilitytoggler.server.description=Show or hide players from other servers in the lobby.
