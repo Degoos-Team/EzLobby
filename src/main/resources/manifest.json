@@ -1,7 +1,7 @@
 {
   "Group": "Degoos",
   "Name": "EzLobby",
-  "Version": "0.1.0",
+  "Version": "0.1.1",
   "Description": "Simple plugin to set up and manage your Lobby server",
   "Authors": [
     {
