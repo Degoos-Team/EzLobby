@@ -34,6 +34,19 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
 
     override fun setup() {
         logger.atInfo().log("[Degoos:EzLobby] Plugin has been loaded")
+
+        // region Interactions - Register codecs early so they're available during asset loading
+        this.getCodecRegistry(Interaction.CODEC).register(
+            ServerMenuItemInteraction.INTERACTION_ID,
+            ServerMenuItemInteraction::class.java,
+            ServerMenuItemInteraction.CODEC
+        )
+        this.getCodecRegistry(Interaction.CODEC).register(
+            VisibilityTogglerItemInteraction.INTERACTION_ID,
+            VisibilityTogglerItemInteraction::class.java,
+            VisibilityTogglerItemInteraction.CODEC
+        )
+        // endregion
     }
 
     override fun start() {
@@ -62,19 +75,6 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
                 event
             )
         }
-        // endregion
-
-        // region Interactions
-        this.getCodecRegistry(Interaction.CODEC).register(
-            ServerMenuItemInteraction.INTERACTION_ID,
-            ServerMenuItemInteraction::class.java,
-            ServerMenuItemInteraction.CODEC
-        )
-        this.getCodecRegistry(Interaction.CODEC).register(
-            VisibilityTogglerItemInteraction.INTERACTION_ID,
-            VisibilityTogglerItemInteraction::class.java,
-            VisibilityTogglerItemInteraction.CODEC
-        )
         // endregion
 
         // Load icons from storage.
