@@ -1,7 +1,7 @@
 package com.degoos.hytale.ezlobby.commands.ezlobby.spawn
 
 import com.degoos.hytale.ezlobby.EzLobby
-import com.degoos.kayle.dsl.dispatcher
+import com.degoos.kayle.extension.dispatcher
 import com.hypixel.hytale.protocol.GameMode
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.AbstractCommand

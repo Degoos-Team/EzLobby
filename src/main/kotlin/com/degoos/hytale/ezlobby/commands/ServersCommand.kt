@@ -5,8 +5,8 @@ import com.degoos.hytale.ezlobby.commands.ezlobby.server.AbstractServerCommand
 import com.degoos.hytale.ezlobby.ui.ServerListPage
 import com.degoos.hytale.ezlobby.utils.createEzLobbyReferralData
 import com.degoos.hytale.ezlobby.utils.validateServersConfig
-import com.degoos.kayle.dsl.dispatcher
-import com.degoos.kayle.dsl.world
+import com.degoos.kayle.extension.dispatcher
+import com.degoos.kayle.extension.world
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.CommandContext
 import com.hypixel.hytale.server.core.entity.entities.Player
@@ -26,7 +26,7 @@ class ServersCommand : AbstractServerCommand("servers", "ezlobby.commands.server
         val server = context.targetServer
 
         EzLobby.instance?.launch {
-            if(server == null) {
+            if (server == null) {
                 tryOpenListAsGUI(context)
             } else {
                 val ref = context.senderAsPlayerRef() ?: return@launch
