@@ -7,8 +7,10 @@ import com.degoos.hytale.ezlobby_linkedserver.configs.LobbyServersConfig
 import com.degoos.hytale.ezlobby_linkedserver.utils.getRandomServer
 import com.degoos.hytale.ezlobby_linkedserver.utils.validateReferralData
 import com.degoos.kayle.KotlinPlugin
+import com.hypixel.hytale.server.core.event.events.ShutdownEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerSetupConnectEvent
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
+import com.hypixel.hytale.server.core.universe.Universe
 import com.hypixel.hytale.server.core.util.Config
 
 
@@ -34,6 +36,7 @@ class EzLobbyLinkedServer(init: JavaPluginInit) : KotlinPlugin(init) {
 
         // region Global Events
         if(lobbyServersConfig.get()?.forceEzLobbyReferral ?: false) {
+            logger.atInfo().log("Force referral is enabled, players without valid referral will be redirected to a lobby server")
             eventRegistry.registerGlobal(
                 PlayerSetupConnectEvent::class.java
             ) { event ->
@@ -41,6 +44,17 @@ class EzLobbyLinkedServer(init: JavaPluginInit) : KotlinPlugin(init) {
                     val server = getRandomServer() ?: return@registerGlobal
                     event.reason = "EzLobby Linked Server - Forced Referral"
                     event.referToServer(server.host, server.port)
+                }
+            }
+        }
+        if(lobbyServersConfig.get()?.redirectToLobbyOnShutdown ?: false) {
+            logger.atInfo().log("Redirect to lobby on shutdown is enabled, players will be redirected to a lobby server when the server is shutting down")
+            eventRegistry.registerGlobal(
+                ShutdownEvent::class.java
+            ) { event ->
+                val server = getRandomServer() ?: return@registerGlobal
+                Universe.get().players.forEach {
+                    it.referToServer(server.host, server.port)
                 }
             }
         }
