@@ -2,8 +2,8 @@ package com.degoos.hytale.ezlobby_linkedserver.ui
 
 import com.degoos.hytale.ezlobby_linkedserver.EzLobbyLinkedServer
 import com.degoos.hytale.ezlobby_linkedserver.configs.LobbyServersConfig
-import com.degoos.kayle.dsl.dispatcher
-import com.degoos.kayle.dsl.world
+import com.degoos.kayle.extension.dispatcher
+import com.degoos.kayle.extension.world
 import com.hypixel.hytale.codec.Codec
 import com.hypixel.hytale.codec.KeyedCodec
 import com.hypixel.hytale.codec.builder.BuilderCodec

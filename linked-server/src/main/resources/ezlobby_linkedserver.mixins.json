@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.degoos.hytale.ezlobby_linkedserver.mixins",
+  "mixins": [
+    "RedirectOnShutdownMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

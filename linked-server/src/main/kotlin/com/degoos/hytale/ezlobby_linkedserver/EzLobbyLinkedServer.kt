@@ -10,6 +10,7 @@ import com.degoos.kayle.KotlinPlugin
 import com.hypixel.hytale.server.core.event.events.ShutdownEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerSetupConnectEvent
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
+import com.hypixel.hytale.server.core.universe.PlayerRef
 import com.hypixel.hytale.server.core.universe.Universe
 import com.hypixel.hytale.server.core.util.Config
 
@@ -47,17 +48,6 @@ class EzLobbyLinkedServer(init: JavaPluginInit) : KotlinPlugin(init) {
                 }
             }
         }
-        if(lobbyServersConfig.get()?.redirectToLobbyOnShutdown ?: false) {
-            logger.atInfo().log("Redirect to lobby on shutdown is enabled, players will be redirected to a lobby server when the server is shutting down")
-            eventRegistry.registerGlobal(
-                ShutdownEvent::class.java
-            ) { event ->
-                val server = getRandomServer() ?: return@registerGlobal
-                Universe.get().players.forEach {
-                    it.referToServer(server.host, server.port)
-                }
-            }
-        }
         // endregion
     }
 
@@ -76,5 +66,10 @@ class EzLobbyLinkedServer(init: JavaPluginInit) : KotlinPlugin(init) {
         fun getEventRegistry() = instance?.eventRegistry
 
         fun getAssetRegistry() = instance?.assetRegistry
+
+        fun redirectPlayerToLobby(player: PlayerRef) {
+            val server = getRandomServer() ?: return
+            player.referToServer(server.host, server.port)
+        }
     }
 }
