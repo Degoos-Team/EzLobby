@@ -2,9 +2,9 @@ package com.degoos.hytale.ezlobby.ui
 
 import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.hytale.ezlobby.assets.ServerIconsStorage
-import com.degoos.hytale.ezlobby.dsl.parseColors
 import com.degoos.hytale.ezlobby.models.Server
 import com.degoos.hytale.ezlobby.utils.ColorUtils
+import com.degoos.kayle.extension.parseTags
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder
 
@@ -14,10 +14,10 @@ object ServerRowUtils {
      * Populates a ServerRow.ui component with server data, including color tinting for button states
      */
     fun populateServerRow(uiCommandBuilder: UICommandBuilder, selector: String, server: Server) {
-        uiCommandBuilder.set("$selector #Name.TextSpans", Message.raw(server.displayName ?: server.name).parseColors())
+        uiCommandBuilder.set("$selector #Name.TextSpans", Message.raw(server.displayName ?: server.name).parseTags())
         uiCommandBuilder.set(
             "$selector #Description.TextSpans",
-            Message.raw(server.description ?: "No description").parseColors()
+            Message.raw(server.description ?: "No description").parseTags()
         )
 
         // Set icon using extracted method
@@ -35,9 +35,9 @@ object ServerRowUtils {
      * Populates an AdminServerRow.ui component with server data
      */
     fun populateAdminServerRow(uiCommandBuilder: UICommandBuilder, selector: String, server: Server) {
-        uiCommandBuilder.set("$selector #Name.TextSpans", Message.raw(server.displayName ?: server.name).parseColors())
+        uiCommandBuilder.set("$selector #Name.TextSpans", Message.raw(server.displayName ?: server.name).parseTags())
         if (server.description != null) {
-            uiCommandBuilder.set("$selector #Description.TextSpans", Message.raw(server.description!!).parseColors())
+            uiCommandBuilder.set("$selector #Description.TextSpans", Message.raw(server.description!!).parseTags())
         }
         uiCommandBuilder.set("$selector #Host.Text", "${server.host}:${server.port}")
         uiCommandBuilder.set("$selector #Id.Text", server.id.toString())
