@@ -15,13 +15,15 @@ val serverOutputPath = "${properties["hytale.server"]}/mods"
 
 repositories {
     mavenCentral()
+    maven("https://cursemaven.com")
     maven("https://dev.degoos.xyz/maven/repo")
 }
 
 dependencies {
     compileOnly(files(hytaleServerExecutablePath))
 
-    compileOnly("com.degoos:kayle:0.0.3")
+    compileOnly("com.degoos:kayle:0.0.8")
+    compileOnly("curse.maven:hyxin-1405491:7399430")
 
     testImplementation(kotlin("test"))
 }

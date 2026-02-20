@@ -1,7 +1,7 @@
 package com.degoos.hytale.ezlobby.interactions
 
 import com.degoos.hytale.ezlobby.EzLobby
-import com.degoos.hytale.ezlobby.dsl.parseColors
+import com.degoos.kayle.extension.parseTags
 
 import com.hypixel.hytale.codec.builder.BuilderCodec
 import com.hypixel.hytale.component.Ref
@@ -50,9 +50,9 @@ class VisibilityTogglerItemInteraction : SimpleInstantInteraction {
         val visibilityManager = EzLobby.getVisibilityManager()
         if(visibilityManager != null) {
             if (visibilityManager.isHidingOthers(playerRef)) {
-                player.sendMessage(Message.translation("ezlobby.messages.visibilitytoggler.enabled").parseColors())
+                player.sendMessage(Message.translation("ezlobby.messages.visibilitytoggler.enabled").parseTags())
             } else {
-                player.sendMessage(Message.translation("ezlobby.messages.visibilitytoggler.disabled").parseColors())
+                player.sendMessage(Message.translation("ezlobby.messages.visibilitytoggler.disabled").parseTags())
             }
             visibilityManager.toggleVisibility(playerRef)
         }

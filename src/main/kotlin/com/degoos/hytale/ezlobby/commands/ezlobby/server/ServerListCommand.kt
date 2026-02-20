@@ -1,11 +1,11 @@
 package com.degoos.hytale.ezlobby.commands.ezlobby.server
 
 import com.degoos.hytale.ezlobby.EzLobby
-import com.degoos.hytale.ezlobby.dsl.parseColors
 import com.degoos.hytale.ezlobby.ui.AdminServerListPage
 import com.degoos.hytale.ezlobby.ui.ServerListPage
 import com.degoos.hytale.ezlobby.utils.validateServersConfig
 import com.degoos.kayle.extension.dispatcher
+import com.degoos.kayle.extension.parseTags
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.CommandContext
 import com.hypixel.hytale.server.core.command.system.arguments.system.DefaultArg
@@ -40,7 +40,7 @@ class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.l
                         Message.translation("ezlobby.messages.server.list.entry")
                             .param("idx", idx.toString())
                             .param("name", server.name)
-                            .param("displayName", Message.raw(server.displayName ?: server.name).parseColors())
+                            .param("displayName", Message.raw(server.displayName ?: server.name).parseTags())
                             .param("host", server.host)
                             .param("port", server.port.toString())
                     )

@@ -20,7 +20,14 @@
   "Dependencies": {
     "Degoos:Kayle": "*"
   },
-  "OptionalDependencies": {},
+  "OptionalDependencies": {
+    "Build-9:Hyxin": "*"
+  },
   "DisabledByDefault": false,
-  "IncludesAssetPack": true
+  "IncludesAssetPack": true,
+  "Hyxin": {
+    "Configs": [
+      "ezlobby_linkedserver.mixins.json"
+    ]
+  }
 }

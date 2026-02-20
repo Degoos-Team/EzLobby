@@ -3,8 +3,8 @@ package com.degoos.hytale.ezlobby_linkedserver.commands
 import com.degoos.hytale.ezlobby_linkedserver.EzLobbyLinkedServer
 import com.degoos.hytale.ezlobby_linkedserver.utils.getRandomServer
 import com.degoos.hytale.ezlobby_linkedserver.utils.validateServersConfig
-import com.degoos.kayle.dsl.dispatcher
-import com.degoos.kayle.dsl.world
+import com.degoos.kayle.extension.dispatcher
+import com.degoos.kayle.extension.world
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.CommandContext
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase

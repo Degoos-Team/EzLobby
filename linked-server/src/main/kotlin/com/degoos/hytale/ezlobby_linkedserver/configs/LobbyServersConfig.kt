@@ -10,6 +10,7 @@ import com.hypixel.hytale.codec.codecs.array.ArrayCodec
 
 class LobbyServersConfig {
     var forceEzLobbyReferral: Boolean = false
+    var redirectToLobbyOnShutdown: Boolean = false
     var defaultDelayInMs: Int = 5
     var lobbyServers: MutableList<Server> = mutableListOf()
 
@@ -24,6 +25,13 @@ class LobbyServersConfig {
                 KeyedCodec("ForceEzLobbyReferral", Codec.BOOLEAN),
                 LobbyServersConfig::forceEzLobbyReferral.setter,
                 LobbyServersConfig::forceEzLobbyReferral
+            )
+            .add()
+
+            .append(
+                KeyedCodec("RedirectToLobbyOnShutdown", Codec.BOOLEAN),
+                LobbyServersConfig::redirectToLobbyOnShutdown.setter,
+                LobbyServersConfig::redirectToLobbyOnShutdown
             )
             .add()
 
