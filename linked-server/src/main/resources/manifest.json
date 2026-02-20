@@ -1,7 +1,7 @@
 {
   "Group": "Degoos",
   "Name": "EzLobby-LinkedServer",
-  "Version": "0.1.0",
+  "Version": "0.2.0",
   "Description": "Simple plugin to allow users to go back to the lobby from linked servers",
   "Authors": [
     {
