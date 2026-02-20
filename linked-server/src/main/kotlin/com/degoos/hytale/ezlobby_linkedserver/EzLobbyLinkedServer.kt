@@ -35,6 +35,21 @@ class EzLobbyLinkedServer(init: JavaPluginInit) : KotlinPlugin(init) {
         commandRegistry.registerCommand(LobbyServersAdminCommand())
         // endregion
 
+        // region Events
+        if (lobbyServersConfig.get()?.redirectToLobbyOnShutdown == true) {
+            // Priority -60 fires before ShutdownEvent.DISCONNECT_PLAYERS (-48), so packets go out before transport tears down
+            eventRegistry.register((-60).toShort(), ShutdownEvent::class.java) {
+                val universe = Universe.get() ?: return@register
+                val players = universe.players.toList()
+                if (players.isEmpty()) return@register
+                logger.atInfo().log("[EzLobby:LinkedServer] Redirecting %d player(s) to lobby before shutdown.", players.size)
+                players.forEach { player -> redirectPlayerToLobby(player) }
+                // Give Netty a moment to flush the referral packets before transport closes
+                Thread.sleep(3_000)
+            }
+        }
+        // endregion
+
         // region Global Events
         if(lobbyServersConfig.get()?.forceEzLobbyReferral ?: false) {
             logger.atInfo().log("Force referral is enabled, players without valid referral will be redirected to a lobby server")
