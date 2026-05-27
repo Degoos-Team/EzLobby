@@ -6,6 +6,7 @@ import com.degoos.hytale.ezlobby.ui.ServerListPage
 import com.degoos.hytale.ezlobby.utils.validateServersConfig
 import com.degoos.kayle.extension.dispatcher
 import com.degoos.kayle.extension.parseTags
+import com.degoos.kayle.extension.world
 import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.command.system.CommandContext
 import com.hypixel.hytale.server.core.command.system.arguments.system.DefaultArg
@@ -53,15 +54,13 @@ class ServerListCommand : CommandBase("list", "ezlobby.commands.ezlobby.server.l
     private suspend fun tryOpenListAsGUI(context: CommandContext): Boolean {
         if (!context.isPlayer) return false
 
-        val player = context.senderAs(Player::class.java)
-        val world = player.world ?: return false
-        val reference = player.reference ?: return false
+        val ref = context.senderAsPlayerRef() ?: return false
 
-        return withContext(world.dispatcher) {
-            val playerRef = reference.store.getComponent(reference, PlayerRef.getComponentType())
-                ?: return@withContext false
+        return withContext(ref.world.dispatcher) {
+            val playerRef = ref.store.getComponent(ref, PlayerRef.getComponentType()) ?: return@withContext false
+            val player = ref.store.getComponent(ref, Player.getComponentType()) ?: return@withContext false
+            val reference = player.reference ?: return@withContext false
 
-            // Use admin UI for users with ezlobby.server.manage permission
             val hasManagePermission = PermissionsModule.get().hasPermission(playerRef.uuid, "ezlobby.server.manage")
             val page = if (hasManagePermission) {
                 AdminServerListPage(playerRef)

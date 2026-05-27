@@ -50,9 +50,9 @@ class VisibilityTogglerItemInteraction : SimpleInstantInteraction {
         val visibilityManager = EzLobby.getVisibilityManager()
         if(visibilityManager != null) {
             if (visibilityManager.isHidingOthers(playerRef)) {
-                player.sendMessage(Message.translation("ezlobby.messages.visibilitytoggler.enabled").parseTags())
+                playerRef.sendMessage(Message.translation("ezlobby.messages.visibilitytoggler.enabled").parseTags())
             } else {
-                player.sendMessage(Message.translation("ezlobby.messages.visibilitytoggler.disabled").parseTags())
+                playerRef.sendMessage(Message.translation("ezlobby.messages.visibilitytoggler.disabled").parseTags())
             }
             visibilityManager.toggleVisibility(playerRef)
         }

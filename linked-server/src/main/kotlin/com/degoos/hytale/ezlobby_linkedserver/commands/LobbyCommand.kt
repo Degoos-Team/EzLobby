@@ -12,6 +12,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.joml.Vector3d
 import kotlin.coroutines.EmptyCoroutineContext
 
 
@@ -40,7 +41,7 @@ class LobbyCommand : CommandBase("lobby", "ezlobby.linkedserver.commands.lobbyse
             withContext(localPlayer.world?.dispatcher ?: EmptyCoroutineContext) {
                 val config = EzLobbyLinkedServer.getLobbyServersConfig()?.get()
                 val delaySeconds = config?.defaultDelayInMs ?: 0
-                val startPosition = localPlayer.transform.position.clone()
+                val startPosition = Vector3d(localPlayer.transform.position)
 
                 if (delaySeconds <= 0) {
                     localPlayer.referToServer(server.host, server.port)
@@ -50,7 +51,11 @@ class LobbyCommand : CommandBase("lobby", "ezlobby.linkedserver.commands.lobbyse
                 var remaining = delaySeconds
                 while (remaining > 0) {
                     val currentPosition = localPlayer.transform.position
-                    if (startPosition.distanceSquaredTo(currentPosition) > CANCEL_DISTANCE_SQUARED) {
+                    val dx = startPosition.x - currentPosition.x
+                    val dy = startPosition.y - currentPosition.y
+                    val dz = startPosition.z - currentPosition.z
+                    val distSq = dx * dx + dy * dy + dz * dz
+                    if (distSq > CANCEL_DISTANCE_SQUARED) {
                         localPlayer.sendMessage(
                             Message.translation("ezlobby.linkedserver.messages.lobby.cancelled.moved")
                         )

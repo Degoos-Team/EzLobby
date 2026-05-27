@@ -27,7 +27,8 @@ private fun shouldCancelInventoryEvent(playerRef: PlayerRef, permission: String)
 
     if(PermissionsModule.get().hasPermission(playerRef.uuid, permission)) return false;
 
-    val player = playerRef.reference?.let { it.store.getComponent(it, Player.getComponentType()) } ?: return false
+    val reference = playerRef.reference ?: return false
+    val player = reference.store.getComponent(reference, Player.getComponentType()) ?: return false
     return player.gameMode == GameMode.Adventure
 }
 

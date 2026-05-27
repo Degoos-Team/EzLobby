@@ -50,13 +50,12 @@ class ServersCommand : AbstractServerCommand("servers", "ezlobby.commands.server
     private suspend fun tryOpenListAsGUI(context: CommandContext): Boolean {
         if (!context.isPlayer) return false
 
-        val player = context.senderAs(Player::class.java)
-        val world = player.world ?: return false
-        val reference = player.reference ?: return false
+        val ref = context.senderAsPlayerRef() ?: return false
 
-        return withContext(world.dispatcher) {
-            val playerRef = reference.store.getComponent(reference, PlayerRef.getComponentType())
-                ?: return@withContext false
+        return withContext(ref.world.dispatcher) {
+            val playerRef = ref.store.getComponent(ref, PlayerRef.getComponentType()) ?: return@withContext false
+            val player = ref.store.getComponent(ref, Player.getComponentType()) ?: return@withContext false
+            val reference = player.reference ?: return@withContext false
             player.pageManager.openCustomPage(reference, reference.store, ServerListPage(playerRef))
             true
         }

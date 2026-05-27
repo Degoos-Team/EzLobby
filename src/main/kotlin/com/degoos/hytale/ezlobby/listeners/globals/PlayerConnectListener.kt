@@ -53,19 +53,21 @@ class PlayerConnectListener {
                     return@execute
                 }
 
+                val hotbar = player.inventory.combinedHotbarFirst ?: return@execute
+
                 if(ezLobbyConfig.serverMenuItemOnJoin) {
                     val playerHasServerMenuItemStack =
-                        player.inventory.combinedHotbarFirst.containsItemStacksStackableWith(ezLobbyConfig.serversMenuItemStack)
+                        hotbar.containsItemStacksStackableWith(ezLobbyConfig.serversMenuItemStack)
                     if (!playerHasServerMenuItemStack) {
-                        player.inventory.combinedHotbarFirst.setItemStackForSlot(0, ezLobbyConfig.serversMenuItemStack)
+                        hotbar.setItemStackForSlot(0, ezLobbyConfig.serversMenuItemStack)
                     }
                 }
 
                 if(ezLobbyConfig.visibilityTogglerItemOnJoin) {
                     val playerHasVisibilityTogglerItemStack =
-                        player.inventory.combinedHotbarFirst.containsItemStacksStackableWith(ezLobbyConfig.visibilityTogglerItemStack)
+                        hotbar.containsItemStacksStackableWith(ezLobbyConfig.visibilityTogglerItemStack)
                     if (!playerHasVisibilityTogglerItemStack) {
-                        player.inventory.combinedHotbarFirst.setItemStackForSlot(4, ezLobbyConfig.visibilityTogglerItemStack)
+                        hotbar.setItemStackForSlot(4, ezLobbyConfig.visibilityTogglerItemStack)
                     }
                 }
 

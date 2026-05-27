@@ -125,16 +125,16 @@ class LobbyServerListPage(player: PlayerRef) :
 
     private fun refreshList() {
         EzLobbyLinkedServer.instance?.launch(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
-            val player = playerRef.reference?.store?.getComponent(playerRef.reference!!, Player.getComponentType()) ?: return@launch
-            val reference = player.reference ?: return@launch
+            val reference = playerRef.reference ?: return@launch
+            val player = reference.store.getComponent(reference, Player.getComponentType()) ?: return@launch
             player.pageManager.openCustomPage(reference, reference.store, LobbyServerListPage(playerRef))
         }
     }
 
     private fun openEditPage(index: Int) {
         EzLobbyLinkedServer.instance?.launch(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
-            val player = playerRef.reference?.store?.getComponent(playerRef.reference!!, Player.getComponentType()) ?: return@launch
-            val reference = player.reference ?: return@launch
+            val reference = playerRef.reference ?: return@launch
+            val player = reference.store.getComponent(reference, Player.getComponentType()) ?: return@launch
             player.pageManager.openCustomPage(reference, reference.store, LobbyServerEditPage(playerRef, index))
         }
     }

@@ -7,6 +7,7 @@ import com.degoos.hytale.ezlobby_linkedserver.configs.LobbyServersConfig
 import com.degoos.hytale.ezlobby_linkedserver.utils.getRandomServer
 import com.degoos.hytale.ezlobby_linkedserver.utils.validateReferralData
 import com.degoos.kayle.KotlinPlugin
+import com.hypixel.hytale.server.core.Message
 import com.hypixel.hytale.server.core.event.events.ShutdownEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerSetupConnectEvent
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
@@ -58,7 +59,7 @@ class EzLobbyLinkedServer(init: JavaPluginInit) : KotlinPlugin(init) {
             ) { event ->
                 if(!event.isReferralConnection || !validateReferralData(event.referralData)) {
                     val server = getRandomServer() ?: return@registerGlobal
-                    event.reason = "EzLobby Linked Server - Forced Referral"
+                    event.reason = Message.parse("EzLobby Linked Server - Forced Referral")
                     event.referToServer(server.host, server.port)
                 }
             }

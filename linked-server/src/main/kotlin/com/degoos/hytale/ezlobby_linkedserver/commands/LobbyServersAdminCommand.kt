@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.hypixel.hytale.server.core.entity.entities.Player
 import com.hypixel.hytale.server.core.universe.PlayerRef
-import kotlin.coroutines.EmptyCoroutineContext
 
 class LobbyServersAdminCommand : CommandBase("lobbyservers", "ezlobby.linkedserver.commands.lobbyservers.admin.desc") {
     init {
@@ -27,15 +26,12 @@ class LobbyServersAdminCommand : CommandBase("lobbyservers", "ezlobby.linkedserv
         }
 
         EzLobbyLinkedServer.instance?.launch {
-            val player = context.senderAs(Player::class.java)
-            val world = player.world ?: return@launch
-            val reference = player.reference ?: return@launch
+            val ref = context.senderAsPlayerRef() ?: return@launch
 
-            val playerRef = withContext(world.dispatcher) {
-                reference.store.getComponent(reference, PlayerRef.getComponentType())
-            } ?: return@launch
-
-            withContext(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
+            withContext(ref.world.dispatcher) {
+                val playerRef = ref.store.getComponent(ref, PlayerRef.getComponentType()) ?: return@withContext
+                val player = ref.store.getComponent(ref, Player.getComponentType()) ?: return@withContext
+                val reference = player.reference ?: return@withContext
                 player.pageManager.openCustomPage(reference, reference.store, LobbyServerListPage(playerRef))
             }
         }

@@ -134,8 +134,8 @@ class AdminServerListPage(player: PlayerRef) :
 
     private fun openAdminServerEditPage(serverIndex: Int) {
         runInEzLobbyScope {
-            val player = playerRef.reference?.store?.getComponent(playerRef.reference!!, Player.getComponentType()) ?: return@runInEzLobbyScope
-            val reference = player.reference ?: return@runInEzLobbyScope
+            val reference = playerRef.reference ?: return@runInEzLobbyScope
+            val player = reference.store.getComponent(reference, Player.getComponentType()) ?: return@runInEzLobbyScope
             player.pageManager.openCustomPage(reference, reference.store, AdminServerEditPage(playerRef, serverIndex))
         }
     }
