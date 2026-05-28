@@ -59,7 +59,7 @@ class EzLobbyLinkedServer(init: JavaPluginInit) : KotlinPlugin(init) {
             ) { event ->
                 if(!event.isReferralConnection || !validateReferralData(event.referralData)) {
                     val server = getRandomServer() ?: return@registerGlobal
-                    event.reason = Message.parse("EzLobby Linked Server - Forced Referral")
+                    event.reason = Message.raw("EzLobby Linked Server - Forced Referral")
                     event.referToServer(server.host, server.port)
                 }
             }
