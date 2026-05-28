@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.degoos.hytale"
-version = "0.1.1-SNAPSHOT"
+version = "0.2.0-SNAPSHOT"
 
 val hytaleInstallationPath = properties["hytale.path"].toString()
 val hytaleServerExecutablePath = "${hytaleInstallationPath}/Server/HytaleServer.jar"
@@ -14,6 +14,7 @@ val serverOutputPath = "${properties["hytale.server"]}/mods"
 
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven("https://dev.degoos.xyz/maven/repo")
 }

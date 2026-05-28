@@ -14,6 +14,7 @@ val serverOutputPath = "${properties["hytale.server"]}/mods"
 
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven("https://cursemaven.com")
     maven("https://dev.degoos.xyz/maven/repo")
