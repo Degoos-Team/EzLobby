@@ -5,6 +5,7 @@ import com.hypixel.hytale.registry.Registration
 import com.hypixel.hytale.server.core.entity.entities.Player
 import com.hypixel.hytale.server.core.event.events.player.AddPlayerToWorldEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
+import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent
 import com.hypixel.hytale.server.core.modules.entity.component.HeadRotation
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent
 import com.hypixel.hytale.server.core.universe.Universe
@@ -20,8 +21,11 @@ class PlayerConnectListener {
         val spawnPointBodyRotation = ezLobbyConfig.spawnPointBodyRotation ?: return
         val spawnPointHeadRotation = ezLobbyConfig.spawnPointHeadRotation ?: return
 
-        val world = Universe.get().getWorld(spawnPointWorldName) ?: return
-
+        val world = Universe.get().getWorld(spawnPointWorldName) ?: run {
+            EzLobby.instance?.logger?.atSevere()
+                ?.log("[EzLobby] Spawn world '%s' not found in Universe — player cannot join", spawnPointWorldName)
+            return
+        }
 
         val transformComponent = TransformComponent(spawnPointPosition, spawnPointBodyRotation)
         val transform = transformComponent.sentTransform
@@ -40,22 +44,44 @@ class PlayerConnectListener {
 
         if (!ezLobbyConfig.serverMenuItemOnJoin && !ezLobbyConfig.visibilityTogglerItemOnJoin) return
 
-        var registration: Registration? = null
-        registration = EzLobby.getEventRegistry()?.registerGlobal(AddPlayerToWorldEvent::class.java) { addEvent ->
-            if (event.world != addEvent.world || event.holder != addEvent.holder) {
+        // Capture stable references so the lambdas below don't close over the mutable event.
+        val targetWorld = world
+        val targetHolder = event.holder
+        val targetPlayerRef = event.playerRef
+
+        var addToWorldReg: Registration? = null
+        var disconnectReg: Registration? = null
+
+        fun cleanup() {
+            addToWorldReg?.unregister()
+            disconnectReg?.unregister()
+            addToWorldReg = null
+            disconnectReg = null
+        }
+
+        // Unregister if the player disconnects before being added to the world.
+        disconnectReg = EzLobby.getEventRegistry()?.registerGlobal(PlayerDisconnectEvent::class.java) { disconnectEvent ->
+            if (disconnectEvent.playerRef == targetPlayerRef) cleanup()
+        }
+
+        addToWorldReg = EzLobby.getEventRegistry()?.registerGlobal(AddPlayerToWorldEvent::class.java) { addEvent ->
+            if (addEvent.world != targetWorld || addEvent.holder != targetHolder) {
                 return@registerGlobal
             }
 
             addEvent.world.execute {
                 val player = addEvent.holder.getComponent(Player.getComponentType())
-                if(player == null) {
-                    registration?.unregister()
+                if (player == null) {
+                    cleanup()
                     return@execute
                 }
 
-                val hotbar = player.inventory.combinedHotbarFirst ?: return@execute
+                val hotbar = player.inventory.combinedHotbarFirst ?: run {
+                    cleanup()
+                    return@execute
+                }
 
-                if(ezLobbyConfig.serverMenuItemOnJoin) {
+                if (ezLobbyConfig.serverMenuItemOnJoin) {
                     val playerHasServerMenuItemStack =
                         hotbar.containsItemStacksStackableWith(ezLobbyConfig.serversMenuItemStack)
                     if (!playerHasServerMenuItemStack) {
@@ -63,7 +89,7 @@ class PlayerConnectListener {
                     }
                 }
 
-                if(ezLobbyConfig.visibilityTogglerItemOnJoin) {
+                if (ezLobbyConfig.visibilityTogglerItemOnJoin) {
                     val playerHasVisibilityTogglerItemStack =
                         hotbar.containsItemStacksStackableWith(ezLobbyConfig.visibilityTogglerItemStack)
                     if (!playerHasVisibilityTogglerItemStack) {
@@ -71,7 +97,7 @@ class PlayerConnectListener {
                     }
                 }
 
-                registration?.unregister()
+                cleanup()
             }
         }
     }
