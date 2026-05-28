@@ -6,6 +6,7 @@ import com.hypixel.hytale.server.core.entity.entities.Player
 import com.hypixel.hytale.server.core.event.events.player.AddPlayerToWorldEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent
+import com.hypixel.hytale.server.core.inventory.InventoryComponent
 import com.hypixel.hytale.server.core.modules.entity.component.HeadRotation
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent
 import com.hypixel.hytale.server.core.universe.Universe
@@ -76,7 +77,7 @@ class PlayerConnectListener {
                     return@execute
                 }
 
-                val hotbar = player.inventory.combinedHotbarFirst ?: run {
+                val hotbar = addEvent.holder.getComponent(InventoryComponent.Hotbar.getComponentType())?.getInventory() ?: run {
                     cleanup()
                     return@execute
                 }
