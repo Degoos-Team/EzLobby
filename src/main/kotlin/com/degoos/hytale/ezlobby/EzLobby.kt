@@ -20,6 +20,7 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
+import com.hypixel.hytale.server.core.universe.world.events.RemoveWorldEvent
 import com.hypixel.hytale.server.core.util.Config
 
 @Suppress("unused")
@@ -82,6 +83,16 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
         this.eventRegistry.registerGlobal(
             PlayerDisconnectEvent::class.java
         ) { event: PlayerDisconnectEvent -> PlayerDisconnectListener().onPlayerDisconnect(event) }
+
+        this.eventRegistry.registerGlobal(
+            RemoveWorldEvent::class.java
+        ) { event: RemoveWorldEvent ->
+            val spawnWorldName = getMainConfig()?.get()?.spawnPointWorldName ?: return@registerGlobal
+            if (event.world.name == spawnWorldName && event.removalReason == RemoveWorldEvent.RemovalReason.GENERAL) {
+                event.setCancelled(true)
+                logger.atWarning().log("[EzLobby] Blocked removal of spawn world '%s'", spawnWorldName)
+            }
+        }
         // endregion
 
         // Load icons from storage.
