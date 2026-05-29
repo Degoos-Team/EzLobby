@@ -10,6 +10,7 @@ error.player.not.found = [EzLobby] Something really weird has happened. No playe
 error.server.not.found = [EzLobby] No server found with the provided selector: {selector}
 error.spawn.config.missing = [EzLobby] Could not set spawn point, config is missing :/
 error.spawn.world.not.found = [EzLobby] Could not set spawn point, World(name={name}) does not exist :/
+error.server.offline = [EzLobby] That server is currently offline.
 
 # Success messages
 success.server.added = [EzLobby] Added server '{name}' ({id}) with address {host}:{port}

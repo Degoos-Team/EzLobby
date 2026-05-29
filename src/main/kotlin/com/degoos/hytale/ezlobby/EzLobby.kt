@@ -10,6 +10,7 @@ import com.degoos.hytale.ezlobby.interactions.ServerMenuItemInteraction
 import com.degoos.hytale.ezlobby.interactions.VisibilityTogglerItemInteraction
 import com.degoos.hytale.ezlobby.listeners.globals.PlayerConnectListener
 import com.degoos.hytale.ezlobby.listeners.globals.PlayerReadyListener
+import com.degoos.hytale.ezlobby.managers.ServerStatusChecker
 import com.degoos.hytale.ezlobby.managers.VisibilityManager
 import com.degoos.hytale.ezlobby.systems.*
 import com.degoos.kayle.KotlinPlugin
@@ -79,6 +80,11 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
 
         // Load icons from storage.
         ServerIconsStorage.recreateIcons()
+
+        // Pre-warm server status checks so the first open of the server menu shows live status.
+        EzLobby.getServersConfig()?.get()?.servers?.forEach { server ->
+            ServerStatusChecker.requestCheck(server, this)
+        }
     }
 
     override fun shutdown() {
