@@ -2,7 +2,7 @@ $Common = "../../Common.ui";
 
 $Common.@PageOverlay {
   $Common.@Container {
-        Anchor: (Width: 560, Height: 650);
+        Anchor: (Width: 600, Height: 650);
         #Title {
           Group {
             LayoutMode: Top;
@@ -21,6 +21,7 @@ $Common.@PageOverlay {
             FlexWeight: 1;
             LayoutMode: TopScrolling;
             ScrollbarStyle: $Common.@DefaultScrollbarStyle;
+            Padding: (Left: 12);
         }
     }
 }
