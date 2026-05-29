@@ -3,6 +3,7 @@ package com.degoos.hytale.ezlobby.ui
 import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.hytale.ezlobby.assets.ServerIconsStorage
 import com.degoos.hytale.ezlobby.models.Server
+import com.degoos.hytale.ezlobby.models.ServerStatus
 import com.degoos.hytale.ezlobby.utils.ColorUtils
 import com.degoos.kayle.extension.parseTags
 import com.hypixel.hytale.server.core.Message
@@ -13,7 +14,12 @@ object ServerRowUtils {
     /**
      * Populates a ServerRow.ui component with server data, including color tinting for button states
      */
-    fun populateServerRow(uiCommandBuilder: UICommandBuilder, selector: String, server: Server) {
+    fun populateServerRow(
+        uiCommandBuilder: UICommandBuilder,
+        selector: String,
+        server: Server,
+        status: ServerStatus = ServerStatus.UNKNOWN
+    ) {
         uiCommandBuilder.set("$selector #Name.TextSpans", Message.raw(server.displayName ?: server.name).parseTags())
         uiCommandBuilder.set(
             "$selector #Description.TextSpans",
@@ -28,6 +34,22 @@ object ServerRowUtils {
             uiCommandBuilder.set("$selector #IconGroup.Background.Color", server.uiColorTint!!)
 
             applyColorTintToButton(uiCommandBuilder, selector, server.uiColorTint!!)
+        }
+
+        // Status circle color — path format: space before # (child element selector)
+        val circleColor = when (status) {
+            ServerStatus.ONLINE   -> "#00CC44"
+            ServerStatus.OFFLINE  -> "#CC2200"
+            ServerStatus.UNKNOWN,
+            ServerStatus.CHECKING -> "#FFCC00"
+        }
+        uiCommandBuilder.set("$selector #StatusCircle.Background.Color", circleColor)
+
+        // OFFLINE visual disable — override Default and Hovered button backgrounds (D-07)
+        // Color override keeps rows clickable at framework level; guard runs in handleDataEvent
+        if (status == ServerStatus.OFFLINE) {
+            uiCommandBuilder.set("$selector.Style.Default.Background.Color", "#66666666")
+            uiCommandBuilder.set("$selector.Style.Hovered.Background.Color", "#66666666")
         }
     }
 
