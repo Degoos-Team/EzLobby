@@ -54,8 +54,8 @@ object ServerRowUtils {
             ServerStatus.UNKNOWN,
             ServerStatus.CHECKING -> "ezlobby.gui.serverrow.status.checking"
         }
-        uiCommandBuilder.set("$selector #StatusCircle.Background.Color", circleColor)
-        uiCommandBuilder.set("$selector #StatusCircle.TooltipText", Message.translation(statusTooltipKey))
+        uiCommandBuilder.set("$selector #StatusBadgeFill.Background.Color", circleColor)
+        uiCommandBuilder.set("$selector #StatusBadge.TooltipText", Message.translation(statusTooltipKey))
 
         // OFFLINE visual disable — override Default and Hovered button backgrounds (D-07)
         // Color override keeps rows clickable at framework level; guard runs in handleDataEvent
