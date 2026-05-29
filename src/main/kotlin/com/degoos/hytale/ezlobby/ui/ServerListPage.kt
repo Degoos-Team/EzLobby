@@ -2,6 +2,7 @@ package com.degoos.hytale.ezlobby.ui
 
 import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.hytale.ezlobby.managers.ServerStatusChecker
+import com.degoos.hytale.ezlobby.managers.TransferTracker
 import com.degoos.hytale.ezlobby.models.ServerStatus
 import com.degoos.hytale.ezlobby.utils.createEzLobbyReferralData
 import com.degoos.hytale.ezlobby.utils.findServer
@@ -146,6 +147,7 @@ class ServerListPage(player: PlayerRef) :
                 }
                 sendUpdate()  // only re-render when actually proceeding to connect
                 EzLobby.instance?.launch(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
+                    TransferTracker.record(playerRef.uuid, server)  // MSG-01: MUST precede referToServer
                     playerRef.referToServer(server.host, server.port, createEzLobbyReferralData())
                 }
             }
