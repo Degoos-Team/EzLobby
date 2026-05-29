@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.degoos.hytale"
-version = "0.3.0-SNAPSHOT"
+version = "0.4.0-SNAPSHOT"
 
 val hytaleInstallationPath = properties["hytale.path"].toString()
 val hytaleServerExecutablePath = "${hytaleInstallationPath}/Server/HytaleServer.jar"
