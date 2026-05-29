@@ -19,12 +19,6 @@ Button {
     Anchor: (Horizontal: 10, Height: 100, Top: 8);
     Padding: (Horizontal: 10, Vertical: 16);
 
-    Group #StatusCircle {
-      Anchor: (Width: 14, Height: 14, Right: 8);
-      Background: PatchStyle(Color: #888888);
-      HitTestVisible: false;
-    }
-
     Group #IconGroup {
       Anchor: (Width: 80, Height: 80, Right: 15);
       Background: PatchStyle(TexturePath: "../../Common/ContainerFullPatch.png", Color: #ffffff);
@@ -53,5 +47,12 @@ Button {
         Anchor: (Height: 18, Top: 8);
         Text: %ezlobby.gui.serverrow.description;
       }
+    }
+
+    Group #StatusCircle {
+      Anchor: (Width: 14, Height: 14, Left: 8, Top: 8);
+      Background: PatchStyle(TexturePath: "StatusDot.png", Color: #888888);
+      TooltipText: %ezlobby.gui.serverrow.status.checking;
+      HitTestVisible: true;
     }
 }

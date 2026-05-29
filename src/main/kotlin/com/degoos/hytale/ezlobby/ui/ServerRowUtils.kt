@@ -42,14 +42,20 @@ object ServerRowUtils {
             }
         }
 
-        // Status circle color — path format: space before # (child element selector)
         val circleColor = when (status) {
             ServerStatus.ONLINE   -> "#00CC44"
             ServerStatus.OFFLINE  -> "#CC2200"
             ServerStatus.UNKNOWN,
             ServerStatus.CHECKING -> "#FFCC00"
         }
+        val statusTooltipKey = when (status) {
+            ServerStatus.ONLINE   -> "ezlobby.gui.serverrow.status.online"
+            ServerStatus.OFFLINE  -> "ezlobby.gui.serverrow.status.offline"
+            ServerStatus.UNKNOWN,
+            ServerStatus.CHECKING -> "ezlobby.gui.serverrow.status.checking"
+        }
         uiCommandBuilder.set("$selector #StatusCircle.Background.Color", circleColor)
+        uiCommandBuilder.set("$selector #StatusCircle.TooltipText", Message.translation(statusTooltipKey))
 
         // OFFLINE visual disable — override Default and Hovered button backgrounds (D-07)
         // Color override keeps rows clickable at framework level; guard runs in handleDataEvent
