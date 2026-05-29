@@ -23,7 +23,7 @@ object ServerRowUtils {
         uiCommandBuilder.set("$selector #Name.TextSpans", Message.raw(server.displayName ?: server.name).parseTags())
         uiCommandBuilder.set(
             "$selector #Description.TextSpans",
-            Message.raw(server.description ?: "No description").parseTags()
+            Message.raw((server.description ?: "No description").replace("<br>", "\n")).parseTags()
         )
 
         // Set icon using extracted method

@@ -50,7 +50,7 @@ Button {
         Text: %ezlobby.gui.serverrow.name;
       }
       Label #Description {
-        Style: (FontSize: 13, TextColor: #dddddd);
+        Style: (FontSize: 13, TextColor: #dddddd, Wrap: true);
         Anchor: (Height: 34, Top: 6);
         Text: %ezlobby.gui.serverrow.description;
       }
