@@ -50,7 +50,7 @@ Button {
     }
 
     Group #StatusCircle {
-      Anchor: (Width: 14, Height: 14, Left: 8, Top: 4);
+      Anchor: (Width: 14, Height: 14, Left: 8, Top: 4, Right: 4);
       Background: PatchStyle(TexturePath: "StatusDot.png", Color: #888888);
       TooltipText: %ezlobby.gui.serverrow.status.checking;
       HitTestVisible: false;
