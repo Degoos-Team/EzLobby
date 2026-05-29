@@ -134,7 +134,6 @@ class ServerListPage(player: PlayerRef) :
         store: Store<EntityStore>,
         data: ServerListEvent
     ) {
-        sendUpdate()
         when (data.action) {
             ServerListEvent.ACTION_CONNECT -> {
                 val uuid = data.serverId ?: return
@@ -147,6 +146,7 @@ class ServerListPage(player: PlayerRef) :
                     }
                     return
                 }
+                sendUpdate()  // only re-render when actually proceeding to connect
                 EzLobby.instance?.launch(playerRef.world?.dispatcher ?: EmptyCoroutineContext) {
                     playerRef.referToServer(server.host, server.port, createEzLobbyReferralData())
                 }
