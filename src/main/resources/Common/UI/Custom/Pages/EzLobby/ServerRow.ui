@@ -16,7 +16,7 @@ Button {
     );
 
     LayoutMode: Left;
-    Anchor: (Horizontal: 10, Height: 100, Top: 8);
+    Anchor: (Horizontal: 10, Height: 110, Top: 8);
     Padding: (Horizontal: 10, Vertical: 16);
 
     Group #IconGroup {
@@ -50,21 +50,19 @@ Button {
         Text: %ezlobby.gui.serverrow.name;
       }
       Label #Description {
-        Style: (FontSize: 13, TextColor: #cccccc);
-        Anchor: (Height: 18, Top: 6);
+        Style: (FontSize: 13, TextColor: #888888);
+        Anchor: (Height: 34, Top: 6);
         Text: %ezlobby.gui.serverrow.description;
       }
     }
 
     Group #StatusBadge {
-      Anchor: (Width: 40, Height: 40);
-      LayoutMode: Middle;
+      Anchor: (Width: 32);
+      LayoutMode: Top;
       HitTestVisible: false;
       TooltipText: %ezlobby.gui.serverrow.status.checking;
-      OutlineColor: #ffffff;
-      OutlineSize: 1;
       Group #StatusBadgeFill {
-        Anchor: (Width: 24, Height: 24);
+        Anchor: (Height: 16, Top: 4, Left: 8, Right: 8);
         Background: PatchStyle(TexturePath: "StatusDot.png", Border: 6, Color: #888888);
         HitTestVisible: false;
       }
