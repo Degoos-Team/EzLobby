@@ -9,12 +9,14 @@ import com.degoos.hytale.ezlobby.configs.ServersConfig
 import com.degoos.hytale.ezlobby.interactions.ServerMenuItemInteraction
 import com.degoos.hytale.ezlobby.interactions.VisibilityTogglerItemInteraction
 import com.degoos.hytale.ezlobby.listeners.globals.PlayerConnectListener
+import com.degoos.hytale.ezlobby.listeners.globals.PlayerDisconnectListener
 import com.degoos.hytale.ezlobby.listeners.globals.PlayerReadyListener
 import com.degoos.hytale.ezlobby.managers.ServerStatusChecker
 import com.degoos.hytale.ezlobby.managers.VisibilityManager
 import com.degoos.hytale.ezlobby.systems.*
 import com.degoos.kayle.KotlinPlugin
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
+import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
@@ -76,6 +78,10 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
                 event
             )
         }
+
+        this.eventRegistry.registerGlobal(
+            PlayerDisconnectEvent::class.java
+        ) { event: PlayerDisconnectEvent -> PlayerDisconnectListener().onPlayerDisconnect(event) }
         // endregion
 
         // Load icons from storage.
