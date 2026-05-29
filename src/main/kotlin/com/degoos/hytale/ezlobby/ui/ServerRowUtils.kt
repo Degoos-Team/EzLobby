@@ -38,7 +38,7 @@ object ServerRowUtils {
             } else {
                 // Only apply Pressed tint; Default/Hovered handled by OFFLINE block below
                 val stateColors = ColorUtils.generateButtonStateColors(server.uiColorTint!!)
-                uiCommandBuilder.set("$selector.Style.Pressed.Background.Color", stateColors["Pressed"]!!)
+                uiCommandBuilder.set("$selector.Style.Pressed.Background.Color", stateColors.getValue("Pressed"))
             }
         }
 
