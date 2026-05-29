@@ -20,7 +20,7 @@ Button {
     Padding: (Horizontal: 10, Vertical: 16);
 
     Group #StatusCircle {
-      Anchor: (Width: 14, Height: 14, Right: 8, Top: 8);
+      Anchor: (Width: 14, Height: 14, Right: 8);
       Background: PatchStyle(Color: #888888);
       HitTestVisible: false;
     }
