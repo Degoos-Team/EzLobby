@@ -92,7 +92,6 @@ class ServerListPage(player: PlayerRef) :
             val connectEvent = EventData.of(ServerListEvent.KEY_ACTION, ServerListEvent.ACTION_CONNECT)
                 .append(ServerListEvent.KEY_SERVER, server.id.toString())
             uiEventBuilder.addEventBinding(CustomUIEventBindingType.Activating, buttonSelector, connectEvent)
-            uiEventBuilder.addEventBinding(CustomUIEventBindingType.Activating, "$buttonSelector #StatusCircle", connectEvent)
         }
 
         // Launch page-scoped coroutine: poll until no CHECKING, sendUpdate, then periodic 30s refresh
