@@ -29,11 +29,17 @@ object ServerRowUtils {
         // Set icon using extracted method
         setServerIcon(uiCommandBuilder, selector, server)
 
-        // Apply color tint to icon background
+        // Apply color tint to icon background and button states
+        // Skip Default/Hovered tint when OFFLINE — those states are overridden below with grey
         if (server.uiColorTint != null) {
             uiCommandBuilder.set("$selector #IconGroup.Background.Color", server.uiColorTint!!)
-
-            applyColorTintToButton(uiCommandBuilder, selector, server.uiColorTint!!)
+            if (status != ServerStatus.OFFLINE) {
+                applyColorTintToButton(uiCommandBuilder, selector, server.uiColorTint!!)
+            } else {
+                // Only apply Pressed tint; Default/Hovered handled by OFFLINE block below
+                val stateColors = ColorUtils.generateButtonStateColors(server.uiColorTint!!)
+                uiCommandBuilder.set("$selector.Style.Pressed.Background.Color", stateColors["Pressed"]!!)
+            }
         }
 
         // Status circle color — path format: space before # (child element selector)
