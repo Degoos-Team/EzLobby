@@ -104,7 +104,10 @@ class ServerListPage(player: PlayerRef) :
                 && System.currentTimeMillis() < deadline) {
                 delay(100)
             }
-            if (isActive) sendUpdate()
+            val worldDispatcher = playerRef.world?.dispatcher ?: return@launch
+            if (isActive) {
+                EzLobby.instance?.launch(worldDispatcher) { sendUpdate() }
+            }
 
             // Periodic 30s refresh loop
             while (isActive) {
@@ -115,7 +118,9 @@ class ServerListPage(player: PlayerRef) :
                     && System.currentTimeMillis() < refreshDeadline) {
                     delay(100)
                 }
-                if (isActive) sendUpdate()
+                if (isActive) {
+                    EzLobby.instance?.launch(worldDispatcher) { sendUpdate() }
+                }
             }
         }
     }
