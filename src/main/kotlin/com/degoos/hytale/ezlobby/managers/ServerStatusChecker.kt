@@ -27,11 +27,12 @@ object ServerStatusChecker {
         if (!shouldLaunch) return
 
         scope.launch {
-            try {
-                statuses[server.id] = probe(server.host, server.port)
-            } catch (e: CancellationException) {
+            statuses.replace(server.id, ServerStatus.CHECKING, probe(server.host, server.port))
+        }.invokeOnCompletion { cause ->
+            // invokeOnCompletion fires even when the job is cancelled before it starts,
+            // covering the window between compute() and launch() scheduling (pre-start race).
+            if (cause is CancellationException) {
                 statuses.replace(server.id, ServerStatus.CHECKING, ServerStatus.UNKNOWN)
-                throw e
             }
         }
     }
@@ -47,7 +48,7 @@ object ServerStatusChecker {
             ServerStatus.ONLINE
         } catch (e: Exception) {
             EzLobby.instance?.logger?.atInfo()?.log(
-                "TCP probe FAILED for %s:%d (%s) on %s", host, port, e.message, Thread.currentThread().name
+                "TCP probe FAILED for %s:%d (%s) on %s", host, port, e.toString(), Thread.currentThread().name
             )
             ServerStatus.OFFLINE
         }
