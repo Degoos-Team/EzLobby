@@ -12,12 +12,18 @@ Button {
       Default: (Background: @ServerRowDefaultBackground),
       Hovered: (Background: @ServerRowHoveredBackground),
       Pressed: (Background: @ServerRowHoveredBackground),
-      Disabled: (Background: @ServerRowHoveredBackground)
+      Disabled: (Background: @ServerRowDisabledBackground)
     );
 
     LayoutMode: Left;
     Anchor: (Horizontal: 10, Height: 100, Top: 8);
     Padding: (Horizontal: 10, Vertical: 16);
+
+    Group #StatusCircle {
+      Anchor: (Width: 14, Height: 14, Right: 8, Top: 8);
+      Background: PatchStyle(Color: #888888);
+      HitTestVisible: false;
+    }
 
     Group #IconGroup {
       Anchor: (Width: 80, Height: 80, Right: 15);
