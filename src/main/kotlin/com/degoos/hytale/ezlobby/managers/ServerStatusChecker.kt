@@ -15,8 +15,14 @@ import java.util.concurrent.ConcurrentHashMap
 
 object ServerStatusChecker {
     private val statuses = ConcurrentHashMap<UUID, ServerStatus>()
+    private val lastResolved = ConcurrentHashMap<UUID, ServerStatus>()
 
-    fun getStatus(server: Server): ServerStatus = statuses.getOrDefault(server.id, ServerStatus.UNKNOWN)
+    fun getStatus(server: Server): ServerStatus {
+        return when (val current = statuses.getOrDefault(server.id, ServerStatus.UNKNOWN)) {
+            ServerStatus.CHECKING -> lastResolved.getOrDefault(server.id, ServerStatus.CHECKING)
+            else -> current
+        }
+    }
 
     fun requestCheck(server: Server, scope: CoroutineScope) {
         var shouldLaunch = false
@@ -27,7 +33,11 @@ object ServerStatusChecker {
         if (!shouldLaunch) return
 
         scope.launch {
-            statuses.replace(server.id, ServerStatus.CHECKING, probe(server.host, server.port))
+            val result = probe(server.host, server.port)
+            if (result == ServerStatus.ONLINE || result == ServerStatus.OFFLINE) {
+                lastResolved[server.id] = result
+            }
+            statuses.replace(server.id, ServerStatus.CHECKING, result)
         }.invokeOnCompletion { cause ->
             // invokeOnCompletion fires even when the job is cancelled before it starts,
             // covering the window between compute() and launch() scheduling (pre-start race).
@@ -42,13 +52,13 @@ object ServerStatusChecker {
             Socket().use { socket ->
                 socket.connect(InetSocketAddress(host, port), 2000)
             }
-            EzLobby.instance?.logger?.atInfo()?.log(
+            EzLobby.instance?.logger?.atFine()?.log(
                 "TCP probe OK for %s:%d on %s", host, port, Thread.currentThread().name
             )
             ServerStatus.ONLINE
         } catch (e: Exception) {
-            EzLobby.instance?.logger?.atInfo()?.log(
-                "TCP probe FAILED for %s:%d (%s) on %s", host, port, e.toString(), Thread.currentThread().name
+            EzLobby.instance?.logger?.atWarning()?.log(
+                "TCP probe FAILED for %s:%d (%s)", host, port, e.toString()
             )
             ServerStatus.OFFLINE
         }
