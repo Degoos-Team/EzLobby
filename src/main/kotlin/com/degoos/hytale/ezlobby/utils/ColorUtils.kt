@@ -13,6 +13,9 @@ object ColorUtils {
      */
     fun hexToHsl(hexColor: String): Triple<Double, Double, Double> {
         val hex = hexColor.removePrefix("#")
+        require(hex.length >= 6) {
+            "hexToHsl requires at least 6 hex characters, got: '${hexColor}' (length ${hex.length})"
+        }
         val r = hex.substring(0, 2).toInt(16) / 255.0
         val g = hex.substring(2, 4).toInt(16) / 255.0
         val b = hex.substring(4, 6).toInt(16) / 255.0
