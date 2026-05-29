@@ -39,3 +39,6 @@ server.list.entry = [{idx}] {name} - {displayName} ({host}:{port})
 # Visibility Toggler messages
 visibilitytoggler.enabled = <c:gold>Players in the lobby are now</c> <c:green>VISIBLE</c><c:gold>.</c>
 visibilitytoggler.disabled = <c:gold>Players in the lobby are now</c> <c:red>INVISIBLE</c><c:gold>.</c>
+
+# Transfer messages
+transfer.player.went = [EzLobby] {player} went to {server}
