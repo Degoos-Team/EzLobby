@@ -7,9 +7,8 @@ $Common.@PageOverlay {
           Group {
             LayoutMode: Top;
             Label {
-              Style: (FontSize: 30, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center);
+              Style: (FontSize: 24, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center);
               Text: %ezlobby.gui.serverlist.title;
-              Anchor: (Bottom: 8);
             }
             Group {
               Anchor: (Height: 1, Left: 40, Right: 40, Bottom: 4);
