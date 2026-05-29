@@ -48,3 +48,4 @@ bin/
 ### Claude Code / GSD ###
 .claude/
 .planning/
+CLAUDE.md
