@@ -88,7 +88,8 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
     }
 
     override fun shutdown() {
-        // logger.atInfo().log("Shutdown")
+        logger.atInfo().log("[Degoos:EzLobby] Plugin is shutting down")
+        super.shutdown()  // cancels the SupervisorJob, terminates all plugin coroutines
     }
 
     companion object {
