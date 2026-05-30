@@ -24,6 +24,9 @@ object ServerStatusChecker {
         }
     }
 
+    fun isChecking(server: Server): Boolean =
+        statuses.getOrDefault(server.id, ServerStatus.UNKNOWN) == ServerStatus.CHECKING
+
     fun requestCheck(server: Server, scope: CoroutineScope) {
         var shouldLaunch = false
         statuses.compute(server.id) { _, current ->

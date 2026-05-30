@@ -98,7 +98,7 @@ class ServerListPage(player: PlayerRef) :
         pageScope.launch {
             // Initial poll: wait until no server is CHECKING or 2500ms cap reached
             val deadline = System.currentTimeMillis() + 2500
-            while (servers.any { ServerStatusChecker.getStatus(it) == ServerStatus.CHECKING }
+            while (servers.any { ServerStatusChecker.isChecking(it) }
                 && System.currentTimeMillis() < deadline) {
                 delay(100)
             }
@@ -112,7 +112,7 @@ class ServerListPage(player: PlayerRef) :
                 delay(30_000)
                 servers.forEach { server -> ServerStatusChecker.requestCheck(server, pageScope) }
                 val refreshDeadline = System.currentTimeMillis() + 2500
-                while (servers.any { ServerStatusChecker.getStatus(it) == ServerStatus.CHECKING }
+                while (servers.any { ServerStatusChecker.isChecking(it) }
                     && System.currentTimeMillis() < refreshDeadline) {
                     delay(100)
                 }
