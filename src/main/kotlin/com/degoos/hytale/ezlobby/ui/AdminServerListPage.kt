@@ -1,6 +1,7 @@
 package com.degoos.hytale.ezlobby.ui
 
 import com.degoos.hytale.ezlobby.EzLobby
+import com.degoos.hytale.ezlobby.managers.TransferTracker
 import com.degoos.hytale.ezlobby.models.Server
 import com.degoos.hytale.ezlobby.utils.createEzLobbyReferralData
 import com.degoos.kayle.extension.dispatcher
@@ -100,6 +101,7 @@ class AdminServerListPage(player: PlayerRef) :
                 val serverIndex = data.serverIndex ?: return
                 val server = EzLobby.getServersConfig()?.get()?.servers?.getOrNull(serverIndex) ?: return
                 runInEzLobbyScope {
+                    TransferTracker.record(playerRef.uuid, server)  // MSG-01: MUST precede referToServer
                     playerRef.referToServer(server.host, server.port, createEzLobbyReferralData())
                 }
             }

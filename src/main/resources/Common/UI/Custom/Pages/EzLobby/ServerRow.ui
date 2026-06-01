@@ -1,22 +1,22 @@
 $Common = "../../Common.ui";
 
-@ServerRowDefaultBackground = PatchStyle(TexturePath: "../../Common/Buttons/Primary.png", Border: 12, Color: #ffffff);
-@ServerRowHoveredBackground = PatchStyle(TexturePath: "../../Common/Buttons/Primary_Hovered.png", Border: 12, Color: #ffffff);
-@ServerRowPressedBackground = PatchStyle(TexturePath: "../../Common/Buttons/Primary_Pressed.png", Border: 12, Color: #ffffff);
+@ServerRowDefaultBackground  = PatchStyle(TexturePath: "VignetteRow.png", Border: 12, Color: #ffffff);
+@ServerRowHoveredBackground  = PatchStyle(TexturePath: "VignetteRow_Hovered.png", Border: 12, Color: #ffffff);
+@ServerRowPressedBackground  = PatchStyle(TexturePath: "VignetteRow_Pressed.png", Border: 12, Color: #ffffff);
 @ServerRowDisabledBackground = PatchStyle(TexturePath: "../../Common/Buttons/Disabled.png", Border: 12, Color: #ffffff);
 
 Button {
     TooltipText: %ezlobby.gui.serverrow.tooltip;
 
     Style: (
-      Default: (Background: @ServerRowDefaultBackground),
-      Hovered: (Background: @ServerRowHoveredBackground),
-      Pressed: (Background: @ServerRowHoveredBackground),
-      Disabled: (Background: @ServerRowHoveredBackground)
+      Default:  (Background: @ServerRowDefaultBackground),
+      Hovered:  (Background: @ServerRowHoveredBackground),
+      Pressed:  (Background: @ServerRowPressedBackground),
+      Disabled: (Background: @ServerRowDisabledBackground)
     );
 
     LayoutMode: Left;
-    Anchor: (Horizontal: 10, Height: 100, Top: 8);
+    Anchor: (Horizontal: 10, Height: 110, Top: 8);
     Padding: (Horizontal: 10, Vertical: 16);
 
     Group #IconGroup {
@@ -30,6 +30,13 @@ Button {
       AssetImage #Image {
             Anchor: (Width: 64, Height: 64);
             AssetPath: "Icons/TEMPLATE_ICON.png";
+            HitTestVisible: false;
+      }
+      Group #IconBorder {
+          Anchor: (Top: 0, Bottom: 0, Left: 0, Right: 0);
+          OutlineColor: #aaaaaa;
+          OutlineSize: 1;
+          HitTestVisible: false;
       }
     }
 
@@ -38,14 +45,26 @@ Button {
       FlexWeight: 1;
       Padding: (Top: 4);
       Label #Name {
-        Style: (FontSize: 18, TextColor: #ffffff, RenderBold: true);
-        Anchor: (Height: 22);
+        Style: (FontSize: 21, TextColor: #ffffff, RenderBold: true);
+        Anchor: (Height: 26);
         Text: %ezlobby.gui.serverrow.name;
       }
       Label #Description {
-        Style: (FontSize: 14, TextColor: #aaaaaa);
-        Anchor: (Height: 18, Top: 8);
+        Style: (FontSize: 13, TextColor: #dddddd, Wrap: true);
+        Anchor: (Height: 34, Top: 6);
         Text: %ezlobby.gui.serverrow.description;
+      }
+    }
+
+    Group #StatusBadge {
+      Anchor: (Width: 32);
+      LayoutMode: Top;
+      HitTestVisible: false;
+      TooltipText: %ezlobby.gui.serverrow.status.checking;
+      Group #StatusBadgeFill {
+        Anchor: (Height: 16, Top: 4, Left: 8, Right: 8);
+        Background: PatchStyle(TexturePath: "StatusDot.png", Border: 6, Color: #888888);
+        HitTestVisible: false;
       }
     }
 }

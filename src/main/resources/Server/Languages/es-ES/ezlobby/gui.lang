@@ -8,6 +8,9 @@ serverlist.title = Lista de Servidores
 serverrow.tooltip = Haz clic para conectarte a este servidor
 serverrow.name = Nombre del Servidor
 serverrow.description = Descripción del Servidor
+serverrow.status.online = En línea
+serverrow.status.offline = No disponible
+serverrow.status.checking = Verificando...
 
 # Página de lista de servidores de administrador
 admin.serverlist.title = Gestión de Servidores
