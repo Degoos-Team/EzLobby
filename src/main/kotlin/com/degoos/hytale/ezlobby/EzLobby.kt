@@ -29,6 +29,7 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
     private var serversConfig: Config<ServersConfig?>
 
     private var visibilityManager: VisibilityManager = VisibilityManager()
+    @Volatile private var isShuttingDown = false
 
     init {
         instance = this
@@ -88,7 +89,7 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
             RemoveWorldEvent::class.java
         ) { event: RemoveWorldEvent ->
             val spawnWorldName = getMainConfig()?.get()?.spawnPointWorldName ?: return@registerGlobal
-            if (event.world.name == spawnWorldName) {
+            if (event.world.name == spawnWorldName && !isShuttingDown) {
                 event.setCancelled(true)
                 logger.atWarning().log("[EzLobby] Blocked removal of spawn world '%s' (reason: %s)", spawnWorldName, event.removalReason)
             }
@@ -105,6 +106,7 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
     }
 
     override fun shutdown() {
+        isShuttingDown = true
         logger.atInfo().log("[Degoos:EzLobby] Plugin is shutting down")
         super.shutdown()  // cancels the SupervisorJob, terminates all plugin coroutines
     }
