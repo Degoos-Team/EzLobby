@@ -2,10 +2,9 @@ package com.degoos.hytale.ezlobby.listeners.globals
 
 import com.degoos.hytale.ezlobby.EzLobby
 import com.hypixel.hytale.registry.Registration
-import com.hypixel.hytale.server.core.entity.entities.Player
-import com.hypixel.hytale.server.core.event.events.player.AddPlayerToWorldEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent
+import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent
 import com.hypixel.hytale.server.core.inventory.InventoryComponent
 import com.hypixel.hytale.server.core.modules.entity.component.HeadRotation
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent
@@ -45,61 +44,47 @@ class PlayerConnectListener {
 
         if (!ezLobbyConfig.serverMenuItemOnJoin && !ezLobbyConfig.visibilityTogglerItemOnJoin) return
 
-        // Capture stable references so the lambdas below don't close over the mutable event.
-        val targetWorld = world
-        val targetHolder = event.holder
         val targetPlayerRef = event.playerRef
 
-        var addToWorldReg: Registration? = null
+        var readyReg: Registration? = null
         var disconnectReg: Registration? = null
 
         fun cleanup() {
-            addToWorldReg?.unregister()
+            readyReg?.unregister()
             disconnectReg?.unregister()
-            addToWorldReg = null
+            readyReg = null
             disconnectReg = null
         }
 
-        // Unregister if the player disconnects before being added to the world.
         disconnectReg = EzLobby.getEventRegistry()?.registerGlobal(PlayerDisconnectEvent::class.java) { disconnectEvent ->
             if (disconnectEvent.playerRef == targetPlayerRef) cleanup()
         }
 
-        addToWorldReg = EzLobby.getEventRegistry()?.registerGlobal(AddPlayerToWorldEvent::class.java) { addEvent ->
-            if (addEvent.world != targetWorld || addEvent.holder != targetHolder) {
+        readyReg = EzLobby.getEventRegistry()?.registerGlobal(PlayerReadyEvent::class.java) { readyEvent ->
+            if (readyEvent.playerRef != targetPlayerRef) return@registerGlobal
+
+            val hotbar = readyEvent.playerRef.store
+                .getComponent(readyEvent.playerRef, InventoryComponent.Hotbar.getComponentType())
+                ?.getInventory() ?: run {
+                EzLobby.instance?.logger?.atWarning()
+                    ?.log("[EzLobby] Hotbar still missing at PlayerReadyEvent — cannot grant items")
+                cleanup()
                 return@registerGlobal
             }
 
-            addEvent.world.execute {
-                val player = addEvent.holder.getComponent(Player.getComponentType())
-                if (player == null) {
-                    cleanup()
-                    return@execute
+            if (ezLobbyConfig.serverMenuItemOnJoin) {
+                if (!hotbar.containsItemStacksStackableWith(ezLobbyConfig.serversMenuItemStack)) {
+                    hotbar.setItemStackForSlot(0, ezLobbyConfig.serversMenuItemStack)
                 }
-
-                val hotbar = addEvent.holder.getComponent(InventoryComponent.Hotbar.getComponentType())?.getInventory() ?: run {
-                    cleanup()
-                    return@execute
-                }
-
-                if (ezLobbyConfig.serverMenuItemOnJoin) {
-                    val playerHasServerMenuItemStack =
-                        hotbar.containsItemStacksStackableWith(ezLobbyConfig.serversMenuItemStack)
-                    if (!playerHasServerMenuItemStack) {
-                        hotbar.setItemStackForSlot(0, ezLobbyConfig.serversMenuItemStack)
-                    }
-                }
-
-                if (ezLobbyConfig.visibilityTogglerItemOnJoin) {
-                    val playerHasVisibilityTogglerItemStack =
-                        hotbar.containsItemStacksStackableWith(ezLobbyConfig.visibilityTogglerItemStack)
-                    if (!playerHasVisibilityTogglerItemStack) {
-                        hotbar.setItemStackForSlot(4, ezLobbyConfig.visibilityTogglerItemStack)
-                    }
-                }
-
-                cleanup()
             }
+
+            if (ezLobbyConfig.visibilityTogglerItemOnJoin) {
+                if (!hotbar.containsItemStacksStackableWith(ezLobbyConfig.visibilityTogglerItemStack)) {
+                    hotbar.setItemStackForSlot(4, ezLobbyConfig.visibilityTogglerItemStack)
+                }
+            }
+
+            cleanup()
         }
     }
 }
