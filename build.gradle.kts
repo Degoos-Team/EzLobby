@@ -22,7 +22,7 @@ repositories {
 dependencies {
     compileOnly(files(hytaleServerExecutablePath))
 
-    compileOnly("com.degoos:kayle:0.0.8")
+    compileOnly("com.degoos:kayle:0.0.9")
 
     testImplementation(kotlin("test"))
 }
