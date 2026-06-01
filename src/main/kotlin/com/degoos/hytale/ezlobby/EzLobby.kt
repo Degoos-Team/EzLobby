@@ -88,9 +88,9 @@ class EzLobby(init: JavaPluginInit) : KotlinPlugin(init) {
             RemoveWorldEvent::class.java
         ) { event: RemoveWorldEvent ->
             val spawnWorldName = getMainConfig()?.get()?.spawnPointWorldName ?: return@registerGlobal
-            if (event.world.name == spawnWorldName && event.removalReason == RemoveWorldEvent.RemovalReason.GENERAL) {
+            if (event.world.name == spawnWorldName) {
                 event.setCancelled(true)
-                logger.atWarning().log("[EzLobby] Blocked removal of spawn world '%s'", spawnWorldName)
+                logger.atWarning().log("[EzLobby] Blocked removal of spawn world '%s' (reason: %s)", spawnWorldName, event.removalReason)
             }
         }
         // endregion
