@@ -8,6 +8,7 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent
 import com.hypixel.hytale.server.core.inventory.InventoryComponent
 import com.hypixel.hytale.server.core.modules.entity.component.HeadRotation
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent
+import com.hypixel.hytale.server.core.universe.PlayerRef
 import com.hypixel.hytale.server.core.universe.Universe
 import com.hypixel.hytale.server.core.util.PositionUtil
 
@@ -44,7 +45,9 @@ class PlayerConnectListener {
 
         if (!ezLobbyConfig.serverMenuItemOnJoin && !ezLobbyConfig.visibilityTogglerItemOnJoin) return
 
-        val targetPlayerRef = event.playerRef
+        // PlayerConnectEvent.playerRef is a PlayerRef component; PlayerReadyEvent.playerRef is a
+        // generic Ref<EntityStore> — they are never reference-equal, so match by UUID instead.
+        val targetUuid = event.playerRef.uuid
 
         var readyReg: Registration? = null
         var disconnectReg: Registration? = null
@@ -57,11 +60,13 @@ class PlayerConnectListener {
         }
 
         disconnectReg = EzLobby.getEventRegistry()?.registerGlobal(PlayerDisconnectEvent::class.java) { disconnectEvent ->
-            if (disconnectEvent.playerRef == targetPlayerRef) cleanup()
+            if (disconnectEvent.playerRef.uuid == targetUuid) cleanup()
         }
 
         readyReg = EzLobby.getEventRegistry()?.registerGlobal(PlayerReadyEvent::class.java) { readyEvent ->
-            if (readyEvent.playerRef != targetPlayerRef) return@registerGlobal
+            val readyPlayerRef = readyEvent.playerRef.store
+                .getComponent(readyEvent.playerRef, PlayerRef.getComponentType())
+            if (readyPlayerRef?.uuid != targetUuid) return@registerGlobal
 
             val hotbar = readyEvent.playerRef.store
                 .getComponent(readyEvent.playerRef, InventoryComponent.Hotbar.getComponentType())
