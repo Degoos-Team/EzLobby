@@ -2,12 +2,18 @@ $Common = "../../Common.ui";
 
 $Common.@PageOverlay {
   $Common.@Container {
-        Anchor: (Width: 560, Height: 650);
+        Anchor: (Width: 600, Height: 650);
         #Title {
           Group {
+            LayoutMode: Top;
             Label {
               Style: (FontSize: 24, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center);
               Text: %ezlobby.gui.serverlist.title;
+            }
+            Group {
+              Anchor: (Height: 1, Left: 40, Right: 40, Bottom: 4);
+              OutlineColor: #5577aa;
+              OutlineSize: 1;
             }
           }
         }
@@ -15,6 +21,7 @@ $Common.@PageOverlay {
             FlexWeight: 1;
             LayoutMode: TopScrolling;
             ScrollbarStyle: $Common.@DefaultScrollbarStyle;
+            Padding: (Left: 12);
         }
     }
 }

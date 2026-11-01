@@ -9,6 +9,7 @@ error.player.not.found = [EzLobby] Algo realmente extraño ha sucedido. No se pu
 error.server.not.found = [EzLobby] No se encontró ningún servidor con el selector proporcionado: {selector}
 error.spawn.config.missing = [EzLobby] No se pudo establecer el punto de aparición, falta la configuración :/
 error.spawn.world.not.found = [EzLobby] No se pudo establecer el punto de aparición, World(name={name}) no existe :/
+error.server.offline = [EzLobby] Ese servidor no está disponible actualmente.
 
 # Mensajes de éxito
 success.server.added = [EzLobby] Servidor '{name}' ({id}) agregado con dirección {host}:{port}
@@ -37,3 +38,6 @@ server.list.entry = [{idx}] {name} - {displayName} ({host}:{port})
 # Visibility Toggler messages
 visibilitytoggler.enabled = <c:gold>Los jugadores en el lobby ahora son</c> <c:green>VISIBLES</c><c:gold>.</c>
 visibilitytoggler.disabled = <c:gold>Los jugadores en el lobby ahora son</c> <c:red>INVISIBLES</c><c:gold>.</c>
+
+# Mensajes de transferencia
+transfer.player.went = [EzLobby] {player} fue a {server}

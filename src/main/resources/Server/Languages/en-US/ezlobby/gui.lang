@@ -9,6 +9,9 @@ serverlist.title = Server List
 serverrow.tooltip = Click to connect to this server
 serverrow.name = Server Name
 serverrow.description = Server Description
+serverrow.status.online = Online
+serverrow.status.offline = Offline
+serverrow.status.checking = Checking...
 
 # Admin Server List Page
 admin.serverlist.title = Server Management

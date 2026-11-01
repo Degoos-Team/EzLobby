@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.degoos.hytale"
-version = "0.2.0-SNAPSHOT"
+version = "0.4.2"
 
 val hytaleInstallationPath = properties["hytale.path"].toString()
 val hytaleServerExecutablePath = "${hytaleInstallationPath}/Server/HytaleServer.jar"
@@ -22,7 +22,7 @@ repositories {
 dependencies {
     compileOnly(files(hytaleServerExecutablePath))
 
-    compileOnly("com.degoos:kayle:0.0.8")
+    compileOnly("com.degoos:kayle:0.0.9")
 
     testImplementation(kotlin("test"))
 }

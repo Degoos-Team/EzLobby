@@ -3,6 +3,7 @@ package com.degoos.hytale.ezlobby.ui
 import com.degoos.hytale.ezlobby.EzLobby
 import com.degoos.hytale.ezlobby.assets.ServerIconsStorage
 import com.degoos.hytale.ezlobby.models.Server
+import com.degoos.hytale.ezlobby.models.ServerStatus
 import com.degoos.hytale.ezlobby.utils.ColorUtils
 import com.degoos.kayle.extension.parseTags
 import com.hypixel.hytale.server.core.Message
@@ -13,21 +14,54 @@ object ServerRowUtils {
     /**
      * Populates a ServerRow.ui component with server data, including color tinting for button states
      */
-    fun populateServerRow(uiCommandBuilder: UICommandBuilder, selector: String, server: Server) {
+    fun populateServerRow(
+        uiCommandBuilder: UICommandBuilder,
+        selector: String,
+        server: Server,
+        status: ServerStatus = ServerStatus.UNKNOWN
+    ) {
         uiCommandBuilder.set("$selector #Name.TextSpans", Message.raw(server.displayName ?: server.name).parseTags())
         uiCommandBuilder.set(
             "$selector #Description.TextSpans",
-            Message.raw(server.description ?: "No description").parseTags()
+            Message.raw((server.description ?: "No description").replace("<br>", "\n")).parseTags()
         )
 
         // Set icon using extracted method
         setServerIcon(uiCommandBuilder, selector, server)
 
-        // Apply color tint to icon background
+        // Apply color tint to icon background and button states
+        // Skip Default/Hovered tint when OFFLINE — those states are overridden below with grey
         if (server.uiColorTint != null) {
             uiCommandBuilder.set("$selector #IconGroup.Background.Color", server.uiColorTint!!)
+            if (status != ServerStatus.OFFLINE) {
+                applyColorTintToButton(uiCommandBuilder, selector, server.uiColorTint!!)
+            } else {
+                // Only apply Pressed tint; Default/Hovered handled by OFFLINE block below
+                val stateColors = ColorUtils.generateButtonStateColors(server.uiColorTint!!)
+                uiCommandBuilder.set("$selector.Style.Pressed.Background.Color", stateColors.getValue("Pressed"))
+            }
+        }
 
-            applyColorTintToButton(uiCommandBuilder, selector, server.uiColorTint!!)
+        val circleColor = when (status) {
+            ServerStatus.ONLINE   -> "#00CC44"
+            ServerStatus.OFFLINE  -> "#CC2200"
+            ServerStatus.UNKNOWN,
+            ServerStatus.CHECKING -> "#FFCC00"
+        }
+        val statusTooltipKey = when (status) {
+            ServerStatus.ONLINE   -> "ezlobby.gui.serverrow.status.online"
+            ServerStatus.OFFLINE  -> "ezlobby.gui.serverrow.status.offline"
+            ServerStatus.UNKNOWN,
+            ServerStatus.CHECKING -> "ezlobby.gui.serverrow.status.checking"
+        }
+        uiCommandBuilder.set("$selector #StatusBadgeFill.Background.Color", circleColor)
+        uiCommandBuilder.set("$selector #StatusBadge.TooltipText", Message.translation(statusTooltipKey))
+
+        // OFFLINE visual disable — override Default and Hovered button backgrounds (D-07)
+        // Color override keeps rows clickable at framework level; guard runs in handleDataEvent
+        if (status == ServerStatus.OFFLINE) {
+            uiCommandBuilder.set("$selector.Style.Default.Background.Color", "#66666666")
+            uiCommandBuilder.set("$selector.Style.Hovered.Background.Color", "#66666666")
         }
     }
 
